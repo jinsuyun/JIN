@@ -32,4 +32,7 @@ public class HarrisBenedict {
 	public static float tefCal(float height,double weight,int age,String sex,int choice) {
 		return (actCal(height,weight,age,sex,choice)+bmrCal(height,weight,age,sex))/9;
 	}
+	public static float consumeCal(float height,double weight,int age,String sex,int choice) {
+		return actCal(height,weight,age,sex,choice)+bmrCal(height,weight,age,sex)+tefCal(height,weight,age,sex,choice);
+	}
 }

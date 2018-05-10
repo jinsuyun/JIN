@@ -29,11 +29,12 @@ public class Main {
 	}
 	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
-		Main m = new Main(182,91,28,"m",2);
+		Main m = new Main(181,81,27,"m",4);
 		HarrisBenedict hb = new HarrisBenedict();
 		System.out.printf("BMI: %.2fkcal\n",hb.bmiCal(m.getHeight(),m.getWeight()));
 		System.out.printf("기초대사량(BMR): %.2fkcal\n",hb.bmrCal(m.getHeight(),m.getWeight(),m.getAge(),m.getSex()));
 		System.out.printf("활동대사량: %.2fkcal\n",hb.actCal(m.getHeight(), m.getWeight(), m.getAge(), m.getSex(), m.getChoice()));
-		System.out.printf("음식소화흡수열량: %.2fkcal",hb.tefCal(m.getHeight(), m.getWeight(), m.getAge(), m.getSex(), m.getChoice()));
+		System.out.printf("음식소화흡수열량: %.2fkcal\n",hb.tefCal(m.getHeight(), m.getWeight(), m.getAge(), m.getSex(), m.getChoice()));
+		System.out.printf("일일 소비 칼로리: %.2fkcal",hb.consumeCal(m.getHeight(), m.getWeight(), m.getAge(), m.getSex(), m.getChoice()));
 	}
 }
