@@ -8,8 +8,6 @@ var userPassword;
 
 router.post('/', function(req, res) {
 
-    console.log(req.body);
-
     userId = req.body.id;
     userPassword = req.body.password;
 
@@ -24,9 +22,11 @@ router.post('/', function(req, res) {
             if(rows.length > 0){
                 if(rows[0].password == req.body.password){
                     if (resultCode == dbConnection.OK) {
+                        console.log("login success");
                         res.json({"success":true});
                     }
                     else {
+                        console.log("false reason: db disconnected");
                         res.json({"success": false});
                     }
                 }

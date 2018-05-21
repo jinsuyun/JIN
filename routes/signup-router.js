@@ -11,7 +11,6 @@ var userEmail;
 router.post('/', function(req, res) {
 
     console.log(req.body);
-
     userId = req.body.id;
     userPassword = req.body.password;
     userName = req.body.name;
@@ -23,30 +22,13 @@ router.post('/', function(req, res) {
 
     }
 
-    signupAdapter.signupWrite(req.body, function(resultCode,rows){
+    signupAdapter.signupWrite(req.body, function(resultCode, rows){
         if(resultCode == dbConnection.OK){
-            if(rows.length>0){
-                if(rows[0].password == req.body.password){
-                    if (resultCode == dbConnection.OK) {
-                        res.json({"success":true});
-                    }
-                    else {
-                        res.json({"success": false});
-                    }
-                }
-                else {
-                    console.log("false reason: wrong pw");
-                    res.json({"success":false});
-                }
-            }
-            else {
-                console.log("false reason: wrong id");
-                res.json({"success":false});
-            }
+            res.json({"success":true});
         }
         else {
-            console.log("false reason: query false");
-            res.json({"success": false});
+            console.log("false reason: wrong id");
+            res.json({"success":false});
         }
     });
 });
