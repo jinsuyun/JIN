@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var loginAdapter = require('../adapters/login-db-adapter');
+var signupAdapter =require('../adapters/signup-db-adapter');
 var dbConnection = require('./result');
 
 var userId;
 var userPassword;
+var userName;
+var userEmail;
 
 router.post('/', function(req, res) {
 
@@ -12,16 +14,18 @@ router.post('/', function(req, res) {
 
     userId = req.body.id;
     userPassword = req.body.password;
+    userName = req.body.name;
+    userEmail = req.body.email;
 
-    if(userId == undefined || userPassword == undefined) {
+    if(userId == undefined || userPassword == undefined || userName == undefined || userEmail == undefined) {
         return res.json({success:false});
     } else {
 
     }
 
-    loginAdapter.loginSearch(userId, userPassword, function(resultCode,rows){
+    signupAdapter.signupWrite(req.body, function(resultCode,rows){
         if(resultCode == dbConnection.OK){
-            if(rows.length > 0){
+            if(rows.length>0){
                 if(rows[0].password == req.body.password){
                     if (resultCode == dbConnection.OK) {
                         res.json({"success":true});
@@ -46,5 +50,4 @@ router.post('/', function(req, res) {
         }
     });
 });
-
 module.exports = router;
