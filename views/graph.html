@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../public/stylesheets/graph.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/radar.js"></script>
+    <script src="https://www.amcharts.com/lib/3/gauge.js"></script>
+    <script src="https://www.amcharts.com/lib/3/pie.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/animate/animate.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script src="/public/javascripts/graph.js"></script>
+    <script src="/public/javascripts/top_menu.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+</head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#top_menu").load("top_menu.html")
+    });
+</script>
+<body>
+    <div id="top_menu"></div> 
+        <div class="btn-group">
+            <!-- 추가 버튼태그 -->
+            <button id=menubtn class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">유저 선택
+            <span class="caret"></span>
+            </button>
+            <!--메뉴버튼 클릭시 하단 표출된 리스트 영역  -->
+            <ul id="dropdown_menu_id" class="dropdown-menu" value='aa'>
+            </ul>
+        </div>
+
+
+        <div id="bmi" class="chart-block" style="border: 1px solid green;"></div>
+        <br>
+        <div id="bmi_desc" style="border: 1px solid pink;">설명</div>
+
+        <div id=graph>
+            <div id="part" style="border: 1px solid gold;"></div>
+            <div id="month" style="border: 1px solid blue;"></div>
+            <div id="week" style="border: 1px solid red;"></div>
+            <div id="workout_calories" style="border: 1px solid green;"></div>
+            <div id="eat_calories" style="border: 1px solid pink;"></div>
+        </div>
+        <br>식단</br>
+        <div id="graph2" ;>
+            <div id="weight" style="border: 1px solid red;"></div>
+            <div id="chartdiv8" style="border: 1px solid gold;"></div>
+        </div>
+
+
+    <br>
+    <br>
+</body>
+
+</html>
