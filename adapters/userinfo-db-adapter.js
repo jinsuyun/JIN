@@ -7,34 +7,51 @@ var dbConfig = {
     database: 'capstone',
     connectionLimit: 10
 }
+var dbResult = require('../routes/result');
 var pool = mysql.createPool(dbConfig);
 var adapter = {};
 
-var userSearchQuery = 'SELECT * FROM appuser WHERE id=? AND password=?'; // id/pw를 이용하여 유저 정보 search
+var userIdSearchQuery = 'SELECT * FROM appuser WHERE id=?'; // id를 이용하여 유저 정보 search
+var userInfoWriteQuery = 'INSERT INTO appuser(sex, age, weight, height, targetweight, targetperiod, worklevel) VALUE (?,?,?,?,?,?,?)'; // 유저 정보입력 query, 이 외의 추가적인 정보 더 입력
 
-adapter.userSearch = function(id, password) {
-    pool.getConnection(function (err, connection) {
-        if (!err) { // db 연결성공
-            console.log("mysql connection success");
-        } else { // db 연결실패
-            console.error('mysql connection error');
-            throw err;
-            return res.json({success:false});
-        }
+adapter.write = function(user, cb) {
+    var resultCode = dbResult.Fail;
 
-        pool.query(userSearchQuery, [id, password], function (err, rows, fields) {
-            if (!err) { // query가 오는 경우
-                console.log(rows); // 삭제
-                if (rows[0]) {
-                    console.log('login success!'); // id/pw가 일치하여 로그인 성공
-                } else {
-                    console.log('login failed'); // 일치하는 id/pw가 없어 로그인 실패
+    pool.getConnection(function(err, connection) {
+        if (err) {
+            console.log(err)
+            resultCode = dbResult.Fail;
+            connection.release();
+            cb(resultCode);
+        } else {
+            connection.query(userIdSearchQuery, user.id, function(err, rows) {
+                if (!err) { // query가 오는 경우
+                    console.log(rows);
+                    if(!rows[0]) { // 중복 id 존재x
+                        console.log('not duplicated id');
+                        resultCode = dbResult.Fail;
+                        connection.release();
+                        cb(resultCode);
+                    } else { // 중복 id 존재o
+                        connection.query(userInfoWriteQuery, [user.sex, user.age, user.weight, user.height, user.targetweight, user.targetperiod, user.worklevel], function(err) {
+                            if (err) {
+                                console.log(err)
+                                resultCode = dbResult.Fail;
+                                connection.release();
+                                cb(resultCode);
+                            } else {
+                                console.log("input success");
+                                resultCode = dbResult.OK;
+                                connection.release();
+                                cb(resultCode);
+                            }
+                        });
+                    }
+                } else { // query가 오지 않는 경우
+                    console.log(err);
                 }
-            } else { // query가 오지 않는 경우
-                console.log(err);
-            }
-        });
-        connection.release();
+            });
+        }
     });
 }
 
