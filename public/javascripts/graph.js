@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var myapi = "http://localhost:3001/appuserjson"
+    var myapi = "http://localhost:3000/appuserjson"
     var appuser_name = [];
     var appuser_id=[];
     var bmi = [];
@@ -15,8 +15,8 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#dropdown_menu_id').on("click",function (req, res) {
         
-        var appuserapi = "http://localhost:3001/appuserjson"
-        var dailyapi = "http://localhost:3001/dailyjson"
+        var appuserapi = "http://localhost:3000/appuserjson"
+        var dailyapi = "http://localhost:3000/dailyjson"
         var name=$('#dropdown_menu_id').text();
         alert(name);
         $.getJSON(appuserapi, function (info) {

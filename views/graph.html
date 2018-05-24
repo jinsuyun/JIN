@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../public/stylesheets/graph.css">
+    <link rel="stylesheet" href="/stylesheets/graph.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -14,11 +14,8 @@
     <script src="https://www.amcharts.com/lib/3/plugins/animate/animate.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
-    <script src="/public/javascripts/graph.js"></script>
-    <script src="/public/javascripts/top_menu.js"></script>
-
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script type="text/javascript">
@@ -27,7 +24,7 @@
     });
 </script>
 <body>
-    <div id="top_menu"></div> 
+    <div id="top_menu"></div>
         <div class="btn-group">
             <!-- 추가 버튼태그 -->
             <button id=menubtn class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">유저 선택
@@ -37,7 +34,6 @@
             <ul id="dropdown_menu_id" class="dropdown-menu" value='aa'>
             </ul>
         </div>
-
 
         <div id="bmi" class="chart-block" style="border: 1px solid green;"></div>
         <br>
@@ -59,6 +55,9 @@
 
     <br>
     <br>
+
+    <script src="/javascripts/graph.js"></script>
+    <script src="/javascripts/top_menu.js"></script>
 </body>
 
 </html>
