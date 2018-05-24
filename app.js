@@ -3,19 +3,20 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var fs = require('fs');
 var ejs = require('ejs');
-var body_parser = require('body-Parser');
-var http = require('http');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var signupRouter = require('./routes/signup-router');
 var loginRouter = require('./routes/login-router');
-var userinputRouter = require('./routes/user-input-router');
+var userInputRouter = require('./routes/user-input-router');
+
 var graphRouter = require('./routes/graph-router');
-var appuserjsonRouter = require('./routes/appuserjson-router');
-var webdailyRouter = require('./routes/web-daily-router');
+var appUserjsonRouter = require('./routes/appuserjson-router');
+var webDailyRouter = require('./routes/web-daily-router');
+var webFoodRouter = require('./routes/web-food-router');
+var trainerRouter = require('./routes/trainer-router');
+var webWorkoutRouter = require('./routes/web-workout-router');
 
 var app = express();
 
@@ -37,29 +38,14 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
-app.use('/userinput', userinputRouter);
+app.use('/userinput', userInputRouter);
 
 app.use('/graph', graphRouter);
-app.use('/appuserjson', appuserjsonRouter);
-app.use('/dailyjson', webdailyRouter);
-
-// app.get('/foodjson', function(req,res){
-//     var appuser_query = connection.query('select * from food',function(err,rows){
-//         res.json(rows);
-//     });
-// });
-//
-// app.get('/trainerjson', function(req,res){
-//     var appuser_query = connection.query('select * from trainer',function(err,rows){
-//         res.json(rows);
-//     });
-// });
-//
-// app.get('/workoutjson', function(req,res){
-//     var appuser_query = connection.query('select * from workout',function(err,rows){
-//         res.json(rows);
-//     });
-// });
+app.use('/appuserjson', appUserjsonRouter);
+app.use('/dailyjson', webDailyRouter);
+app.use('/foodjson', webFoodRouter);
+app.use('/trainerjson', trainerRouter);
+app.use('/workoutjson', webWorkoutRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

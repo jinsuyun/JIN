@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var userinfoAdapter =require('../adapters/userinfo-db-adapter');
+var userInputAdapter =require('../adapters/userinput-db-adapter');
 var dbConnection = require('./result');
 
 var userId;
@@ -30,7 +30,7 @@ router.post('/', function(req, res) {
 
     }
 
-    userinfoAdapter.write(req.body, function(resultCode, rows){
+    userInputAdapter.write(req.body, function(resultCode, rows){
         if(resultCode == dbConnection.OK){
             res.json({"success":true});
         }

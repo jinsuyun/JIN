@@ -12,9 +12,9 @@ var dbResult = require('../routes/result');
 var pool = mysql.createPool(dbConfig);
 var adapter = {};
 
-var dailySearchQuery = 'SELECT * FROM daily';
+var foodSearchQuery = 'SELECT * FROM food';
 
-adapter.dailySearch = function(cb) {
+adapter.foodSearch = function(cb) {
     var resultCode = dbResult.Fail;
 
     pool.getConnection(function(err, connection) {
@@ -24,7 +24,7 @@ adapter.dailySearch = function(cb) {
             connection.release();
             cb(resultCode, []);
         } else { // db연결성공
-            connection.query(dailySearchQuery, function(err, rows) {
+            connection.query(foodSearchQuery, function(err, rows) {
                 if (err) {
                     console.log(err);
                     resultCode = dbResult.Fail;
