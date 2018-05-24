@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
 router.get('/', function(req, res) {
-    res.render('main.html');
-    res.writeHead(200,{'Content-Type':'text/html'});
+
+    var id=req.params.id;
+    res.render('graph.html');
 });
 
 module.exports = router;

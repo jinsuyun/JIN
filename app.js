@@ -3,18 +3,26 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var fs = require('fs');
+var ejs = require('ejs');
+var body_parser = require('body-Parser');
+var http = require('http');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var signupRouter = require('./routes/signup-router');
 var loginRouter = require('./routes/login-router');
 var userinputRouter = require('./routes/user-input-router');
+var graphRouter = require('./routes/graph-router');
+var appuserjsonRouter = require('./routes/appuserjson-router');
+var webdailyRouter = require('./routes/web-daily-router');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
 // port setup
 app.set('port', process.env.PORT || 3000);
 
@@ -23,12 +31,35 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.engine('html', ejs.renderFile);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 app.use('/userinput', userinputRouter);
+
+app.use('/graph', graphRouter);
+app.use('/appuserjson', appuserjsonRouter);
+app.use('/dailyjson', webdailyRouter);
+
+// app.get('/foodjson', function(req,res){
+//     var appuser_query = connection.query('select * from food',function(err,rows){
+//         res.json(rows);
+//     });
+// });
+//
+// app.get('/trainerjson', function(req,res){
+//     var appuser_query = connection.query('select * from trainer',function(err,rows){
+//         res.json(rows);
+//     });
+// });
+//
+// app.get('/workoutjson', function(req,res){
+//     var appuser_query = connection.query('select * from workout',function(err,rows){
+//         res.json(rows);
+//     });
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
