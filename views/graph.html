@@ -2,7 +2,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/stylesheets/graph.css">
+    <link rel="stylesheet"  href="stylesheets/graph.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="/javascripts/graph.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>퍼스널 트레이닝</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"  href="/stylesheets/graph.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -15,7 +26,7 @@
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+    
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script type="text/javascript">
@@ -24,15 +35,56 @@
     });
 </script>
 <body>
-    <div id="top_menu"></div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- 브라우저가 좁아졋을때 나오는 버튼(클릭시 메뉴출력) -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="main.html">Hel-Per</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li id="login" value="login"><a href="login.html">Log-In</a></li>
+                    <li id="user" value="user"><a href="graph.html">User</a></li>
+                    <li id="qa" value="qa"><a href="post.html">Q & A</a></li>
+                </ul>
+            </div>
+        </div>
+    </div> 
         <div class="btn-group">
             <!-- 추가 버튼태그 -->
             <button id=menubtn class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">유저 선택
             <span class="caret"></span>
-            </button>
-            <!--메뉴버튼 클릭시 하단 표출된 리스트 영역  -->
-            <ul id="dropdown_menu_id" class="dropdown-menu" value='aa'>
+            </button><!--메뉴버튼 클릭시 하단 표출된 리스트 영역  -->
+            <ul id="dropdown_menu_id" class="dropdown-menu">
             </ul>
+            
+            <select name="sh_year" id="sh_year"  onchange="makeWeekSelectOptions();">
+            <option value='2018' selected='selected'>2018년</option>
+            </select>
+
+        <select name="sh_month" id="sh_month" onchange="makeWeekSelectOptions();">
+            <option value='1'>01월</option>
+            <option value='2'>02월</option>
+            <option value='3'>03월</option>
+            <option value='4'>04월</option>
+            <option value='5'>05월</option>
+            <option value='6'>06월</option>
+            <option value='7'>07월</option>
+            <option value='8'>08월</option>
+            <option value='9'>09월</option>
+            <option value='10'>10월</option>
+            <option value='11'>11월</option>
+            <option value='12'>12월</option>
+            </select>
+        <select name="sh_week" id="sh_week">
+            </select>
+            
+            
         </div>
 
         <div id="bmi" class="chart-block" style="border: 1px solid green;"></div>
@@ -49,15 +101,12 @@
         <br>식단</br>
         <div id="graph2" ;>
             <div id="weight" style="border: 1px solid red;"></div>
-            <div id="chartdiv8" style="border: 1px solid gold;"></div>
+            <div id="objective" style="border: 1px solid gold;"></div>
         </div>
 
 
     <br>
     <br>
-
-    <script src="/javascripts/graph.js"></script>
-    <script src="/javascripts/top_menu.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
-#menubtn {
-    margin-top: 50%;
+#menubtn,#sh_year,#sh_month,#sh_week {
+    margin-top: 20%;
 }
 
 #graph {
@@ -119,7 +119,7 @@ body {
     grid-row: 1/3;
 }
 
-#chartdiv8 {
+#objective {
     width: 100%;
     height: 100%;
     grid-column: 2;
