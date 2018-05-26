@@ -2,8 +2,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class HarrisBenedict {
-	public int bmiCal(float height,float weight){
-		return (int)(weight/((height/100)*(height/100)));
+	public float bmiCal(float height,float weight){
+		return (float)(weight/((height/100)*(height/100)));
 	}
 	public static float bmrCal(float height,float weight,int age,String sex) { //기초 대사량 계산
 		float bmrcal = 0;
@@ -21,7 +21,7 @@ public class HarrisBenedict {
 		switch(choice){
 	        case 1: //활동이 적거나 운동을 안할 경우
 	        	actcal = (float) (bmrCal(height, weight, age, sex)*0.2);
-			case 2: //가벼운 활동 및 운동(대략 1-3일/주)
+			case 2: //가벼운 활동 및 운동(대략 1-2일/주)
 	        	actcal = (float) (bmrCal(height, weight, age, sex)*0.375);
 	        case 3: // 보통의 활동 및 운동(대략 3-5일/주)
 	        	actcal =  (float) (bmrCal(height, weight, age, sex)*0.555);
