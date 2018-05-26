@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var myapi = "http://localhost:3001/appuserjson"
+    var myapi = "http://localhost:3000/appuserjson"
     var appuser_name = [];
     var appuser_id = [];
     var bmi = [];
@@ -19,15 +19,15 @@ $(document).ready(function () {
     $('.dropdown-menu').on("click", "li", function (req, res) {
         makeWeekSelectOptions();
         //console.log(start_date,end_date);
-        var appuserapi = "http://localhost:3001/appuserjson"
-        var dailyapi = "http://localhost:3001/dailyjson"
+        var appuserapi = "http://localhost:3000/appuserjson"
+        var dailyapi = "http://localhost:3000/dailyjson"
         var id = $(this).attr('value');
         var real_date;
        
         
         var match_date = 0;
           
-       $.getJSON("http://localhost:3001/dailyjson", function (info) {
+       $.getJSON("http://localhost:3000/dailyjson", function (info) {
             $.each(info, function (key, item) {
                 real_date = new Date(info[key]["workoutday"]);
                 /*if (start_year < real_year && end_year > real_year)

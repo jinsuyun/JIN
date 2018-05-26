@@ -7,6 +7,7 @@ var dbConfig = {
     database: 'capstone',
     connectionLimit: 10
 }
+
 var dbResult = require('../routes/result');
 var pool = mysql.createPool(dbConfig);
 var adapter = {};

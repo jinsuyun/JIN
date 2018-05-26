@@ -3,7 +3,7 @@ var router = express.Router();
 
 router.get('/', function(req, res) {
 
-    var id=req.params.id;
+    var id = req.params.id;
     res.render('graph.html');
 });
 

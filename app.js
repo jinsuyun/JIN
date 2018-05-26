@@ -17,6 +17,7 @@ var webDailyRouter = require('./routes/web-daily-router');
 var webFoodRouter = require('./routes/web-food-router');
 var trainerRouter = require('./routes/trainer-router');
 var webWorkoutRouter = require('./routes/web-workout-router');
+var trainerLoginRouter = require('./routes/trainer-login-router');
 
 var app = express();
 
@@ -40,12 +41,13 @@ app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 app.use('/userinput', userInputRouter);
 
-app.use('/graph', graphRouter);
+app.use('/usergraph', graphRouter);
 app.use('/appuserjson', appUserjsonRouter);
 app.use('/dailyjson', webDailyRouter);
 app.use('/foodjson', webFoodRouter);
 app.use('/trainerjson', trainerRouter);
 app.use('/workoutjson', webWorkoutRouter);
+app.use('/weblogin', trainerLoginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -66,5 +68,5 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 var server = app.listen(app.get('port'), function() {
-console.log('Express server listening on port ' + server.address().port);
+  console.log('Express server listening on port ' + server.address().port);
 });
