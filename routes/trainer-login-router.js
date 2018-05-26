@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var loginAdapter = require('../adapters/login-db-adapter');
+var loginAdapter = require('../adapters/trainer-login-db-adapter');
 var dbConnection = require('./result');
 
 var userId;
