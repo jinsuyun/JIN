@@ -63,7 +63,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                             });
                             builder2.show();
                         }
-             }).setCancelable(false).show();
+                    }).setCancelable(false).show();
         }
     }
     @Override
@@ -109,6 +109,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             manager.beginTransaction().replace(R.id.content_main,new addUser()).commit();
         } else if (id == R.id.nav_body_check) {
             manager.beginTransaction().replace(R.id.content_main,new bodyCheck()).commit();
+
         } else if (id == R.id.nav_qna) {
             manager.beginTransaction().replace(R.id.content_main,new QnA()).commit();
         }
