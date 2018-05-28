@@ -14,25 +14,35 @@ var userWorkLevel;
 
 router.post('/', function(req, res) {
 
-    userId = req.body.id;
-    userSex = req.body.sex;
-    userAge = req.body.age;
-    userWeight = req.body.weight;
-    userHeight = req.body.height;
-    userTargetWeight = req.body.targetweight;
-    userTargetPeriod = req.body.targetperiod;
-    userWorkLevel = req.body.worklevel;
+    var str = Object.keys(req.body);
+    var obj = JSON.parse(str[0]);
+    userId = obj.id;
+    userSex = obj.sex;
+    userAge = obj.age;
+    userWeight = obj.weight;
+    userHeight = obj.height;
+    userTargetWeight = obj.targetweight;
+    userTargetPeriod = obj.targetperiod;
+    userWorkPeriod = obj.workperiod;
+    userWorkLevel = obj.worklevel;
 
-    if(userId == undefined || userSex == undefined || userAge == undefined || userWeight == undefined
-        || userHeight == undefined || userTargetWeight == undefined || userTargetPeriod == undefined || userWorkLevel == undefined) {
+    if(userId == '' || userSex == '' || userAge == '' || userWeight == ''  || userHeight == ''
+        || userTargetWeight == '' || userTargetPeriod == '' || userWorkPeriod == '' || userWorkLevel == '') {
         return res.json({success:false});
     } else {
 
     }
 
-    userInputAdapter.write(req.body, function(resultCode, rows){
+    userInputAdapter.write(obj, function(resultCode, rows){
         if(resultCode == dbConnection.OK){
-            res.json({"success":true});
+            userInputAdapter.search(obj, function(resultCode, rows){
+                if(resultCode == dbConnection.OK) {
+                    var response;
+                    console.log(rows);
+                    response = Object.assign(rows[0], {"success":true});
+                    res.json(response);
+                }
+            })
         }
         else {
             console.log("false reason: query false");
