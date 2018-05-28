@@ -16,7 +16,6 @@ router.post('/', function(req, res) {
     console.log(userId);
     console.log(userPassword);
 
-
     if(userId == '' || userPassword == '') {
         return res.json({success:false});
     } else {
