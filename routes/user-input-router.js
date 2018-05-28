@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var userInputAdapter =require('../adapters/userinput-db-adapter');
+var userInputAdapter = require('../adapters/userinput-db-adapter');
+var bodyTypeAdapter = require('../adapters/bodytype-adapter');
 var dbConnection = require('./result');
 
 var userId;
@@ -10,7 +11,9 @@ var userWeight;
 var userHeight;
 var userTargetWeight;
 var userTargetPeriod;
+var userWorkPeriod;
 var userWorkLevel;
+var userBodyType;
 
 router.post('/', function(req, res) {
 
@@ -33,7 +36,12 @@ router.post('/', function(req, res) {
 
     }
 
-    userInputAdapter.write(obj, function(resultCode, rows){
+    bodyTypeAdapter.classifyBodyType(obj, function (rows) {
+        userBodyType = rows.bodytype;
+        obj = Object.assign(obj, rows);
+    })
+
+    userInputAdapter.write(obj, function(resultCode, rows){ // obj에 bodytype추가 수정
         if(resultCode == dbConnection.OK){
             userInputAdapter.search(obj, function(resultCode, rows){
                 if(resultCode == dbConnection.OK) {
