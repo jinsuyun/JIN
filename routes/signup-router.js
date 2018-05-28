@@ -11,24 +11,26 @@ var userEmail;
 router.post('/', function(req, res) {
 
     console.log(req.body);
-    userId = req.body.id;
-    userPassword = req.body.password;
-    userName = req.body.name;
-    userEmail = req.body.email;
+    var str = Object.keys(req.body);
+    var obj = JSON.parse(str[0]);
+    userId = obj.id;
+    userPassword = obj.password;
+    userName = obj.name;
+    userEmail = obj.email;
 
-    if(userId == undefined || userPassword == undefined || userName == undefined || userEmail == undefined) {
-        return res.json({success:false});
+    if(userId == '' || userPassword == '' || userName == '' || userEmail == '') {
+
+        return res.json({success:false, valid:false});
     } else {
 
     }
 
-    signupAdapter.signupWrite(req.body, function(resultCode, rows){
+    signupAdapter.signupWrite(obj, function(resultCode, rows){
         if(resultCode == dbConnection.OK){
             res.json({"success":true});
-        }
-        else {
-            console.log("false reason: wrong id");
-            res.json({"success":false});
+        } else {
+            console.log("false reason: id duplicated");
+            res.json({"success":false, "valid":true});
         }
     });
 });

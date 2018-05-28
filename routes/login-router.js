@@ -8,10 +8,16 @@ var userPassword;
 
 router.post('/', function(req, res) {
 
-    userId = req.body.id;
-    userPassword = req.body.password;
+    console.log(req.body);
+    var str = Object.keys(req.body);
+    var obj = JSON.parse(str[0]);
+    userId = obj.id;
+    userPassword = obj.password;
+    console.log(userId);
+    console.log(userPassword);
 
-    if(userId == undefined || userPassword == undefined) {
+
+    if(userId == '' || userPassword == '') {
         return res.json({success:false});
     } else {
 
@@ -20,10 +26,17 @@ router.post('/', function(req, res) {
     loginAdapter.loginSearch(userId, userPassword, function(resultCode,rows){
         if(resultCode == dbConnection.OK){
             if(rows.length > 0){
-                if(rows[0].password == req.body.password){
+                if(rows[0].password == obj.password){
                     if (resultCode == dbConnection.OK) {
+                        var response;
                         console.log("login success");
-                        var response = Object.assign(rows[0], {"success":true});
+                        if(rows[0].sex == undefined || rows[0].age == undefined || rows[0].weight == undefined  || rows[0].height == undefined
+                            || rows[0].targetweight == undefined || rows[0].targetperiod == undefined || rows[0].workperiod == undefined || rows[0].worklevel == undefined) {
+                            response = Object.assign(rows[0], {"success":true, "survey":false});
+                        } else {
+                            response = Object.assign(rows[0], {"success":true, "survey":true});
+                        }
+                        console.log(response);
                         res.json(response);
                     }
                     else {
