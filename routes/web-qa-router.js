@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var webFoodAdapter = require('../adapters/webqa-db-adapter');
 
-/* GET home page. */
 router.get('/', function(req, res) {
-    res.render('staty.html');
-    res.writeHead(200,{'Content-Type':'text/html'});
+
+    var id=req.params.id;
+    res.render('post.html');
 });
 
 module.exports = router;

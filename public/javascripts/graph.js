@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     var myapi = "http://localhost:3001/appuserjson"
     var appuser_name = [];
     var appuser_id = [];
@@ -7,41 +8,54 @@ $(document).ready(function () {
         $.each(info, function (key, item) {
             appuser_name[key] = item["name"];
             appuser_id[key] = item["id"];
-            $(".dropdown-menu").append("<li value=" + appuser_id[key] + "><a>" + appuser_name[key] + "</a></li>");
+            $("#userselect").append("<option value=" + appuser_id[key] + ">" + appuser_name[key] + "</option>");
             makeWeekSelectOptions();
         });
     });
-
 });
-var start_date=[];
-var end_date=[];
+
 $(document).ready(function () {
-    $('.dropdown-menu').on("click", "li", function (req, res) {
-        makeWeekSelectOptions();
-        //console.log(start_date,end_date);
+    $("#searchform").on('submit', function (event) {
+        event.preventDefault();
+        var sel_userid = $('#userselect').val();
+        var sel_year = $('#sh_year').val();
+        var sel_month = $('#sh_month').val();
+        var sel_week = $('#sh_week').val();
+        var select_date = sel_week.split("|");
+        var start_date = new Date(select_date[0]);
+        var end_date = new Date(select_date[1]);
+
         var appuserapi = "http://localhost:3001/appuserjson"
         var dailyapi = "http://localhost:3001/dailyjson"
-        var id = $(this).attr('value');
-        var real_date;
-       
-        
+
+        var real_date; 
         var match_date = 0;
-          
-       $.getJSON("http://localhost:3001/dailyjson", function (info) {
+        
+         var appuser_bodytype;
+        $.getJSON(appuserapi, function (info) {
+            $.each(info, function (key, item) {
+                if (sel_userid == info[key]['id']) {
+                    appuser_bodytype=info[key]["bodytype"];
+                $("#bodytype_desc").html("<img src = '../uploads/"+appuser_bodytype+".PNG' height='100%' width='100%'>");
+                }
+            });
+        });
+        
+        $.getJSON("http://localhost:3001/dailyjson", function (info) {
             $.each(info, function (key, item) {
                 real_date = new Date(info[key]["workoutday"]);
-                /*if (start_year < real_year && end_year > real_year)
-                    match_year = 1;
-               */
+                if (start_date.getTime() <= real_date.getTime() && real_date.getTime() <= end_date.getTime()) {
+                    match_date = 1;
+                }
             });
 
         });
-        
+
         $.getJSON(appuserapi, function (info) {
             var appuser = [];
             var bmi = [];
             $.each(info, function (key, item) {
-                if (id == info[key]['id']) {
+                if (sel_userid == info[key]['id']) {
                     bmi[key] = item.weight / ((item.height / 100) * (item.height / 100));
                     bmi[key] = bmi[key].toFixed(2);
                     var bmi_chart = AmCharts.makeChart("bmi", {
@@ -134,8 +148,8 @@ $(document).ready(function () {
                     });
                 }
             });
-
         });
+
         $.getJSON(dailyapi, function (info) {
             var set = [];
             var set_day = []; //주마다 세트수 
@@ -147,18 +161,20 @@ $(document).ready(function () {
                 set_chest = 0,
                 set_shoulder = 0;
             $.each(info, function (key, item) {
-                if (id == info[key]['id']) {
-                    set_arm += info[key]["arm"];
-                    set_sixpack += info[key]["sixpack"];
-                    set_leg += info[key]["leg"];
-                    set_back += info[key]["back"];
-                    set_chest += info[key]["chest"];
-                    set_shoulder += info[key]["shoulder"];
+                if (sel_userid == info[key]['id']) {
+                    real_date = new Date(info[key]["workoutday"]);
+                    if (start_date.getTime() <= real_date.getTime() && real_date.getTime() <= end_date.getTime()) {
+                        set_arm += info[key]["arm"];
+                        set_sixpack += info[key]["sixpack"];
+                        set_leg += info[key]["leg"];
+                        set_back += info[key]["back"];
+                        set_chest += info[key]["chest"];
+                        set_shoulder += info[key]["shoulder"];
+                    }
                 }
             });
             $.each(info, function (key, item) {
-
-                if (id == info[key]['id']) {
+                if (sel_userid == info[key]['id']) {
                     var part_chart = AmCharts.makeChart("part", {
                         "type": "radar",
                         "theme": "light",
@@ -217,96 +233,131 @@ $(document).ready(function () {
             });
             var day = []; //일
             var date = []; //요일
-            var run_mon, run_tue, run_wed, run_thu, run_fri, run_sat, run_sun;
-            var weight_mon, weight_tue, weight_wed, weight_thu, weight_fri, weight_sat, weight_sun;
+            var run_mon = 0,
+                run_tue = 0,
+                run_wed = 0,
+                run_thu = 0,
+                run_fri = 0,
+                run_sat = 0,
+                run_sun = 0;
+            var weight_mon = 0,
+                weight_tue = 0,
+                weight_wed = 0,
+                weight_thu = 0,
+                weight_fri = 0,
+                weight_sat = 0,
+                weight_sun = 0;
             var sum_week_run = [];
+            var sum_run = [0, 0, 0, 0, 0];
             var sum_week_weight = [];
+            var sum_weight = [0, 0, 0, 0, 0];
 
             $.each(info, function (key, item) {
-
-                if (id == info[key]['id']) {
+                if (sel_userid == info[key]['id']) {
                     day[key] = (info[key]['workoutday']);
                     date[key] = new Date(day[key]).getDay();
+                    real_date = new Date(info[key]["workoutday"]);
+                    if (start_date.getTime() <= real_date.getTime() && real_date.getTime() <= end_date.getTime()) {
 
-                    if (date[key] == 0) {
-                        run_sun = info[key]["running_time"];
-                        weight_sun = info[key]["weight_time"];
-                    } else if (date[key] == 1) {
-                        run_mon = info[key]["running_time"];
-                        weight_mon = info[key]["weight_time"];
-                    } else if (date[key] == 2) {
-                        run_tue = info[key]["running_time"];
-                        weight_tue = info[key]["weight_time"];
-                    } else if (date[key] == 3) {
-                        run_wed = info[key]["running_time"];
-                        weight_wed = info[key]["weight_time"];
-                    } else if (date[key] == 4) {
-                        run_thu = info[key]["running_time"];
-                        weight_thu = info[key]["weight_time"];
-                    } else if (date[key] == 5) {
-                        run_fri = info[key]["running_time"];
-                        weight_fri = info[key]["weight_time"];
-                    } else if (date[key] == 6) {
-                        run_sat = info[key]["running_time"];
-                        weight_sat = info[key]["weight_time"];
+                        if (date[key] == 0) {
+                            run_sun = info[key]["running_time"];
+                            weight_sun = info[key]["weight_time"];
+                        } else if (date[key] == 1) {
+                            run_mon = info[key]["running_time"];
+                            weight_mon = info[key]["weight_time"];
+                        } else if (date[key] == 2) {
+                            run_tue = info[key]["running_time"];
+                            weight_tue = info[key]["weight_time"];
+                        } else if (date[key] == 3) {
+                            run_wed = info[key]["running_time"];
+                            weight_wed = info[key]["weight_time"];
+                        } else if (date[key] == 4) {
+                            run_thu = info[key]["running_time"];
+                            weight_thu = info[key]["weight_time"];
+                        } else if (date[key] == 5) {
+                            run_fri = info[key]["running_time"];
+                            weight_fri = info[key]["weight_time"];
+                        } else if (date[key] == 6) {
+                            run_sat = info[key]["running_time"];
+                            weight_sat = info[key]["weight_time"];
+                        }
                     }
-                    sum_week_run = (run_mon + run_tue + run_wed + run_thu + run_fri + run_sat + run_sun) / 60;
-                    sum_week_weight = (weight_mon + weight_tue + weight_wed + weight_thu + weight_fri + weight_sat + weight_sun) / 60;
-                    sum_week_run = sum_week_run.toFixed(2);
-                    sum_week_weight = sum_week_weight.toFixed(2);
                 }
             });
+
             $.each(info, function (key, item) {
-                if (id == info[key]['id']) {
-                    var month_chart = AmCharts.makeChart("month", {
-                        "type": "serial",
-                        "theme": "light",
-                        "titles": [{
-                            "text": "월간 운동량"
-                        }],
-                        "dataProvider": [{
-                            "country": "1주차",
-                            "running": sum_week_run,
-                            "weight": sum_week_weight
-                            }, {
-                            "country": "2주차",
-                            "running": sum_week_run,
-                            "weight": sum_week_weight
-                            }, {
-                            "country": "3주차",
-                            "running": sum_week_run,
-                            "weight": sum_week_weight,
-                            }, {
-                            "country": "4주차",
-                            "running": sum_week_run,
-                            "weight": sum_week_weight,
-                            }],
-                        "graphs": [{
-                            "fillAlphas": 0.9,
-                            "lineAlpha": 0.2,
-                            "type": "column",
-                            "valueField": "running",
-                            "balloonText": "유산소:[[value]]시간",
-                            }, {
-                            "fillAlphas": 0.9,
-                            "lineAlpha": 0.2,
-                            "type": "column",
-                            "valueField": "weight",
-                            "balloonText": "웨이트:[[value]]시간",
-                        }],
-                        "categoryField": "country",
-                        "chartCursor": {
-                            "fullWidth": true,
-                            "cursorAlpha": 0.1,
-                            "listeners": [{
-                                "event": "changed",
-                                "method": function (ev) {
-                                    // Log last cursor position
-                                    ev.chart.lastCursorPosition = ev.index;
-                                }
-                            }]
+                if (sel_userid == info[key]['id']) {
+                    day[key] = (info[key]['workoutday']);
+                    date[key] = new Date(day[key]).getDay();
+                    real_date = new Date(info[key]["workoutday"]);
+
+                    if (start_date.getTime() <= real_date.getTime() && real_date.getTime() <= end_date.getTime()) {
+                        sum_run[0] += (info[key]["running_time"]);
+                        sum_weight[0] += (info[key]["weight_time"]);
+                    } else {
+                        if (start_date.getMonth() <= real_date.getMonth() && real_date.getMonth() <= end_date.getMonth()) {
+                            sum_run[1] += (info[key]["running_time"]);
+                            sum_weight[1] += (info[key]["weight_time"]);
                         }
-                    });
+                    }
+
+                }
+            });
+            for (var i = 0; i < 5; i++) {
+                sum_week_run[i] = (sum_run[i]);
+                sum_week_weight[i] = (sum_weight[i]);
+            }
+            var month_chart = AmCharts.makeChart("month", {
+                "type": "serial",
+                "theme": "light",
+                "titles": [{
+                    "text": "월간 운동량"
+                        }],
+                "dataProvider": [{
+                    "country": "1주차",
+                    "running": sum_week_run[0],
+                    "weight": sum_week_weight[0]
+                            }, {
+                    "country": "2주차",
+                    "running": sum_week_run[1],
+                    "weight": sum_week_weight[1]
+                            }, {
+                    "country": "3주차",
+                    "running": sum_week_run[2],
+                    "weight": sum_week_weight[2]
+                            }, {
+                    "country": "4주차",
+                    "running": sum_week_run[3],
+                    "weight": sum_week_weight[3]
+                            }, {
+                    "country": "5주차",
+                    "running": sum_week_run[4],
+                    "weight": sum_week_weight[4]
+                            }],
+                "graphs": [{
+                    "fillAlphas": 0.9,
+                    "lineAlpha": 0.2,
+                    "type": "column",
+                    "valueField": "running",
+                    "balloonText": "유산소:[[value]]시간",
+                            }, {
+                    "fillAlphas": 0.9,
+                    "lineAlpha": 0.2,
+                    "type": "column",
+                    "valueField": "weight",
+                    "balloonText": "웨이트:[[value]]시간",
+                        }],
+                "categoryField": "country",
+                "chartCursor": {
+                    "fullWidth": true,
+                    "cursorAlpha": 0.1,
+                    "listeners": [{
+                        "event": "changed",
+                        "method": function (ev) {
+                            // Log last cursor position
+                            ev.chart.lastCursorPosition = ev.index;
+                        }
+                            }]
                 }
             });
 
@@ -324,6 +375,10 @@ $(document).ready(function () {
                         "text": "주간 운동량"
                         }],
                     "dataProvider": [{
+                        "country": "일",
+                        "running": run_sun,
+                        "weight": weight_sun,
+                            }, {
                         "country": "월",
                         "running": run_mon,
                         "weight": weight_mon,
@@ -347,10 +402,6 @@ $(document).ready(function () {
                         "country": "토",
                         "running": run_sat,
                         "weight": weight_sat,
-                            }, {
-                        "country": "일",
-                        "running": run_sun,
-                        "weight": weight_sun,
                             }],
                     "graphs": [{
                         "balloonText": "유산소:[[value]]분",
@@ -380,7 +431,7 @@ $(document).ready(function () {
                         }]
                     }
                 });
-                //ㅇㅇㅇㅇㅇㅇ수정시작
+
                 $.each(info, function (key, item) {
                     var workout_calories_chart = AmCharts.makeChart("workout_calories", {
                         "type": "pie",
@@ -647,15 +698,10 @@ function makeWeekSelectOptions() {
 
         sdate = new Date(edate.getFullYear(), edate.getMonth(), edate.getDate() + 1);
         edate = new Date(sdate.getFullYear(), sdate.getMonth(), sdate.getDate());
-        start_date=sdate;
-        end_date=edate;
+
+
     }
 
     if (seled) obj.value = seled;
-   
-    var select_year = document.getElementById('sh_year');
-    console.log(select_year.options[select_year.selectedIndex].value);
-    var select_month = document.getElementById('sh_month');
-    console.log(select_month.options[select_month.selectedIndex].value);
 
 }

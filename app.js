@@ -17,6 +17,9 @@ var webDailyRouter = require('./routes/web-daily-router');
 var webFoodRouter = require('./routes/web-food-router');
 var trainerRouter = require('./routes/trainer-router');
 var webWorkoutRouter = require('./routes/web-workout-router');
+var webLoginRouter = require('./routes/web-login-router');
+var webMainRouter = require('./routes/web-main-router');
+var webQaRouter = require('./routes/web-qa-router');
 
 var app = express();
 
@@ -25,13 +28,16 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // port setup
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads',express.static(__dirname + '/uploads'));
+app.use('/views',express.static(__dirname + '/views'));
+
 app.engine('html', ejs.renderFile);
 
 app.use('/', indexRouter);
@@ -46,6 +52,9 @@ app.use('/dailyjson', webDailyRouter);
 app.use('/foodjson', webFoodRouter);
 app.use('/trainerjson', trainerRouter);
 app.use('/workoutjson', webWorkoutRouter);
+app.use('/weblogin', webLoginRouter);
+app.use('/webmain',webMainRouter);
+app.use('/post',webQaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
