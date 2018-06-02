@@ -1,6 +1,17 @@
-#page_graph{
+.container_login{
+    width: 100%;
+    margin: 0 auto;
+    margin-left: 40%;
+    margin-top: 5%;
+    /* 가로로 중앙에 배치 */
     
+    /* 테두리와 내용 사이의 패딩 여백 */
 }
+
+/*#page_graph{
+    background-color:dimgrey;
+}    */
+
 #selectbtn{
     margin-top:55px;
 }
@@ -89,7 +100,7 @@ body {
     height: 100%;
     font-size: 11px;
     grid-row: 1;
-    grid-column: 3;
+    grid-column: 2/4;
 
 }
 

@@ -20,7 +20,6 @@ var webFoodRouter = require('./routes/web-food-router');
 var trainerRouter = require('./routes/trainer-router');
 var webWorkoutRouter = require('./routes/web-workout-router');
 var trainerLoginRouter = require('./routes/trainer-login-router');
-var webMainRouter = require('./routes/web-main-router');
 var webQaRouter = require('./routes/web-qa-router');
 
 var app = express();
@@ -57,7 +56,6 @@ app.use('/foodjson', webFoodRouter);
 app.use('/trainerjson', trainerRouter);
 app.use('/workoutjson', webWorkoutRouter);
 app.use('/weblogin', trainerLoginRouter);
-app.use('/webmain',webMainRouter);
 app.use('/post',webQaRouter);
 
 // catch 404 and forward to error handler
