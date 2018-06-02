@@ -1,3 +1,4 @@
 node_modules/
 .idea
 /public/javascripts/main.js
+/views/main.html
