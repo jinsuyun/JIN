@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".exercise_cycle"
+    tools:showIn="@layout/activity_exercise_cycle">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="다음"
+        android:id="@+id/nextbtn_cycle"/>
+    <TextView
+        android:id="@+id/text_cycle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/nextbtn_cycle"
+        android:textSize="30dp"
+        android:text="Timer"
+        />
+
+    <ImageView
+        android:id="@+id/cycle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_below="@+id/nextbtn_cycle"
+        app:srcCompat="@drawable/cycle" />
+
+</RelativeLayout>

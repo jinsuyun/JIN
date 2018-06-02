@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "ssm.hel_per"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -38,6 +38,8 @@ dependencies {
     implementation 'com.airbnb.android:lottie:2.1.0'
     compile 'com.facebook.android:facebook-android-sdk:4.+'
     compile group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
+    compile 'com.github.PhilJay:MpAndroidChart:v3.0.2'
+    compile 'com.github.lzyzsd:circleprogress:1.2.1'
     implementation 'com.naver.nid:naveridlogin-android-sdk:4.2.0'
     implementation 'com.felipecsl.asymmetricgridview:library:2.0.1'
     implementation 'com.android.support:design:27.0.1'

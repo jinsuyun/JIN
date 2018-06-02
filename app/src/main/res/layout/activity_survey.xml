@@ -99,18 +99,45 @@
                     android:background="#ADCCE2" />
 
                 <customfonts.MyEditText
-                    android:id="@+id/sex"
+                    android:id="@+id/sex_font"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="22dp"
                     android:layout_marginRight="35dp"
                     android:background="#0000"
                     android:hint="성별 *"
-                    android:inputType="text"
+                    android:inputType="textPassword"
+                    android:maxLength="12"
                     android:padding="16dp"
                     android:textColor="#ADCCE2"
                     android:textColorHint="#ADCCE2"
-                    android:textSize="14dp" />
+                    android:textSize="14dp"></customfonts.MyEditText>
+                <RadioGroup
+                    android:id="@+id/sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/sex_man"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="남자" />
+
+                <RadioButton
+                    android:id="@+id/sex_woman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1"
+                    android:text="여자" /> />
+
+
+                </RadioGroup>
 
                 <View
                     android:id="@+id/view3"
@@ -128,7 +155,7 @@
                     android:layout_marginRight="35dp"
                     android:background="#0000"
                     android:hint="목표체중 *"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:maxLength="12"
                     android:padding="16dp"
                     android:textColor="#ADCCE2"
@@ -151,7 +178,7 @@
                     android:layout_marginRight="35dp"
                     android:background="#0000"
                     android:hint="목표기간 *"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:maxLength="12"
                     android:padding="16dp"
                     android:textColor="#ADCCE2"

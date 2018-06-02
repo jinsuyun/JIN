@@ -70,6 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
                 thread.start();
             }
         });
+
     }
 
     class ConnectThread extends Thread {

@@ -32,6 +32,17 @@ public class SignInActivity extends AppCompatActivity {
     boolean signinCheck = false;
     boolean surveyCheck = false;
 
+    String name;
+    String sex;
+    int age;
+    double weight;
+    double height;
+    double targetweight;
+    int targetperiod;
+    int worklevel;
+    int workperiod;
+    String bodytype;
+
     ImageView sback;
     TextView createbutton;
     Toolbar toolbar;
@@ -107,25 +118,51 @@ public class SignInActivity extends AppCompatActivity {
                         try {
                             JSONObject obj = new JSONObject(output);
                             signinCheck = obj.getBoolean("success");
-                            String bt = obj.getString("bodytype");
                             try {
                                 surveyCheck = obj.getBoolean("survey");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            if(surveyCheck) { // 설문조사x
-                                alert = 1;
-                            } else {
-
-                            }
-
                             if(signinCheck) {
-                                Intent it = new Intent(SignInActivity.this, Main2Activity.class);
-                                it.putExtra("id", id);
-                                it.putExtra("alert", alert);
-                                it.putExtra("bodytype", bt);
-                                startActivity(it);
-                                finish();
+                                name = obj.getString("name");
+
+                                if(!surveyCheck) { // 설문조사x
+                                    Intent it = new Intent(SignInActivity.this, Survey.class);
+                                    it.putExtra("id", id);
+                                    it.putExtra("name", name);
+                                    startActivity(it);
+                                    finish();
+
+                                } else { // 설문조사o
+                                    alert = 1;
+                                    sex = obj.getString("sex");
+                                    age = obj.getInt("age");
+                                    weight = obj.getDouble("weight");
+                                    height = obj.getDouble("height");
+                                    targetweight = obj.getDouble("targetweight");
+                                    targetperiod = obj.getInt("targetperiod");
+                                    worklevel = obj.getInt("worklevel");//일주일에 얼마나 운동하는지
+                                    workperiod = obj.getInt("workperiod");//그동안 운동을 얼마나 해봤는지
+                                    bodytype = obj.getString("bodytype");
+
+                                    Intent it = new Intent(SignInActivity.this, Main2Activity.class);
+                                    it.putExtra("id", id);
+                                    it.putExtra("alert", alert);
+                                    it.putExtra("name",name);
+                                    it.putExtra("sex",sex);
+                                    it.putExtra("age",age);
+                                    it.putExtra("targetperiod",targetperiod);
+                                    it.putExtra("targetweight",targetweight);
+                                    it.putExtra("worklevel",worklevel);
+                                    it.putExtra("workperiod",workperiod);
+                                    it.putExtra("bodytype",bodytype);
+                                    it.putExtra("weight",weight);
+                                    it.putExtra("height",height);
+
+                                    startActivity(it);
+                                    finish();
+                                }
+
                             } else {
                                 Toast.makeText(getApplicationContext(), "로그인 실패!", Toast.LENGTH_LONG).show();
                             }
