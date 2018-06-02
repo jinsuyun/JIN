@@ -20,7 +20,6 @@ var webFoodRouter = require('./routes/web-food-router');
 var trainerRouter = require('./routes/trainer-router');
 var webWorkoutRouter = require('./routes/web-workout-router');
 var trainerLoginRouter = require('./routes/trainer-login-router');
-var webLoginRouter = require('./routes/web-login-router');
 var webMainRouter = require('./routes/web-main-router');
 var webQaRouter = require('./routes/web-qa-router');
 
