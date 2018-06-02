@@ -8,13 +8,10 @@ var userPassword;
 
 router.post('/', function(req, res) {
 
-    console.log(req.body);
     var str = Object.keys(req.body);
     var obj = JSON.parse(str[0]);
     userId = obj.id;
     userPassword = obj.password;
-    console.log(userId);
-    console.log(userPassword);
 
     if(userId == '' || userPassword == '') {
         return res.json({success:false});

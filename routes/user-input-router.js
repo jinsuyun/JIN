@@ -46,7 +46,6 @@ router.post('/', function(req, res) {
             userInputAdapter.search(obj, function(resultCode, rows){
                 if(resultCode == dbConnection.OK) {
                     var response;
-                    console.log(rows);
                     response = Object.assign(rows[0], {"success":true});
                     res.json(response);
                 }
