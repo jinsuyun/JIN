@@ -16,15 +16,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    ImageView career_image; // 운동경력에 따른 이미지 삽입 변수
+    int alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        /*-------------------------------*/
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -37,8 +42,10 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
         Intent it1 = getIntent();
-        int alert = (int)it1.getSerializableExtra("alert");
+        alert = (int) it1.getSerializableExtra("alert"); // 로그인 이후에만 접근되어야함
+
 
         if(alert==1234) {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
@@ -58,6 +65,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent it = new Intent(Main2Activity.this,Survey.class);
+                                    it.putExtra("alert",alert);
                                     startActivity(it);
                                 }
                             });
@@ -65,6 +73,15 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                         }
                     }).setCancelable(false).show();
         }
+
+        career_image = (ImageView)findViewById(R.id.information);
+
+        if (alert == 1) {
+            career_image.setImageResource(R.drawable.lw_1);
+        } else if (alert == 2) {
+            career_image.setImageResource(R.drawable.sw_2);
+        } else if(alert == 3)
+            career_image.setImageResource(R.drawable.ob_3);
     }
     @Override
     public void onBackPressed() {

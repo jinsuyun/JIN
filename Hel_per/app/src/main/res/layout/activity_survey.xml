@@ -17,7 +17,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/unconditional"
@@ -190,6 +190,29 @@
                     android:background="#ADCCE2" />
 
                 <customfonts.MyEditText
+                    android:id="@+id/fat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="35dp"
+                    android:background="#0000"
+                    android:hint="체지방량"
+                    android:inputType="textPassword"
+                    android:maxLength="12"
+                    android:padding="16dp"
+                    android:textColor="#ADCCE2"
+                    android:textColorHint="#ADCCE2"
+                    android:textSize="14dp" />
+
+                <View
+                    android:id="@+id/view10"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="#ADCCE2" />
+
+                <customfonts.MyEditText
                     android:id="@+id/whether"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -207,17 +230,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginLeft="22dp"
-                    android:layout_marginRight="35dp">
+                    android:layout_marginRight="35dp"
+                    android:orientation="horizontal">
 
                     <CheckBox
                         android:id="@+id/drunk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginLeft="22dp"
                         android:layout_marginRight="35dp"
+                        android:layout_weight="1"
                         android:text="술" />
 
                     <CheckBox
@@ -250,13 +273,74 @@
                         android:layout_marginLeft="22dp"
                         android:layout_marginRight="35dp"
                         android:background="#0000"
-                        android:hint="운동량"
+                        android:hint="운동경력 *"
                         android:inputType="textPassword"
                         android:maxLength="12"
                         android:padding="16dp"
                         android:textColor="#ADCCE2"
                         android:textColorHint="#ADCCE2"
                         android:textSize="14dp"></customfonts.MyEditText>
+
+                    <RadioGroup
+                        android:id="@+id/exer_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <RadioButton
+                            android:id="@+id/ca_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_weight="1"
+                            android:text="1년 미만" />
+
+                        <RadioButton
+                            android:id="@+id/ca_one_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_weight="1"
+                            android:text="1년 이상 3년 미만" />
+
+                        <RadioButton
+                            android:id="@+id/ca_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_weight="1"
+                            android:text="3년 이상" />
+
+                    </RadioGroup>
+
+                    <View
+                        android:id="@+id/view8"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_weight="1"
+                        android:background="#ADCCE2" />
+
+                    <customfonts.MyEditText
+                        android:id="@+id/exercise_career"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="22dp"
+                        android:layout_marginRight="35dp"
+                        android:layout_weight="1"
+                        android:background="#0000"
+                        android:hint="운동량 *"
+                        android:inputType="textPassword"
+                        android:maxLength="12"
+                        android:padding="16dp"
+                        android:textColor="#ADCCE2"
+                        android:textColorHint="#ADCCE2"
+                        android:textSize="14dp" />
 
                     <RadioGroup
                         android:id="@+id/exer_state"
@@ -314,30 +398,6 @@
                     android:id="@+id/view7"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:background="#ADCCE2" />
-
-                <customfonts.MyEditText
-                    android:id="@+id/exercise_career"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginRight="35dp"
-                    android:background="#0000"
-                    android:hint="운동경력"
-                    android:inputType="textPassword"
-                    android:maxLength="12"
-                    android:padding="16dp"
-                    android:textColor="#ADCCE2"
-                    android:textColorHint="#ADCCE2"
-                    android:textSize="14dp" />
-
-                <View
-                    android:id="@+id/view8"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:background="#ADCCE2" />
