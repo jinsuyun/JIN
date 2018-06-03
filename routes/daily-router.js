@@ -5,15 +5,14 @@ var dbConnection = require('./result');
 
 router.post('/', function(req, res) {
 
-    console.log(req.body);
     var str = Object.keys(req.body);
     var obj = JSON.parse(str[0]);
+    console.log(obj);
 
     dailyAdapter.dailyWrite(obj, function(resultCode,rows){
-        var response;
         if(resultCode == dbConnection.OK){
-            response = Object.assign(rows[0], {"success":true});
-            res.json(response);
+            console.log(rows);
+            res.json({"success":true});
         } else {
             console.log("false reason: id duplicated");
             res.json({"success":false});

@@ -43,6 +43,7 @@ adapter.dailySearch = function(id, cb) {
 }
 
 adapter.dailyWrite = function(daily, cb) {
+    console.log(daily)
     var resultCode = dbResult.Fail;
 
     pool.getConnection(function(err, connection) {
