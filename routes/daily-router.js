@@ -8,9 +8,11 @@ router.post('/', function(req, res) {
     var str = Object.keys(req.body);
     var obj = JSON.parse(str[0]);
 
-    dailyAdapter.dailyWrite(obj, function(err,rows){
+    dailyAdapter.dailyWrite(obj, function(resultCode,rows){
+        var response;
         if(resultCode == dbConnection.OK){
-            res.json(rows);
+            response = Object.assign(rows[0], {"success":true});
+            res.json(response);
         } else {
             console.log("false reason: id duplicated");
             res.json({"success":false});
