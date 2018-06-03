@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var dailyAdapter = require('../adapters/appdaily-db-adapter');
+var dbConnection = require('./result');
 
 router.post('/', function(req, res) {
 
