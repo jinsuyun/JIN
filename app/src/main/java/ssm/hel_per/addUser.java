@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class addUser  extends Fragment {
-    View view;
+    View v;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.add_user, container, false);
-        return view;
+        v = inflater.inflate(R.layout.add_user, container, false);
+        return v;
     }
 }

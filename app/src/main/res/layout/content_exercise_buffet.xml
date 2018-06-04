@@ -16,7 +16,7 @@
         android:id="@+id/skylayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/cycle"
+        android:layout_above="@id/buffet"
         >
 
         <ImageView
@@ -27,7 +27,7 @@
             android:background="@drawable/android_swing" />
 
         <TextView
-            android:id="@+id/text_cycle"
+            android:id="@+id/text_buffet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/swingImage"
@@ -37,23 +37,23 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/nextbtn_cycle"
+        android:id="@+id/nextbtn_buffet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_below="@id/skylayout"
-        android:layout_toEndOf="@+id/cycle"
+        android:layout_toEndOf="@+id/buffet"
         android:text="다음"
         android:textSize="60px"/>
 
 
     <ImageView
-        android:id="@+id/cycle"
+        android:id="@+id/buffet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_weight="1"
-        app:srcCompat="@drawable/cycle" />
+        app:srcCompat="@drawable/buffet" />
 
 </RelativeLayout>

@@ -92,7 +92,7 @@ public class bodyCheck extends Fragment {
         tv6.setText("일일목표소모 열량: " + (double)(Math.round(bodyalgo.targetCal(weight, targetweight, targetperiod) * 100d) / 100d) + "kcal");
         tv7.setText("당신이 지금부터 " + targetperiod + "일간 " + Math.abs(weight - targetweight) + "kg을 조절하기 위해서는 매일 운동으로 "
                 + (double)(Math.round(bodyalgo.targetCal(weight, targetweight, targetperiod) * 0.3 * 100d) / 100d) + "kcal를 소모해야 하고, 식사는 하루 "
-                + (double)(Math.round(bodyalgo.targetCal(weight, targetweight, targetperiod) * 0.7 * 100d) / 100d) + "kcal 를 섭취해야 합니다..");
+                + (double)(Math.round(bodyalgo.eatCal(height, weight, age, sex, worklevel, targetweight, targetperiod) * 100d) / 100d) + "kcal 를 섭취해야 합니다..");
 
         return v;
     }

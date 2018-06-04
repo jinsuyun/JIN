@@ -1,14 +1,9 @@
 package ssm.hel_per;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,10 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class exercise_buffet extends AppCompatActivity {
+public class exercise_flank extends AppCompatActivity {
     TextView mText;
     Button mButton;
-    int value=120;
+    int value=30;
 
     ImageView swingImage;
     ImageView skyImage;
@@ -31,22 +26,17 @@ public class exercise_buffet extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercise_buffet);
+        setContentView(R.layout.activity_exercise_flank);
 
-        mText=(TextView)findViewById(R.id.text_buffet);
-        mButton=(Button)findViewById(R.id.nextbtn_buffet);
+        mText=(TextView)findViewById(R.id.text_plank);
+        mButton=(Button)findViewById(R.id.nextbtn_plank);
 
-        new CountDownTimer(120*1000, 1000){
+        new CountDownTimer(30*1000, 1000){
 
             @Override
             public void onTick(long millisUntilFinished) { // 총 시간과 주기
                 value--;
                 mText.setText("남은 시간  " + value + "초");
-//                if(value==0){
-//                    Intent intent = new Intent(exercise_buffet.this,exercise_jumpingrope.class);
-//                    startActivity(intent);
-//                    finish();
-//                }
             }
 
             @Override
@@ -57,8 +47,6 @@ public class exercise_buffet extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(exercise_buffet.this,exercise_running.class);
-                startActivity(intent);
                 finish();
             }
         });
@@ -78,7 +66,6 @@ public class exercise_buffet extends AppCompatActivity {
         skyImage.setAnimation(flowAnimation);
         flowAnimation.setAnimationListener(new AnimationAdapter());
     }
-
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -132,5 +119,3 @@ public class exercise_buffet extends AppCompatActivity {
 
     }
 }
-
-

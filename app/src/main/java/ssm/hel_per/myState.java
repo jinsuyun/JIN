@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,8 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class myState extends Fragment {
     View v;
     double weight=0;
@@ -49,6 +52,8 @@ public class myState extends Fragment {
         worklevel=getActivity().getIntent().getIntExtra("worklevel",0);
         workperiod=getActivity().getIntent().getIntExtra("workperiod",0);
         height=getActivity().getIntent().getDoubleExtra("height",0);
+
+
         bmi=bodyAlgo.bmiCal(height,weight);
         float f_weight=Float.parseFloat(String.valueOf(weight));
 

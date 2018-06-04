@@ -3,7 +3,9 @@ package ssm.hel_per;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,6 +42,8 @@ import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static android.support.constraint.Constraints.TAG;
+
 
 public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     Handler handler = new Handler();
@@ -55,6 +59,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     int worklevel;
     int workperiod;
     String bodytype;
+    String bt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +100,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                         }
                     }).setCancelable(false).show();
         }else if(alert ==1){
-            String bt=getIntent().getStringExtra("bodytype");
+            bt=getIntent().getStringExtra("bodytype");
             age = (int)it1.getIntExtra("age", 0);
             weight =it1.getDoubleExtra("weight",0);
             height =it1.getDoubleExtra("height",0);
@@ -234,10 +239,15 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             it_myState.putExtra("workperiod",workperiod);
             it_myState.putExtra("height",height);
 
+
             manager.beginTransaction().replace(R.id.content_main,new myState()).commit();
         } else if (id == R.id.nav_exercise) {
+            Intent it2_myState = new Intent(Main2Activity.this,exercise.class);
+            it2_myState.putExtra("state",bodytype);
             manager.beginTransaction().replace(R.id.content_main,new exercise()).commit();
         } else if (id == R.id.nav_food_manage) {
+            Intent it3_myState = new Intent(Main2Activity.this,foodManage.class);
+            it3_myState.putExtra("state",bt);
             manager.beginTransaction().replace(R.id.content_main,new foodManage()).commit();
         } else if (id == R.id.nav_add_user) {
             manager.beginTransaction().replace(R.id.content_main,new addUser()).commit();

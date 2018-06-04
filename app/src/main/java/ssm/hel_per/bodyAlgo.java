@@ -55,5 +55,23 @@ public class bodyAlgo {
     public static double targetCal(double weight, double targetWeight,int targetDay) { //일 목표소비 칼로리 계산
         return ((weight - targetWeight) * 7200)/targetDay;
     }
+    public static double eatCal(double height,double weight,int age,String sex,int worklevel,double targetWeight,int targetDay) {
+        double eatcal = 0;
+        switch(worklevel) {
+            case 1:
+                eatcal = (bmrCal(height,weight,age,sex) *1.1) - targetCal(weight,targetWeight, targetDay);
+            case 2:
+                eatcal = (bmrCal(height,weight,age,sex) *1.2) - targetCal(weight,targetWeight, targetDay);
+            case 3:
+                eatcal = (bmrCal(height,weight,age,sex) *1.3) - targetCal(weight,targetWeight, targetDay);
+            case 4:
+                eatcal = (bmrCal(height,weight,age,sex) *1.4) - targetCal(weight,targetWeight, targetDay);
+            case 5:
+                eatcal = (bmrCal(height,weight,age,sex) *1.5) - targetCal(weight,targetWeight, targetDay);
+            default:
+        }
+
+        return eatcal;
+    }
 
 }

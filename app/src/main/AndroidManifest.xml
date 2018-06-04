@@ -65,6 +65,9 @@
             android:label="@string/title_activity_exercise_cycle"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".exercise_buffet" />
+        <activity android:name=".exercise_jumpingrope" />
+        <activity android:name=".exercise_flank" />
+        <activity android:name=".exercise_running"></activity>
     </application>
 
 </manifest>

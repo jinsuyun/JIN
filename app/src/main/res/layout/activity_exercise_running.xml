@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".exercise_buffet">
+    tools:context=".exercise_running">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -20,6 +20,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_exercise_buffet" />
+    <include layout="@layout/content_exercise_running" />
 
 </android.support.design.widget.CoordinatorLayout>
