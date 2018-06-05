@@ -39,13 +39,13 @@
             android:orientation="vertical">
 
             <customfonts.MyEditText
-                android:id="@+id/fname"
+                android:id="@+id/regid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="35dp"
                 android:background="#0000"
-                android:hint="Fullname"
+                android:hint="ID"
                 android:inputType="text"
                 android:padding="16dp"
                 android:textColor="#ADCCE2"
@@ -60,14 +60,14 @@
                 android:background="#ADCCE2" />
 
             <customfonts.MyEditText
-                android:id="@+id/mail"
+                android:id="@+id/regpw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="35dp"
                 android:background="#0000"
-                android:hint="Email"
-                android:inputType="text"
+                android:hint="Password"
+                android:inputType="textPassword"
                 android:padding="16dp"
                 android:textColor="#ADCCE2"
                 android:textColorHint="#ADCCE2"
@@ -81,7 +81,7 @@
                 android:background="#ADCCE2" />
 
             <customfonts.MyEditText
-                android:id="@+id/usrusr"
+                android:id="@+id/regname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
@@ -102,14 +102,14 @@
                 android:background="#ADCCE2" />
 
             <customfonts.MyEditText
-                android:id="@+id/pswrd"
+                android:id="@+id/regemail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="35dp"
                 android:background="#0000"
-                android:hint="Password"
-                android:inputType="textPassword"
+                android:hint="E-mail"
+                android:inputType="text"
                 android:maxLength="12"
                 android:padding="16dp"
                 android:textColor="#ADCCE2"
