@@ -1,5 +1,6 @@
 package ssm.hel_per;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,22 +21,12 @@ public class CustomfoodActivity extends AppCompatActivity {
     private FoodSelectAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
 
-    Button regButton;
     ArrayList<CustomFoodContent> data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customfood);
-
-        regButton = findViewById(R.id.foodregButton);
-
-        regButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 등록 버튼
-            }
-        });
 
         // RecyclerView binding
         mCustomFoodView = findViewById(R.id.mList);
@@ -45,15 +36,34 @@ public class CustomfoodActivity extends AppCompatActivity {
         // setLayoutManager
         mCustomFoodView.setLayoutManager(mLayoutManager);
 
-        for(int i = 0; i < 10; i++) {
-            data.add(new CustomFoodContent("음식이름 " + i, "음식 양 " + i, i));
-        }
+        for(int i = 0; i < 50; i++) {
+            data.add(new CustomFoodContent("이름 " + i, "양 " + i, i));
+        } // 음식 목록 추가
         // init Adapter
         mAdapter = new FoodSelectAdapter();
         // set Data
         mAdapter.setData(data);
         // set Adapter
         mCustomFoodView.setAdapter(mAdapter);
+
+        mCustomFoodView.addOnItemTouchListener(new RecyclerViewOnItemClickListener(this, mCustomFoodView, new RecyclerViewOnItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("name", data.get(position).getFoodName());
+                resultIntent.putExtra("amount", data.get(position).getAmount());
+                resultIntent.putExtra("consumeCal", data.get(position).getConsumeCal());
+                setResult(RESULT_OK, resultIntent);
+                finish();
+
+            }
+            @Override
+            public void onItemLongClick(View v, int position) {
+
+            }
+        }
+        ));
+
     }
 
 }

@@ -9,39 +9,51 @@
     tools:context=".FoodselectActivity"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/btnLayout"
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mSelectList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_above="@id/sumCalories"
+        />
+
+    <TextView
+        android:id="@+id/sumCalories"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_above="@id/btnLayout"
+        android:textSize="16pt"
+        android:textAlignment="center"
+        android:textColor="#000000"/>
+
+    <LinearLayout
+        android:id="@+id/btnLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="8dp"
+        android:gravity="bottom"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/addFood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:padding="16dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
+            android:padding="16dp"
             android:text="식단 추가"
-            android:textSize="10pt"/>
+            android:textSize="10pt" />
 
         <Button
             android:id="@+id/registerFood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:padding="16dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
+            android:padding="16dp"
             android:text="식단 등록"
-            android:textSize="10pt"/>
+            android:textSize="10pt" />
     </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/mSelectList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnLayout"
-        />
-
 </RelativeLayout>
