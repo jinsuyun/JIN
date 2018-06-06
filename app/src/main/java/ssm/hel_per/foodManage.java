@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -22,6 +23,7 @@ public class foodManage  extends Fragment {
     FrameLayout food;
     String bt;
     ImageView graph;
+    Button button;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -29,14 +31,26 @@ public class foodManage  extends Fragment {
         v2 = inflater.inflate(R.layout.food_calori, container, false);
         food = (FrameLayout)v.findViewById(R.id.food);
         graph =(ImageView)v2.findViewById(R.id.graph);
+        button = (Button) v.findViewById(R.id.customFood);
         bt = getActivity().getIntent().getStringExtra("bodytype");
 
         Log.d(TAG,"SSIBAL"+bt);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(),FoodselectActivity.class);
+                startActivity(intent);
+                // intent를 이용하여 목록 추가
+
+            }
+        });
+
         if(bt !=null) {
-            if (bt.equals("LW") || bt.equals("LF") || bt.equals("LB") || bt.equals("SB") || bt.equals("SW")) {
-                food.setBackgroundResource(R.drawable.thin_food);
-                graph.setImageResource(R.drawable.thin_recommned);
+            if (bt.equals("LW") || bt.equals("LF") || bt.equals("LB")) {
+                food.setBackgroundResource(R.drawable.menu_2100);
+                graph.setImageResource(R.drawable.nut_2100);
                 food.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -47,11 +61,23 @@ public class foodManage  extends Fragment {
                         dialog.show();
                     }
                 });
-            }  else {
+            } else if (bt.equals("SB") || bt.equals("SW")) {
+                food.setBackgroundResource(R.drawable.menu_1900);
+                graph.setImageResource(R.drawable.nut_1900);
+                food.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Dialog dialog = new Dialog(getActivity());
 
+                        dialog.setContentView(R.layout.food_calori);
+                        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                        dialog.show();
+                    }
+                });
+            } else {
 
-                food.setBackgroundResource(R.drawable.food_recommend);
-                graph.setImageResource(R.drawable.food_graph);
+                food.setBackgroundResource(R.drawable.menu_1500);
+                graph.setImageResource(R.drawable.nut_1500);
                 food.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

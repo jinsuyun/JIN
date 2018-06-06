@@ -67,7 +67,9 @@
         <activity android:name=".exercise_buffet" />
         <activity android:name=".exercise_jumpingrope" />
         <activity android:name=".exercise_flank" />
-        <activity android:name=".exercise_running"></activity>
+        <activity android:name=".exercise_running" />
+        <activity android:name=".CustomfoodActivity" />
+        <activity android:name=".FoodselectActivity"></activity>
     </application>
 
 </manifest>
