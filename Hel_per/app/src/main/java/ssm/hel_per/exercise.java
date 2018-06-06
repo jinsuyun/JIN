@@ -58,7 +58,7 @@ public class exercise extends Fragment {
     public static String urlStr = "http://13.209.40.50:3000/daily"; // 웹
     RelativeLayout Rela_exer5;
 
-    int level;
+    int aerobic_level,weight_chest_level,weight_back_level;
 
     @Nullable
     @Override
@@ -67,16 +67,13 @@ public class exercise extends Fragment {
 
         v = inflater.inflate(R.layout.exercise, container, false);
 
-        //bt = getActivity().getIntent().getStringExtra("bodytype");
-        exer1 = v.findViewById(R.id.exer_opt1);
-        exer2 = v.findViewById(R.id.exer_opt2);
-        exer3 = v.findViewById(R.id.exer_opt3);
-        exer4 = v.findViewById(R.id.exer_opt4);
-        exer5 = v.findViewById(R.id.exer_opt5);
 
-        level = getActivity().getIntent().getIntExtra("level",0);
-        Log.d(TAG,"fuckingdf"+level);
-        if(level==1) {
+        exer1 = v.findViewById(R.id.exer_opt1);exer2 = v.findViewById(R.id.exer_opt2);exer3 = v.findViewById(R.id.exer_opt3);exer4 = v.findViewById(R.id.exer_opt4);exer5 = v.findViewById(R.id.exer_opt5);
+
+
+        /*aerobic_level=1;
+
+        if(aerobic_level==1) {
             exer1.setImageResource(R.drawable.running3km);
             exer2.setImageResource(R.drawable.jumprope);
             exer3.setImageResource(R.drawable.buffet);
@@ -92,11 +89,45 @@ public class exercise extends Fragment {
             Rela_exer5.removeAllViews();
         }
 
-        id = getActivity().getIntent().getStringExtra("id");
+        weight_chest_level=1;
+        if(weight_chest_level==1){
+            exer1.setImageResource(R.drawable.knee_pushup);
+            exer2.setImageResource(R.drawable.wall_pushup);
+            exer3.setImageResource(R.drawable.wide_pushup);
+            exer4.setImageResource(R.drawable.fly_3kg);
+            Rela_exer5= (RelativeLayout)v.findViewById(R.id.exercise_5);
+            Rela_exer5.removeAllViews();
+        } else {
+            exer1.setImageResource(R.drawable.knee_pushup);
+            exer2.setImageResource(R.drawable.narrow_pushup);
+            exer3.setImageResource(R.drawable.incline_pushup);
+            exer4.setImageResource(R.drawable.fly_5kg);
+            Rela_exer5= (RelativeLayout)v.findViewById(R.id.exercise_5);
+            Rela_exer5.removeAllViews();
+        }
+        */
+        weight_back_level=1;
+        if(weight_back_level==1){
+            exer1.setImageResource(R.drawable.jump_pullup);
+            exer2.setImageResource(R.drawable.bentover_3);
+            exer3.setImageResource(R.drawable.onearm_3);
+            exer4.setImageResource(R.drawable.backex);
+            Rela_exer5= (RelativeLayout)v.findViewById(R.id.exercise_5);
+            Rela_exer5.removeAllViews();
+        } else {
+            exer1.setImageResource(R.drawable.bentover_5);
+            exer2.setImageResource(R.drawable.pullup);
+            exer3.setImageResource(R.drawable.onearm_5);
+            exer4.setImageResource(R.drawable.backex);
+            Rela_exer5= (RelativeLayout)v.findViewById(R.id.exercise_5);
+            Rela_exer5.removeAllViews();
+        }
 
+        id = getActivity().getIntent().getStringExtra("id");
+        bt = getActivity().getIntent().getStringExtra("bodytype");
         button = (Button)v.findViewById(R.id.exercise);
 
-        /*if(bt!=null) {
+        if(bt!=null) {
             if (bt.equals("LW") || bt.equals("LF") || bt.equals("LB") || bt.equals("SB") || bt.equals("SW")) {
                 exer1.setImageResource(R.drawable.pushup);
                 exer2.setImageResource(R.drawable.pullup);
@@ -108,11 +139,11 @@ public class exercise extends Fragment {
                 exer2.setImageResource(R.drawable.running3km);
                 exer3.setImageResource(R.drawable.cycle);
                 exer4.setImageResource(R.drawable.jumprope);
-                //Rela_exer5= (RelativeLayout)v.findViewById(R.id.exercise_5);
-                //Rela_exer5.removeAllViews();
+                Rela_exer5= (RelativeLayout)v.findViewById(R.id.exercise_5);
+                Rela_exer5.removeAllViews();
                 //exer5.setImageResource(R.drawable.plank);
             }
-        }*/
+        }
 
         countTxt = (TextView)v.findViewById(R.id.count);
         button.setOnClickListener(new View.OnClickListener() {

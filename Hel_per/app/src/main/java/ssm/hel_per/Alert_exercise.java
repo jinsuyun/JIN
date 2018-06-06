@@ -6,7 +6,12 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class Alert_exercise extends AppCompatActivity {
 
@@ -14,13 +19,11 @@ public class Alert_exercise extends AppCompatActivity {
     public  CharSequence[] weighttrain={"1.가슴","2.등","3.어깨","4.하체","5.팔","6.복근"};
     public AlertDialog.Builder builder;
     public FragmentManager manager;
-    public int level=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alert_exercise);
-
         manager = getFragmentManager();
 
         builder = new AlertDialog.Builder(this);
@@ -32,11 +35,7 @@ public class Alert_exercise extends AppCompatActivity {
                         switch(which)
                         {
                             case 0: // 유산소
-
-                                Intent intent = new Intent(Alert_exercise.this,exercise.class);
-                                intent.putExtra("level",level);
                                 manager.beginTransaction().replace(R.id.activity_alert,new exercise()).commit();
-
                                 //finish();
                                 break;
                             case 1: // 웨이트
@@ -46,15 +45,31 @@ public class Alert_exercise extends AppCompatActivity {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 switch(which) {
-                                                    case 0:
-
+                                                    case 0: // 가슴
+                                                        manager.beginTransaction().replace(R.id.activity_alert,new exercise()).commit();
+                                                        break;
+                                                    case 1: // 등
+                                                        manager.beginTransaction().replace(R.id.activity_alert,new exercise()).commit();
+                                                        break;
+                                                    case 2: // 어깨
+                                                        manager.beginTransaction().replace(R.id.activity_alert,new exercise()).commit();
+                                                        break;
+                                                    case 3: // 하체
+                                                        manager.beginTransaction().replace(R.id.activity_alert,new exercise()).commit();
+                                                        break;
+                                                    case 4: // 팔
+                                                        manager.beginTransaction().replace(R.id.activity_alert,new exercise()).commit();
+                                                        break;
+                                                    case 5: // 복근
+                                                        manager.beginTransaction().replace(R.id.activity_alert,new exercise()).commit();
+                                                        break;
                                                 }
 
                                             }
                                         }).show();
                                 break;
                             case 2: // 무작위
-                                Toast.makeText(getApplicationContext(), "굿보", Toast.LENGTH_SHORT).show();
+                                manager.beginTransaction().replace(R.id.activity_alert,new exercise()).commit();
                                 break;
                         }
 

@@ -68,7 +68,21 @@
         <activity android:name=".exercise_jumpingrope" />
         <activity android:name=".exercise_flank" />
         <activity android:name=".exercise_running5km" />
-        <activity android:name=".Alert_exercise"></activity>
+        <activity android:name=".Alert_exercise" />
+        <activity android:name=".exercise_fly3kg" />
+        <activity android:name=".exercise_fly5kg" />
+        <activity android:name=".exercise_incline_pushup" />
+        <activity android:name=".exercise_knee_pushup" />
+        <activity android:name=".exercise_narrow_pushup" />
+        <activity android:name=".exercise_wall_pushup" />
+        <activity android:name=".exercise_wide_pushup" />
+        <activity android:name=".exercise_backex" />
+        <activity android:name=".exercise_bentover_3" />
+        <activity android:name=".exercise_jump_pullup" />
+        <activity android:name=".exercise_onearm_3" />
+        <activity android:name=".exercise_onearm_5" />
+        <activity android:name=".exercise_pullup" />
+        <activity android:name=".exercise_bentover_5"></activity>
     </application>
 
 </manifest>

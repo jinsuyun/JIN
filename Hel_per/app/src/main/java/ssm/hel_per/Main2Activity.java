@@ -61,6 +61,8 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     int workperiod;
     String bodytype;
     String bt;
+    int progress;
+    int curlevel=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,8 +150,12 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                     iv.setImageResource(R.drawable.os_10);
             }
 
+            progress=100;
             final ArcProgress arcProgress = findViewById(R.id.arc_progress);
-            arcProgress.setProgress(20);
+            Datasend datasend=new Datasend(curlevel,1);
+            if(progress==100)
+                datasend.datasum();
+            arcProgress.setProgress(100);
 
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
