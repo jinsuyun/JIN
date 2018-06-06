@@ -182,12 +182,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
         }
-
-
-
-
-
-
     }
     @Override
     public void onBackPressed() {
@@ -249,9 +243,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             Intent it3_myState = new Intent(Main2Activity.this,foodManage.class);
             it3_myState.putExtra("state",bt);
             manager.beginTransaction().replace(R.id.content_main,new foodManage()).commit();
-        } else if (id == R.id.nav_add_user) {
-            manager.beginTransaction().replace(R.id.content_main,new addUser()).commit();
-        } else if (id == R.id.nav_body_check) {
+        }  else if (id == R.id.nav_body_check) {
             bodyAlgo bodyAlgo = new bodyAlgo();
             Intent it_bodytype = new Intent(Main2Activity.this,bodyCheck.class);
             age=getIntent().getIntExtra("age",0);
@@ -280,24 +272,12 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             it_bodytype.putExtra("bodytype",bodytype);
 
             manager.beginTransaction().replace(R.id.content_main,new bodyCheck()).commit();
-        } else if (id == R.id.nav_qna) {
-            manager.beginTransaction().replace(R.id.content_main,new QnA()).commit();
-        } else if (id == R.id.nav_my_home) {
+        }else if (id == R.id.nav_my_home) {
             manager.beginTransaction().replace(R.id.content_main,new home()).commit(); // 홈화면
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-
-    public interface onKeyBackPressedListener {
-        public void onBack();
-    }
-    private onKeyBackPressedListener mOnKeyBackPressedListener;
-
-    public void setOnKeyBackPressedListener(onKeyBackPressedListener listener) {
-        mOnKeyBackPressedListener = listener;
     }
 }
