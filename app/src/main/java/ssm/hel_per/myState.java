@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +46,10 @@ public class myState extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.my_state, container, false);
-
+        FloatingActionButton floatingActionButton = ((Main2Activity) getActivity()).getFloatingActionButton();
+        if (floatingActionButton != null) {
+            floatingActionButton.show();
+        }
         weight=getActivity().getIntent().getDoubleExtra("weight",0);
         targetweight=getActivity().getIntent().getDoubleExtra("targetweight",0);
         targetperiod=getActivity().getIntent().getIntExtra("targetperiod",0);
