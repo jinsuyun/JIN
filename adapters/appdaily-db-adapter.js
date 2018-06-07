@@ -12,12 +12,14 @@ var dbResult = require('../routes/result');
 var pool = mysql.createPool(dbConfig);
 var adapter = {};
 
-var dailySearchQuery = 'SELECT * FROM daily WHERE id=?'; // id/pw를 이용하여 유저 정보 search
+var dailySearchQuery = 'SELECT * FROM daily WHERE id=? ORDER BY workoutday DESC LIMIT 1'; // id/pw를 이용하여 유저 정보 search
+var weightSearchQuery = 'SELECT workoutday, weight FROM daily WHERE id=? ORDER BY workoutday DESC LIMIT 7';
 var dailyDupSearchQuery = 'SELECT workoutday FROM daily WHERE id=? AND workoutday=?'; // 유저 daily query
 var dailyWriteQuery = 'INSERT INTO daily VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'; // 유저 daily query
 
 adapter.dailySearch = function(id, cb) {
     var resultCode = dbResult.Fail;
+    var response;
 
     pool.getConnection(function(err, connection) {
         if (err) { // db연결실패
@@ -26,16 +28,29 @@ adapter.dailySearch = function(id, cb) {
             connection.release();
             cb(resultCode, []);
         } else { // db연결성공
-            connection.query(dailySearchQuery, [id], function(err, rows) {
-                if (err) { // dailly x
+            connection.query(dailySearchQuery, [id], function(err, rows1) {
+                if (err) { // daily x
                     console.log(err);
                     resultCode = dbResult.Fail;
                     connection.release();
                     cb(resultCode, []);
                 } else { // daily o
+                    response = rows1;
+                    connection.query(weightSearchQuery, [id], function(err, rows2) {
+                        if (err) { // daily x
+                            console.log(err);
+                            resultCode = dbResult.Fail;
+                            connection.release();
+                            cb(resultCode, []);
+                        } else { // daily o
+                            resultCode = dbResult.OK;
+                            connection.release();
+                            response = Object.assign(rows1[0], rows2);
+                            console.log(response)
+                            cb(resultCode, response);
+                        }
+                    });
                     resultCode = dbResult.OK;
-                    connection.release();
-                    cb(resultCode, rows);
                 }
             });
         }
