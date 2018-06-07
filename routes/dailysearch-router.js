@@ -5,11 +5,11 @@ var dbConnection = require('./result');
 
 router.post('/', function(req, res) {
 
-    // var str = Object.keys(req.body);
-    // var obj = JSON.parse(str[0]);
-    // console.log(obj);
+    var str = Object.keys(req.body);
+    var obj = JSON.parse(str[0]);
+    console.log(obj);
 
-    dailyAdapter.dailySearch(req.body.id, function(resultCode,rows){
+    dailyAdapter.dailySearch(obj.id, function(resultCode,rows){
         if(resultCode == dbConnection.OK){
             var response;
             response = Object.assign(rows, {"success":true});
