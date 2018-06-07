@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -39,18 +39,17 @@ public class FoodselectActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(FoodselectActivity.this,CustomfoodActivity.class);
                 startActivityForResult(intent, 3000);
-                // intent를 이용하여 목록 추가
-
             }
         });
 
         registButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                sumCalText = findViewById(R.id.sumCalories);
+                sumCalText.setText(sumCalories(data) + " kcal"); // 실시간 갱신 필요
+                //서버에 칼로리 저장
             }
         });
     }
@@ -59,7 +58,6 @@ public class FoodselectActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        int sum = 0;
         // RecyclerView binding
         mFoodListView = findViewById(R.id.mSelectList);
         // init LayoutManager
@@ -67,7 +65,6 @@ public class FoodselectActivity extends AppCompatActivity {
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); // 기본값이 VERTICAL
         // setLayoutManager
         mFoodListView.setLayoutManager(mLayoutManager);
-
         // init Adapter
         mAdapter = new FoodListAdapter();
         // set Data
@@ -76,12 +73,7 @@ public class FoodselectActivity extends AppCompatActivity {
         mFoodListView.setAdapter(mAdapter);
 
         sumCalText = findViewById(R.id.sumCalories);
-
-        for(int i = 0; i < data.size(); i++) {
-            sum = sum + data.get(i).getConsumeCal();
-        }
-        sumCalText.setText(sum + " kcal");
-
+        sumCalText.setText(sumCalories(data) + " kcal"); // 실시간 갱신 필요
 
     }
 
@@ -97,9 +89,19 @@ public class FoodselectActivity extends AppCompatActivity {
             }
         }
     }
+
+    public int sumCalories(ArrayList<CustomFoodContent> al){
+        int sum = 0;
+
+        for(int i = 0; i < al.size(); i++) {
+            sum = sum + al.get(i).getConsumeCal();
+        }
+
+        return sum;
+    }
 }
 
-class FoodListAdapter extends RecyclerView.Adapter<FoodListViewHolder> {
+class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodListViewHolder>{
 
     private ArrayList<CustomFoodContent> foodData;
 
@@ -112,7 +114,7 @@ class FoodListAdapter extends RecyclerView.Adapter<FoodListViewHolder> {
 
         // 사용할 아이템의 뷰를 생성해준다.
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.food_content, parent, false);
+                .inflate(R.layout.food_list, parent, false);
 
         FoodListViewHolder holder = new FoodListViewHolder(view);
 
@@ -126,7 +128,6 @@ class FoodListAdapter extends RecyclerView.Adapter<FoodListViewHolder> {
         holder.name.setText(data.getFoodName());
         holder.amount.setText(data.getAmount());
         holder.consumeCal.setText(data.getConsumeCal() + " kcal");
-
     }
 
     @Override
@@ -134,20 +135,34 @@ class FoodListAdapter extends RecyclerView.Adapter<FoodListViewHolder> {
         return foodData.size();
     }
 
-}
-
-class FoodListViewHolder extends RecyclerView.ViewHolder {
-
-    public TextView name;
-    public TextView amount;
-    public TextView consumeCal;
-
-    public FoodListViewHolder(View foodView) {
-        super(foodView);
-
-        name = foodView.findViewById(R.id.foodName);
-        amount = foodView.findViewById(R.id.foodAmount);
-        consumeCal = foodView.findViewById(R.id.foodCalories);
+    private void removeItemView(int position) {
+        foodData.remove(position);
+        notifyItemChanged(position);
+        notifyItemRangeChanged(position, foodData.size());
     }
 
+    class FoodListViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView name;
+        public TextView amount;
+        public TextView consumeCal;
+        public ImageView delbtn;
+
+        public FoodListViewHolder(View foodView) {
+            super(foodView);
+
+            name = foodView.findViewById(R.id.regFoodName);
+            amount = foodView.findViewById(R.id.regFoodAmount);
+            consumeCal = foodView.findViewById(R.id.regFoodCalories);
+            delbtn = foodView.findViewById(R.id.delBtn);
+
+            delbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    removeItemView(getAdapterPosition());
+
+                }
+            });
+        }
+    }
 }
