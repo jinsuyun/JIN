@@ -129,6 +129,7 @@ public class bodyCheck extends Fragment implements Main2Activity.OnBackPressedLi
         return v;
     }
 
+
     class ConnectThread extends Thread {
         String urlStr;
         String id;

@@ -6,15 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -131,8 +128,8 @@ public class Survey extends AppCompatActivity {
                 ConnectThread thread = new ConnectThread(urlStr, id, name, select_sex, age, weight, height, targetweight, targetperiod, workperiod, worklevel);
                 thread.start();
 
-//                Intent it = new Intent(Survey.this, Main2Activity.class);
-//                startActivity(it);
+                //Intent it = new Intent(Survey.this, Main2Activity.class);
+                //startActivity(it);
 
             }
         });

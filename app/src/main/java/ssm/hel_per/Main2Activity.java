@@ -3,16 +3,12 @@ package ssm.hel_per;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.PendingIntent;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -32,8 +28,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.github.lzyzsd.circleprogress.ArcProgress;
@@ -47,17 +43,17 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static android.os.SystemClock.sleep;
 import static android.support.constraint.Constraints.TAG;
 
 
 public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     Handler handler = new Handler();
     int alert=0;
-    String id="";
+    String id2="";
     int age=0;
     double weight=0;
     double height=0;
@@ -69,7 +65,8 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     int workperiod;
     String bodytype;
     String bt;
-//   private Context c;
+
+    //   private Context c;
     FloatingActionButton fab;
 
     public FloatingActionButton getFloatingActionButton() {
@@ -83,10 +80,11 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent it1 = getIntent();
 
+        Intent it1 = getIntent();
         alert = (int)it1.getSerializableExtra("alert");
-        id=it1.getStringExtra("id");
+        id2=it1.getStringExtra("id");
+
 
         if(alert==1234) {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
@@ -106,7 +104,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent it = new Intent(Main2Activity.this,Survey.class);
-                                    it.putExtra("id", id);
+                                    it.putExtra("id", id2);
                                     startActivity(it);
                                 }
                             });
@@ -116,15 +114,19 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         }else if(alert ==1){
             bt=getIntent().getStringExtra("bodytype");
             age = (int)it1.getIntExtra("age", 0);
+
             weight =it1.getDoubleExtra("weight",0);
             height =it1.getDoubleExtra("height",0);
             sex =it1.getStringExtra("sex");
             String human="";
 
-            if(sex.equals("M"))
-                human="남자";
+            Log.d(TAG,"SEX"+sex+age);
+
+            if (sex.equals("M"))
+                human = "남자";
             else
-                human="여자";
+                human = "여자";
+
 
             TextView textView_age=findViewById(R.id.age);
             TextView textView_weight=findViewById(R.id.weight);
@@ -161,7 +163,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             }
 
             final ArcProgress arcProgress = findViewById(R.id.arc_progress);
-            arcProgress.setProgress(20);
+            arcProgress.setProgress(100);
 
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
@@ -187,6 +189,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                 }
             }, 0, 2000);
 
+
             /*체중입력을 받기위한 FloatingActionButton*/
             fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(new View.OnClickListener() {
@@ -198,9 +201,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                 }
             });
 
-
-
-                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
             drawer.addDrawerListener(toggle);
@@ -209,17 +210,17 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
         }
-    }
 
-   /* @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }*/
+    }
+//    @Override
+//    public void onBackPressed() {
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -264,14 +265,12 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
             manager.beginTransaction().replace(R.id.content_main,new myState()).commit();
         } else if (id == R.id.nav_exercise) {
-            Intent it2_myState = new Intent(Main2Activity.this,exercise.class);
-            it2_myState.putExtra("state",bodytype);
             manager.beginTransaction().replace(R.id.content_main,new exercise()).commit();
         } else if (id == R.id.nav_food_manage) {
             Intent it3_myState = new Intent(Main2Activity.this,foodManage.class);
             it3_myState.putExtra("state",bt);
             manager.beginTransaction().replace(R.id.content_main,new foodManage()).commit();
-        }  else if (id == R.id.nav_body_check) {
+        } else if (id == R.id.nav_body_check) {
             bodyAlgo bodyAlgo = new bodyAlgo();
             Intent it_bodytype = new Intent(Main2Activity.this,bodyCheck.class);
             age=getIntent().getIntExtra("age",0);
@@ -300,18 +299,25 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             it_bodytype.putExtra("bodytype",bodytype);
 
             manager.beginTransaction().replace(R.id.content_main,new bodyCheck()).commit();
-        }else if (id == R.id.nav_my_home) {
+        } else if (id == R.id.nav_re_survey) {
+            Intent it = new Intent(Main2Activity.this,Re_Survey.class);
+           // bodytype=getIntent().getStringExtra("bodytype");
+            //it.putExtra("bodytype",bodytype);
+            it.putExtra("id", id2);
+            /*it.putExtra("id",id);
+            it.putExtra("sex",sex);
+            it.putExtra("age",age);*/
+            //Log.d(TAG,"asdf"+id+sex+age);
+            startActivity(it);
+        } else if (id == R.id.nav_my_home) {
             manager.beginTransaction().replace(R.id.content_main,new home()).commit(); // 홈화면
         }
-//        else if (id == R.id.nav_alarm_push) {
-//
-//            manager.beginTransaction().replace(R.id.content_main,new alarmPush()).commit(); // 알람설정
-//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     private void showAddWeightDialog(Context c) {
         final EditText weightEditText = new EditText(c);
         AlertDialog dialog = new AlertDialog.Builder(c)
@@ -328,7 +334,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                 .create();
         dialog.show();
     }
-    // 뒤로가기 버튼 입력시간이 담길 long 객체
+
     private long pressedTime = 0;
 
     // 리스너 생성
@@ -378,5 +384,4 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             }
         }
     }
-
 }

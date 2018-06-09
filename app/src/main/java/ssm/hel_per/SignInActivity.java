@@ -1,18 +1,14 @@
 package ssm.hel_per;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,8 +30,7 @@ public class SignInActivity extends AppCompatActivity {
     //public static String url = "http://192.168.0.58:3000/login"; // 로컬
     boolean signinCheck = false;
     boolean surveyCheck = false;
-    String id;
-    String pw;
+
     String name;
     String sex;
     int age;
@@ -46,17 +41,15 @@ public class SignInActivity extends AppCompatActivity {
     int worklevel;
     int workperiod;
     String bodytype;
+
     ImageView sback;
-    TextView signinButton;
+    TextView createbutton;
     Toolbar toolbar;
     EditText etid;
     EditText etpw;
     Handler handler = new Handler();
     public int alert= 1234;  // 설문조사 여부를 위한 토큰
-    boolean saveLoginData;
-    SharedPreferences appData;
-    CheckBox autoLogin;
-    String urlStr = url;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -64,6 +57,7 @@ public class SignInActivity extends AppCompatActivity {
         {
             case android.R.id.home:
                 Intent it = new Intent(SignInActivity.this,MainActivity.class);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(it);
                 return true;
         }
@@ -75,10 +69,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        // 설정값 불러오기
-        appData = getSharedPreferences("appData", MODE_PRIVATE);
-        load();
-        signinButton=(TextView)findViewById(R.id.create);
+
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -88,27 +79,22 @@ public class SignInActivity extends AppCompatActivity {
 
         etid = (EditText) findViewById(R.id.usrusr);
         etpw = (EditText) findViewById(R.id.pswrd);
-        autoLogin = (CheckBox) findViewById(R.id.checkBox);
 
-        // if autoLogin checked, get input
-
-        // 이전에 로그인 정보를 저장시킨 기록이 있다면
-        if (saveLoginData) {
-            etid.setText(id);
-            etpw.setText(pw);
-            autoLogin.setChecked(saveLoginData);
-        }
-        signinButton.setOnClickListener(new View.OnClickListener() {
+        createbutton=(TextView)findViewById(R.id.create_2);
+        createbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                id = etid.getText().toString();
-                pw = etpw.getText().toString();
-                // 로그인 성공시 저장 처리
-                save();
+
+                String urlStr = url;
+                String id = etid.getText().toString();
+                String pw = etpw.getText().toString();
+
                 ConnectThread thread = new ConnectThread(urlStr, id, pw);
                 thread.start();
+
             }
         });
+
     }
 
     class ConnectThread extends Thread {
@@ -120,6 +106,7 @@ public class SignInActivity extends AppCompatActivity {
             this.urlStr = inStr;
             this.id = id;
             this.password = password;
+
         }
 
         public void run() {
@@ -234,28 +221,5 @@ public class SignInActivity extends AppCompatActivity {
             }
             return output.toString();
         }
-    }
-    // 설정값을 저장하는 함수
-    private void save() {
-        // SharedPreferences 객체만으론 저장 불가능 Editor 사용
-        SharedPreferences.Editor editor = appData.edit();
-
-        // 에디터객체.put타입( 저장시킬 이름, 저장시킬 값 )
-        // 저장시킬 이름이 이미 존재하면 덮어씌움
-        editor.putBoolean("SAVE_LOGIN_DATA", autoLogin.isChecked());
-        editor.putString("id", etid.getText().toString().trim());
-        editor.putString("pw", etpw.getText().toString().trim());
-
-        // apply, commit 을 안하면 변경된 내용이 저장되지 않음
-       editor.apply();
-    }
-
-    // 설정값을 불러오는 함수
-    private void load() {
-        // SharedPreferences 객체.get타입( 저장된 이름, 기본값 )
-        // 저장된 이름이 존재하지 않을 시 기본값
-        saveLoginData = appData.getBoolean("SAVE_LOGIN_DATA", false);
-        id = appData.getString("id", "");
-        pw = appData.getString("pw", "");
     }
 }
