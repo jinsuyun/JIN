@@ -29,12 +29,12 @@ router.post('/', function(req, res) {
     userWorkPeriod = obj.workperiod;
     userWorkLevel = obj.worklevel;
 
-    // if(userId == '' || userSex == '' || userAge == '' || userWeight == ''  || userHeight == ''
-    //     || userTargetWeight == '' || userTargetPeriod == '' || userWorkPeriod == '' || userWorkLevel == '') {
-    //     return res.json({success:false});
-    // } else {
-    //
-    // }
+    if(userId == '' || userSex == '' || userAge == '' || userWeight == ''  || userHeight == ''
+        || userTargetWeight == '' || userTargetPeriod == '' || userWorkPeriod == '' || userWorkLevel == '') {
+        return res.json({success:false});
+    } else {
+
+    }
 
     bodyTypeAdapter.classifyBodyType(obj, function (rows) {
         userBodyType = rows.bodytype;
