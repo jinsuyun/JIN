@@ -42,6 +42,7 @@ import java.util.Date;
 
 
 import static android.support.constraint.Constraints.TAG;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class exercise extends Fragment implements Main2Activity.OnBackPressedListener{
     String id;
