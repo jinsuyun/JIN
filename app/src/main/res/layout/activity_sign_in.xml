@@ -58,6 +58,7 @@
                 android:padding="16dp"
                 android:drawableRight="@drawable/pasword"
                 android:layout_marginRight="35dp"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_marginLeft="40dp"
@@ -65,6 +66,15 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
                 android:background="#ADCCE2"/>
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="로그인 내역 저장"
+                android:layout_marginLeft="35dp"
+                android:textColor="#ADCCE2" />
             <customfonts.MyTextView
                 android:id="@+id/create"
                 android:layout_width="match_parent"
@@ -91,6 +101,5 @@
         android:background="@android:color/transparent"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
-
 
 </FrameLayout>
