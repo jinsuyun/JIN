@@ -139,7 +139,6 @@
                         android:id="@+id/exer_opt4"
                         android:layout_width="wrap_content"
                         android:layout_height="115dp"
-                        android:layout_alignEnd="@+id/exer_opt5"
                         android:layout_alignParentBottom="true"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/jumprope" />

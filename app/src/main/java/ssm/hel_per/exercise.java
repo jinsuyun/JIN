@@ -3,6 +3,7 @@ package ssm.hel_per;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -43,9 +44,10 @@ import java.util.Date;
 import static android.support.constraint.Constraints.TAG;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class exercise extends Fragment {
+public class exercise extends Fragment implements Main2Activity.OnBackPressedListener{
     String id;
     View v;
+    home mainFragment;
     Button button1,re_select;
     TextView countTxt;
     ImageView urltest,exer1,exer2,exer3,exer4,exer5;
@@ -73,6 +75,7 @@ public class exercise extends Fragment {
         Rela_exer5= (RelativeLayout)v.findViewById(R.id.exercise_5);
         Rela_exer5.setVisibility(View.VISIBLE);
 
+        mainFragment = new home();
         routine1=lwRestore(workperiod);routine2=swRestore(workperiod);routine3=obRestore(workperiod);routine4=sfRestore(workperiod);routine5=lbRestore(workperiod);routine6=sbRestore(workperiod);routine7=ssRestore(workperiod);
         final RelativeLayout[] ran={routine1,routine2,routine3,routine4,routine5,routine6,routine7};
         test=(int)(Math.random()*7);
@@ -551,5 +554,25 @@ public class exercise extends Fragment {
             }
             return output.toString();
         }
+    }
+    @Override
+    public void onBack() {
+        Log.e("Other", "onBack()");
+        // 리스너를 설정하기 위해 Activity 를 받아옵니다.
+        Main2Activity activity = (Main2Activity) getActivity();
+        // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
+        activity.setOnBackPressedListener(null);
+        // MainFragment 로 교체
+        getActivity().getFragmentManager().beginTransaction()
+                .replace(R.id.content_main, mainFragment).commit();
+        // Activity 에서도 뭔가 처리하고 싶은 내용이 있다면 하단 문장처럼 호출해주면 됩니다.
+        // activity.onBackPressed();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.e("Other", "onAttach()");
+        ((Main2Activity) context).setOnBackPressedListener(this);
     }
 }

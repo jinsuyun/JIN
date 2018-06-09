@@ -49,7 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        createbutton = (TextView) findViewById(R.id.create_2);
+        createbutton = (TextView) findViewById(R.id.create);
 
         etid = (EditText) findViewById(R.id.regid);
         etpw = (EditText) findViewById(R.id.regpw);

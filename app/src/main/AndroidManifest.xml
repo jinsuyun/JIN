@@ -64,6 +64,8 @@
             android:label="YourActivity"
             android:theme="@style/Theme.AppCompat.Translucent" />
         <activity android:name=".Main2Activity" />
+        <activity android:name=".CustomfoodActivity" />
+        <activity android:name=".FoodselectActivity"></activity>
     </application>
 
 </manifest>
