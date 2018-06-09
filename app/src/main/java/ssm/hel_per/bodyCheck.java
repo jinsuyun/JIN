@@ -7,11 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.internal.NavigationMenuItemView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
@@ -23,27 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
-
-public class bodyCheck extends Fragment implements Main2Activity.OnBackPressedListener{
-
-    public static String urlStr = "http://13.209.40.50:3000/allcalorie"; // 웹
-
-    home mainFragment;
+public class bodyCheck extends Fragment {
     View v;
     ImageView iv;
     TextView tv1;
@@ -55,20 +34,12 @@ public class bodyCheck extends Fragment implements Main2Activity.OnBackPressedLi
     TextView tv7;
     TextView tv8;
 
-    Handler handler = new Handler();
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.body_check, container, false);
         super.onCreate(savedInstanceState);
 
-        mainFragment = new home();
-
-        FloatingActionButton floatingActionButton = ((Main2Activity) getActivity()).getFloatingActionButton();
-        if (floatingActionButton != null) {
-            floatingActionButton.hide();
-        }
        String bt = getActivity().getIntent().getStringExtra("bodytype");
 
         iv = (ImageView) v.findViewById(R.id.imageView4);
@@ -123,119 +94,7 @@ public class bodyCheck extends Fragment implements Main2Activity.OnBackPressedLi
                 + (double)(Math.round(bodyalgo.targetCal(weight, targetweight, targetperiod) * 0.3 * 100d) / 100d) + "kcal를 소모해야 하고, 식사는 하루 "
                 + (double)(Math.round(bodyalgo.eatCal(height, weight, age, sex, worklevel, targetweight, targetperiod) * 100d) / 100d) + "kcal 를 섭취해야 합니다..");
 
-        ConnectThread thread = new ConnectThread(urlStr, getActivity().getIntent().getStringExtra("id"), (double)(Math.round(bodyalgo.eatCal(height, weight, age, sex, worklevel, targetweight, targetperiod) * 100d) / 100d));
-        thread.start();
-
         return v;
     }
 
-
-    class ConnectThread extends Thread {
-        String urlStr;
-        String id;
-        String workoutday;
-        double all_eat_calories;
-
-        public ConnectThread(String inStr, String id, double all_eat_calories) {
-            this.urlStr = inStr;
-            this.id = id;
-            this.all_eat_calories = all_eat_calories;
-
-        }
-
-        public void run() {
-            try {
-                final String output = request(urlStr, id, all_eat_calories);
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            JSONObject obj = new JSONObject(output);
-                            //Toast.makeText(getApplicationContext(), all_eat_calories + " kcal가 등록되었습니다..", Toast.LENGTH_LONG).show();
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }catch(Exception e) {
-                e.printStackTrace();
-            }
-        }
-        private String request(String urlStr, String id, double all_eat_calories) throws IOException {
-            StringBuilder output = new StringBuilder();
-            try {
-                URL url = new URL(urlStr);
-
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-                workoutday = simpleDateFormat.format(new Date(System.currentTimeMillis()));
-
-                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                if(conn != null) {
-                    String json = "";
-
-                    // build jsonObject
-                    JSONObject jsonObject = new JSONObject();
-
-                    jsonObject.put("id", id);
-                    jsonObject.put("workoutday", workoutday);
-                    jsonObject.put("all_eat_calories", all_eat_calories);
-
-                    // convert JSONObject to JSON to String
-                    json = jsonObject.toString();
-                    conn.setConnectTimeout(1000);
-                    conn.setRequestMethod("POST");
-                    conn.setDoInput(true);
-                    conn.setDoOutput(true);
-                    OutputStream os = conn.getOutputStream();
-                    os.write(json.getBytes("euc-kr")); // 출력 스트림에 출력.
-                    os.flush(); // 출력 스트림을 플러시(비운다)하고 버퍼링 된 모든 출력 바이트를 강제 실행.
-                    os.close();
-
-                    int resCode = conn.getResponseCode();
-
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-                    String line = null;
-                    while(true) {
-                        line = reader.readLine();
-                        if (line == null) {
-                            break;
-                        }
-                        output.append(line + "\n");
-                    }
-                    reader.close();
-                    conn.disconnect();
-                }
-            } catch (Exception e) {
-                Log.e("SampleHTTP", "Exception in processing response.", e);
-            }
-            return output.toString();
-        }
-    }
-
-
-
-    @Override
-    public void onBack() {
-        Log.e("Other", "onBack()");
-        // 리스너를 설정하기 위해 Activity 를 받아옵니다.
-        Main2Activity activity = (Main2Activity)getActivity();
-        // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
-        activity.setOnBackPressedListener(null);
-        // MainFragment 로 교체
-        getActivity().getFragmentManager().beginTransaction()
-                .replace(R.id.content_main, mainFragment).commit();
-        // Activity 에서도 뭔가 처리하고 싶은 내용이 있다면 하단 문장처럼 호출해주면 됩니다.
-        // activity.onBackPressed();
-    }
-
-    // Fragment 호출 시 반드시 호출되는 오버라이드 메소드입니다.
-    @Override
-    //                     혹시 Context 로 안되시는분은 Activity 로 바꿔보시기 바랍니다.
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.e("Other", "onAttach()");
-        ((Main2Activity)context).setOnBackPressedListener(this);
-    }
 }

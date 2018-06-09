@@ -49,7 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        createbutton = (TextView) findViewById(R.id.create);
+        createbutton = (TextView) findViewById(R.id.create_2);
 
         etid = (EditText) findViewById(R.id.regid);
         etpw = (EditText) findViewById(R.id.regpw);
@@ -100,6 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
                             if(signupCheck) {
                                 Toast.makeText(getApplicationContext(), "회원가입 성공!.", Toast.LENGTH_LONG).show();
                                 Intent it = new Intent(SignUpActivity.this, SignInActivity.class);
+                                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(it);
                                 finish();
                             } else {

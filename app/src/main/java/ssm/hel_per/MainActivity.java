@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity{
         });
 
         circle = (LinearLayout)findViewById(R.id.circle);
-        sin = (TextView)findViewById(R.id.create);
+        sin = (TextView)findViewById(R.id.create_2);
 
         circle.setOnClickListener(new View.OnClickListener() {
             @Override
