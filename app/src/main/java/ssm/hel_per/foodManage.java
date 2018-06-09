@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,10 @@ public class foodManage  extends Fragment {
         graph =(ImageView)v2.findViewById(R.id.graph);
         button = (Button) v.findViewById(R.id.customFood);
         bt = getActivity().getIntent().getStringExtra("bodytype");
-
+        FloatingActionButton floatingActionButton = ((Main2Activity) getActivity()).getFloatingActionButton();
+        if (floatingActionButton != null) {
+            floatingActionButton.hide();
+        }
         Log.d(TAG,"SSIBAL"+bt);
 
         button.setOnClickListener(new View.OnClickListener() {

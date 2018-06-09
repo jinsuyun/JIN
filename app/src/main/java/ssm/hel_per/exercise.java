@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,10 @@ public class exercise extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.exercise, container, false);
 
+        FloatingActionButton floatingActionButton = ((Main2Activity) getActivity()).getFloatingActionButton();
+        if (floatingActionButton != null) {
+            floatingActionButton.hide();
+        }
         bt = getActivity().getIntent().getStringExtra("bodytype");
         Log.d(TAG,"FUCKING"+bt);
 
@@ -237,4 +242,5 @@ public class exercise extends Fragment {
             return output.toString();
         }
     }
+
 }

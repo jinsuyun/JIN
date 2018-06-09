@@ -64,8 +64,11 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     String bodytype;
     String bt;
     private Context c;
+    FloatingActionButton fab;
 
-
+    public FloatingActionButton getFloatingActionButton() {
+        return fab;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,7 +182,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             }, 0, 2000);
 
             /*체중입력을 받기위한 FloatingActionButton*/
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -315,4 +318,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                 .create();
         dialog.show();
     }
+
+
 }
