@@ -28,6 +28,7 @@ router.post('/', function(req, res) {
     userTargetPeriod = obj.targetperiod;
     userWorkPeriod = obj.workperiod;
     userWorkLevel = obj.worklevel;
+    console.log(obj);
 
     if(userId == '' || userSex == '' || userAge == '' || userWeight == ''  || userHeight == ''
         || userTargetWeight == '' || userTargetPeriod == '' || userWorkPeriod == '' || userWorkLevel == '') {
