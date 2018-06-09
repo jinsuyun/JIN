@@ -18,12 +18,12 @@ adapter.classifyBodyType = function(obj, cb) {
                 if(obj.worklevel == "1" || obj.worklevel == "2") {
                     type2 = "W";
                 } else {
-                    type2 = "S";
+                    type2 = "B";
                 }
                 bodytype = type1.concat(type2);
                 break;
             case 3 :
-                type2 = "S";
+                type2 = "B";
                 bodytype = type1.concat(type2);
                 break;
         }
@@ -48,12 +48,12 @@ adapter.classifyBodyType = function(obj, cb) {
                     bodytype = type1.concat(type2);
                     break;
                 } else {
-                    type2 = "S";
+                    type2 = "B";
                     bodytype = type1.concat(type2);
                     break;
                 }
             case 3 :
-                type2 = "S";
+                type2 = "B";
                 bodytype = type1.concat(type2);
                 break;
         }
@@ -82,8 +82,12 @@ adapter.classifyBodyType = function(obj, cb) {
                     break;
                 }
             case 3 :
-                type2 = "S";
-                bodytype = type1.concat(type2);
+                if(BMI > 30 || obj.worklevel == "5") {
+                    type2 = "S";
+                    bodytype = type1.concat(type2);
+                } else {
+                    bodytype == "SS"
+                }
                 break;
         }
     }
