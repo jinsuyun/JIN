@@ -36,10 +36,7 @@ public class foodManage  extends Fragment implements Main2Activity.OnBackPressed
         graph =(ImageView)v2.findViewById(R.id.graph);
         button = (Button) v.findViewById(R.id.customFood);
         bt = getActivity().getIntent().getStringExtra("bodytype");
-        FloatingActionButton floatingActionButton = ((Main2Activity) getActivity()).getFloatingActionButton();
-        if (floatingActionButton != null) {
-            floatingActionButton.hide();
-        }
+
         Log.d(TAG,"SSIBAL"+bt);
 
         mainFragment = new home();

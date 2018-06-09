@@ -39,7 +39,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static android.support.constraint.Constraints.TAG;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class exercise extends Fragment implements Main2Activity.OnBackPressedListener{
     home mainFragment;
@@ -79,10 +78,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
         v = inflater.inflate(R.layout.exercise, container, false);
 
         mainFragment = new home();
-        FloatingActionButton floatingActionButton = ((Main2Activity) getActivity()).getFloatingActionButton();
-        if (floatingActionButton != null) {
-            floatingActionButton.hide();
-        }
+
         bt = getActivity().getIntent().getStringExtra("bodytype");
         Log.d(TAG,"FUCKING"+bt);
 

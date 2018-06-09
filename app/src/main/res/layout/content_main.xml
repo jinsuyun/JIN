@@ -26,14 +26,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="최근 측정일"
-                android:textAlignment="center"
-                android:textColor="@android:color/background_light"
-                android:textStyle="bold" />
-
-            <TextView
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

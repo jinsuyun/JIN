@@ -19,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="현재 정보"
+            android:layout_margin="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:textColor="#FFFFFF"
             android:textSize="25dp"/>
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/chart"
             android:text="체중변화"
+            android:layout_margin="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:textColor="#FFFFFF"
             android:textSize="25dp" />
@@ -50,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/weight_chart"
+            android:layout_margin="10dp"
             android:text="부위 별 세트 수"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:textColor="#FFFFFF"
@@ -64,6 +67,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="칼로리 소모 및 섭취 내역"
             android:layout_below="@+id/set_chart"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
