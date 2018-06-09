@@ -3,12 +3,16 @@ package ssm.hel_per;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -29,6 +33,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.github.lzyzsd.circleprogress.ArcProgress;
@@ -42,6 +47,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -63,17 +69,17 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     int workperiod;
     String bodytype;
     String bt;
-    private Context c;
+//   private Context c;
     FloatingActionButton fab;
 
     public FloatingActionButton getFloatingActionButton() {
         return fab;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -205,7 +211,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         }
     }
 
-    @Override
+   /* @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -213,7 +219,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         } else {
             super.onBackPressed();
         }
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -297,6 +303,10 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         }else if (id == R.id.nav_my_home) {
             manager.beginTransaction().replace(R.id.content_main,new home()).commit(); // 홈화면
         }
+        else if (id == R.id.nav_alarm_push) {
+
+            manager.beginTransaction().replace(R.id.content_main,new alarmPush()).commit(); // 알람설정
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -318,6 +328,55 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                 .create();
         dialog.show();
     }
+    // 뒤로가기 버튼 입력시간이 담길 long 객체
+    private long pressedTime = 0;
 
+    // 리스너 생성
+    public interface OnBackPressedListener {
+        public void onBack();
+    }
+
+    // 리스너 객체 생성
+    private OnBackPressedListener mBackListener;
+
+    // 리스너 설정 메소드
+    public void setOnBackPressedListener(OnBackPressedListener listener) {
+        mBackListener = listener;
+    }
+
+    // 뒤로가기 버튼을 눌렀을 때의 오버라이드 메소드
+    @Override
+    public void onBackPressed() {
+
+        // 다른 Fragment 에서 리스너를 설정했을 때 처리됩니다.
+        if(mBackListener != null) {
+            mBackListener.onBack();
+            Log.e("!!!", "Listener is not null");
+            // 리스너가 설정되지 않은 상태(예를들어 메인Fragment)라면
+            // 뒤로가기 버튼을 연속적으로 두번 눌렀을 때 앱이 종료됩니다.
+        } else {
+            Log.e("!!!", "Listener is null");
+            if ( pressedTime == 0 ) {
+                Snackbar.make(findViewById(R.id.content_main),
+                        " 한 번 더 누르면 종료됩니다." , Snackbar.LENGTH_LONG).show();
+                pressedTime = System.currentTimeMillis();
+            }
+            else {
+                int seconds = (int) (System.currentTimeMillis() - pressedTime);
+
+                if ( seconds > 2000 ) {
+                    Snackbar.make(findViewById(R.id.content_main),
+                            " 한 번 더 누르면 종료됩니다." , Snackbar.LENGTH_LONG).show();
+                    pressedTime = 0 ;
+                }
+                else {
+                    super.onBackPressed();
+                    Log.e("!!!", "onBackPressed : finish, killProcess");
+                    finish();
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                }
+            }
+        }
+    }
 
 }
