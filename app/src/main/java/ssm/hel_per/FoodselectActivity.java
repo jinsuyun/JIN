@@ -20,6 +20,7 @@ public class FoodselectActivity extends AppCompatActivity {
     private FoodListAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
 
+    Button calButton;
     Button addButton;
     Button registButton;
     TextView sumCalText;
@@ -31,11 +32,20 @@ public class FoodselectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foodselect);
 
+        calButton = (Button) findViewById(R.id.calFix);
         addButton = (Button) findViewById(R.id.addFood);
         registButton = (Button) findViewById(R.id.registerFood);
 //        ReviewData task = new ReviewData();
 //        task.execute(R_number);
 
+
+        calButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sumCalText = findViewById(R.id.sumCalories);
+                sumCalText.setText(sumCalories(data) + " kcal"); // 실시간 갱신 필요
+            }
+        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
