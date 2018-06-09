@@ -60,6 +60,7 @@ import java.util.Date;
 import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
+import static com.github.mikephil.charting.components.Legend.LegendPosition.RIGHT_OF_CHART_CENTER;
 
 public class myState extends Fragment implements Main2Activity.OnBackPressedListener {
     View v;
@@ -138,72 +139,72 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
 
             for (int i = 0; i < ary.length(); i++) {
                 JSONObject obj = ary.getJSONObject(i);
-                if(!obj.getString("workoutday").isEmpty()) {
+                if((obj.getString("workoutday"))!=null) {
                     workoutday = obj.getString("workoutday");
                 }else{
-                    workoutday=null;
+                    workoutday="";
                 }
-                if(!obj.getString("weight").isEmpty()) {
+                if(obj.getDouble("weight")!=0) {
                     weight = obj.getDouble("weight");
                 }else{
                     weight=0;
                 }
-                if(!obj.getString("all_spent_calories").isEmpty()) {
+                if(obj.getInt("all_spent_calories")!=0) {
                     all_spent_calories = obj.getInt("all_spent_calories");
                 }else{
                     all_spent_calories=0;
                 }
-                if(!obj.getString("spent_calories").isEmpty()) {
+                if(obj.getInt("spent_calories")!=0) {
                     spent_calories = obj.getInt("spent_calories");
                 }else{
                     spent_calories=0;
                 }
-                if(!obj.getString("all_eat_calories").isEmpty()) {
+                if(obj.getInt("all_eat_calories")!=0) {
                     all_eat_calories = obj.getInt("all_eat_calories");
                 }else{
                     all_eat_calories=0;
                 }
-                if(!obj.getString("eat_calories").isEmpty()) {
+                if(obj.getInt("eat_calories")!=0) {
                     eat_calories = obj.getInt("eat_calories");
                 }else{
                     eat_calories=0;
                 }
-                if(!obj.getString("sixpack").isEmpty()) {
+                if(obj.getInt("sixpack")!=0) {
                     sixpack = obj.getInt("sixpack");
                 }else{
                     sixpack=0;
                 }
-                if(!obj.getString("leg").isEmpty()) {
+                if(obj.getInt("leg")!=0) {
                     leg = obj.getInt("leg");
                 }else{
                     leg=0;
                 }
-                if(!obj.getString("chest").isEmpty()) {
+                if(obj.getInt("chest")!=0) {
                     chest = obj.getInt("chest");
                 }else{
                     chest=0;
                 }
-                if(!obj.getString("shoulder").isEmpty()) {
+                if(obj.getInt("shoulder")!=0) {
                     shoulder = obj.getInt("shoulder");
                 }else{
                     shoulder=0;
                 }
-                if(!obj.getString("back").isEmpty()) {
+                if(obj.getInt("back")!=0) {
                     back = obj.getInt("back");
                 }else{
                     back=0;
                 }
-                if(!obj.getString("arm").isEmpty()) {
+                if(obj.getInt("arm")!=0) {
                     arm = obj.getInt("arm");
                 }else{
                     arm=0;
                 }
-                if(!obj.getString("running_time").isEmpty()) {
+                if(obj.getInt("running_time")!=0) {
                     running_time = obj.getInt("running_time");
                 }else{
                     running_time=0;
                 }
-                if(!obj.getString("weight_time").isEmpty()) {
+                if(obj.getInt("weight_time")!=0) {
                     weight_time = obj.getInt("weight_time");
                 }else{
                     weight_time=0;
@@ -243,7 +244,11 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
 
 
         bmi = bodyAlgo.bmiCal(height, weight);
-        float f_weight = Float.parseFloat(String.valueOf(weight));
+
+        double d_weight= getActivity().getIntent().getDoubleExtra("weight", 0);
+        float f_weight=Float.parseFloat(String.valueOf(d_weight));
+        //Float.valueOf(arrayList_weight.get(0).toString());
+
 
         float f_targetweight = Float.parseFloat(String.valueOf(targetweight));
         float f_targetperiod = Float.parseFloat(String.valueOf(targetperiod));
@@ -294,8 +299,10 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
 
 
         Legend legend=horizontalBarChart.getLegend();
+        legend.setPosition(Legend.LegendPosition.RIGHT_OF_CHART_INSIDE);
         legend.setTextSize(10f);
         legend.setTextColor(Color.WHITE);
+
         // xAxis.enableGridDashedLine(8, 24, 0);
 
 
@@ -320,10 +327,11 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
 ///////////////////////////////////////////////////////////////////////////////////////////
         LineChart lineChart = v.findViewById(R.id.weight_chart);
         List<Entry> weight_change = new ArrayList<>();
+        int j=0;
+        for (int i = arrayList_weight.size()-1; i >= 0; i--) {
 
-        for (int i = 0; i < arrayList_weight.size(); i++) {
-
-            weight_change.add(new Entry(i, Float.valueOf(arrayList_weight.get(i).toString()), "체중"));
+            weight_change.add(new Entry(j, Float.valueOf(arrayList_weight.get(i).toString()), "체중"));
+            j++;
         }
 
 
