@@ -12,12 +12,13 @@ var dbResult = require('../routes/result');
 var pool = mysql.createPool(dbConfig);
 var adapter = {};
 
-var dailySearchQuery = 'SELECT * FROM daily WHERE id=?'; // id/pw를 이용하여 유저 정보 search
+var dailySearchQuery = 'SELECT * FROM daily WHERE id=? ORDER BY workoutday DESC'; // id/pw를 이용하여 유저 정보 search
 var dailyDupSearchQuery = 'SELECT workoutday FROM daily WHERE id=? AND workoutday=?'; // 유저 daily query
 var dailyWriteQuery = 'INSERT INTO daily VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'; // 유저 daily query
 
 adapter.dailySearch = function(id, cb) {
     var resultCode = dbResult.Fail;
+    var response;
 
     pool.getConnection(function(err, connection) {
         if (err) { // db연결실패
@@ -27,7 +28,7 @@ adapter.dailySearch = function(id, cb) {
             cb(resultCode, []);
         } else { // db연결성공
             connection.query(dailySearchQuery, [id], function(err, rows) {
-                if (err) { // dailly x
+                if (err) { // daily x
                     console.log(err);
                     resultCode = dbResult.Fail;
                     connection.release();
@@ -43,6 +44,7 @@ adapter.dailySearch = function(id, cb) {
 }
 
 adapter.dailyWrite = function(daily, cb) {
+    console.log(daily)
     var resultCode = dbResult.Fail;
 
     pool.getConnection(function(err, connection) {

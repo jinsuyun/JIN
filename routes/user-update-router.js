@@ -1,12 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var userInputAdapter = require('../adapters/userinput-db-adapter');
+var userUpdateAdapter = require('../adapters/userupdate-db-adapter');
 var bodyTypeAdapter = require('../adapters/bodytype-adapter');
 var dbConnection = require('./result');
 
 var userId;
-var userSex;
-var userAge;
 var userWeight;
 var userHeight;
 var userTargetWeight;
@@ -19,9 +17,8 @@ router.post('/', function(req, res) {
 
     var str = Object.keys(req.body);
     var obj = JSON.parse(str[0]);
+    console.log(obj);
     userId = obj.id;
-    userSex = obj.sex;
-    userAge = obj.age;
     userWeight = obj.weight;
     userHeight = obj.height;
     userTargetWeight = obj.targetweight;
@@ -29,21 +26,20 @@ router.post('/', function(req, res) {
     userWorkPeriod = obj.workperiod;
     userWorkLevel = obj.worklevel;
 
-    // if(userId == '' || userSex == '' || userAge == '' || userWeight == ''  || userHeight == ''
-    //     || userTargetWeight == '' || userTargetPeriod == '' || userWorkPeriod == '' || userWorkLevel == '') {
-    //     return res.json({success:false});
-    // } else {
-    //
-    // }
+    if(userId == '' || userWeight == ''  || userHeight == '' || userTargetWeight == '' || userTargetPeriod == '' || userWorkPeriod == '' || userWorkLevel == '') {
+        return res.json({success:false});
+    } else {
+
+    }
 
     bodyTypeAdapter.classifyBodyType(obj, function (rows) {
         userBodyType = rows.bodytype;
         obj = Object.assign(obj, rows);
     })
 
-    userInputAdapter.write(obj, function(resultCode, rows){ // obj에 bodytype추가 수정
+    userUpdateAdapter.write(obj, function(resultCode, rows){ // obj에 bodytype추가 수정
         if(resultCode == dbConnection.OK){
-            userInputAdapter.search(obj, function(resultCode, rows){
+            userUpdateAdapter.search(obj, function(resultCode, rows){
                 if(resultCode == dbConnection.OK) {
                     var response;
                     response = Object.assign(rows[0], {"success":true});

@@ -5,15 +5,13 @@ var dbConnection = require('./result');
 
 router.post('/', function(req, res) {
 
-    console.log(req.body);
     var str = Object.keys(req.body);
     var obj = JSON.parse(str[0]);
     console.log(obj);
 
-    dailyAdapter.dailySearch(req.body.id, function(resultCode,rows){
+    dailyAdapter.dailySearch(obj.id, function(resultCode,rows){
         if(resultCode == dbConnection.OK){
             var response;
-            console.log(rows);
             response = Object.assign(rows, {"success":true});
             res.json(response);
         } else {
@@ -21,15 +19,6 @@ router.post('/', function(req, res) {
         }
     });
 
-    dailyAdapter.dailyWrite(obj, function(resultCode,rows){
-        if(resultCode == dbConnection.OK){
-            console.log(rows);
-            res.json({"success":true});
-        } else {
-            console.log("false reason: id duplicated");
-            res.json({"success":false});
-        }
-    });
 });
 
 module.exports = router;
