@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 var signupRouter = require('./routes/signup-router');
 var loginRouter = require('./routes/login-router');
 var userInputRouter = require('./routes/user-input-router');
+var userUpdateRouter = require('./routes/user-update-router');
 var dailyRouter = require('./routes/daily-router')
 var dailysearchRouter = require('./routes/dailysearch-router')
 var foodlistRouter = require('./routes/foodlist-router');
@@ -50,6 +51,7 @@ app.use('/users', usersRouter);
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 app.use('/userinput', userInputRouter);
+app.use('/userupdate', userUpdateRouter);
 app.use('/daily', dailyRouter);
 app.use('/dailysearch', dailysearchRouter);
 app.use('/foodlist', foodlistRouter);
