@@ -3,11 +3,14 @@ package ssm.hel_per;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,57 +60,66 @@ import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class myState extends Fragment {
+public class myState extends Fragment implements Main2Activity.OnBackPressedListener {
     View v;
 
-    String url_daily="http://13.209.40.50:3000/dailysearch";
-    double weight=0;
-    double height=0;
-    double targetweight=0;
-    double bmi=0;
-    String id="";
-    int targetperiod=0;
-    int worklevel=0;
-    int workperiod=0;
-    int sum_spent_calories=0;
-    int all_spent_calories=0;
-    int spent_calories=0;
-    int all_eat_calories=0;
-    int eat_calories=0;
-    int sixpack=0;
-    int leg=0;
-    int chest=0;
-    int shoulder=0;
-    int back=0;
-    int arm=0;
-    String workoutday="";
-    int running_time=0;
-    int weight_time=0;
+    String url_daily = "http://13.209.40.50:3000/dailysearch";
+
+    home mainFragment;
+    double weight = 0;
+    double height = 0;
+    double targetweight = 0;
+    double bmi = 0;
+    String id = "";
+    int targetperiod = 0;
+    int worklevel = 0;
+    int workperiod = 0;
+    int sum_spent_calories = 0;
+    int all_spent_calories = 0;
+    int spent_calories = 0;
+    int all_eat_calories = 0;
+    int eat_calories = 0;
+    int sixpack = 0;
+    int leg = 0;
+    int chest = 0;
+    int shoulder = 0;
+    int back = 0;
+    int arm = 0;
+    String workoutday = "";
+    int running_time = 0;
+    int weight_time = 0;
     Handler handler = new Handler();
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
-    ArrayList arrayList_workoutday=new ArrayList();
-    ArrayList arrayList_weight =new ArrayList();
-    ArrayList arrayList_sixpack=new ArrayList();
-    ArrayList arrayList_leg=new ArrayList();
-    ArrayList arrayList_chest =new ArrayList();
-    ArrayList arrayList_shoulder=new ArrayList();
-    ArrayList arrayList_back=new ArrayList();
-    ArrayList arrayList_arm =new ArrayList();
-    ArrayList arrayList_running_time=new ArrayList();
-    ArrayList arrayList_weight_time=new ArrayList();
+    ArrayList arrayList_workoutday = new ArrayList();
+    ArrayList arrayList_weight = new ArrayList();
+    ArrayList arrayList_sixpack = new ArrayList();
+    ArrayList arrayList_leg = new ArrayList();
+    ArrayList arrayList_chest = new ArrayList();
+    ArrayList arrayList_shoulder = new ArrayList();
+    ArrayList arrayList_back = new ArrayList();
+    ArrayList arrayList_arm = new ArrayList();
+    ArrayList arrayList_running_time = new ArrayList();
+    ArrayList arrayList_weight_time = new ArrayList();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.my_state, container, false);
+        mainFragment = new home();
 
         id = getActivity().getIntent().getStringExtra("id");
-        weight=getActivity().getIntent().getDoubleExtra("weight",0);
-        targetweight=getActivity().getIntent().getDoubleExtra("targetweight",0);
-        targetperiod=getActivity().getIntent().getIntExtra("targetperiod",0);
-        worklevel=getActivity().getIntent().getIntExtra("worklevel",0);
-        workperiod=getActivity().getIntent().getIntExtra("workperiod",0);
-        height=getActivity().getIntent().getDoubleExtra("height",0);
+
+        FloatingActionButton floatingActionButton = ((Main2Activity) getActivity()).getFloatingActionButton();
+        if (floatingActionButton != null) {
+            floatingActionButton.show();
+        }
+        weight = getActivity().getIntent().getDoubleExtra("weight", 0);
+        targetweight = getActivity().getIntent().getDoubleExtra("targetweight", 0);
+        targetperiod = getActivity().getIntent().getIntExtra("targetperiod", 0);
+        worklevel = getActivity().getIntent().getIntExtra("worklevel", 0);
+        workperiod = getActivity().getIntent().getIntExtra("workperiod", 0);
+        height = getActivity().getIntent().getDoubleExtra("height", 0);
 
 
         ConnectThread thread = new ConnectThread(url_daily, id);
@@ -117,14 +129,14 @@ public class myState extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        String test=thread.getResult();
+        String test = thread.getResult();
 
         try {
-            JSONArray ary=new JSONArray(test);
+            JSONArray ary = new JSONArray(test);
 
-            for(int i=0;i<ary.length();i++) {
-                JSONObject obj =  ary.getJSONObject(i);
-                Log.i("TTTT22",""+obj);
+            for (int i = 0; i < ary.length(); i++) {
+                JSONObject obj = ary.getJSONObject(i);
+                Log.i("TTTT22", "" + obj);
                 workoutday = obj.getString("workoutday");
                 weight = obj.getDouble("weight");
                 all_spent_calories = obj.getInt("all_spent_calories");
@@ -138,10 +150,10 @@ public class myState extends Fragment {
                 running_time = obj.getInt("running_time");
                 weight_time = obj.getInt("weight_time");
 
-                sum_spent_calories=sum_spent_calories+spent_calories;
+                sum_spent_calories = sum_spent_calories + spent_calories;
                 arrayList_workoutday.add(workoutday);
                 arrayList_weight.add(weight);
-                arrayList_sixpack.add(sixpack) ;
+                arrayList_sixpack.add(sixpack);
                 arrayList_leg.add(leg);
                 arrayList_chest.add(chest);
                 arrayList_shoulder.add(shoulder);
@@ -158,20 +170,19 @@ public class myState extends Fragment {
         }
 
 
+        bmi = bodyAlgo.bmiCal(height, weight);
+        float f_weight = Float.parseFloat(String.valueOf(weight));
 
-        bmi=bodyAlgo.bmiCal(height,weight);
-        float f_weight=Float.parseFloat(String.valueOf(weight));
-
-        float f_targetweight=Float.parseFloat(String.valueOf(targetweight));
-        float f_targetperiod=Float.parseFloat(String.valueOf(targetperiod));
-        float f_worklevel=Float.parseFloat(String.valueOf(worklevel));
-        float f_workperiod=Float.parseFloat(String.valueOf(workperiod));
-        float f_bmi=Float.parseFloat(String.valueOf(bmi));
+        float f_targetweight = Float.parseFloat(String.valueOf(targetweight));
+        float f_targetperiod = Float.parseFloat(String.valueOf(targetperiod));
+        float f_worklevel = Float.parseFloat(String.valueOf(worklevel));
+        float f_workperiod = Float.parseFloat(String.valueOf(workperiod));
+        float f_bmi = Float.parseFloat(String.valueOf(bmi));
 
         HorizontalBarChart horizontalBarChart = (HorizontalBarChart) v.findViewById(R.id.chart);
 
         List<BarEntry> BarEntry_weight = new ArrayList<>();
-        BarEntry_weight.add(new BarEntry(0f, f_weight,"체중"));
+        BarEntry_weight.add(new BarEntry(0f, f_weight, "체중"));
 
         List<BarEntry> BarEntry_targetweight = new ArrayList<>();
         BarEntry_targetweight.add(new BarEntry(1f, f_targetweight));
@@ -196,7 +207,7 @@ public class myState extends Fragment {
         barDataSet_targetweight.setColor(Color.parseColor("#0000FF"));
 
 
-        BarData barData = new BarData(barDataSet_targetweight,barDataSet_weight,barDataSet_bmi);
+        BarData barData = new BarData(barDataSet_targetweight, barDataSet_weight, barDataSet_bmi);
         horizontalBarChart.setData(barData);
 
         barData.setBarWidth(0.25f);
@@ -210,7 +221,7 @@ public class myState extends Fragment {
         //xAxis.setTextColor(Color.WHITE);
 
 
-       // xAxis.enableGridDashedLine(8, 24, 0);
+        // xAxis.enableGridDashedLine(8, 24, 0);
 
 
         YAxis yLAxis = horizontalBarChart.getAxisLeft();
@@ -230,12 +241,12 @@ public class myState extends Fragment {
         horizontalBarChart.animateY(2000, Easing.EasingOption.EaseInCubic);
         horizontalBarChart.invalidate();
 
-        LineChart lineChart =v.findViewById(R.id.weight_chart);
+        LineChart lineChart = v.findViewById(R.id.weight_chart);
         List<Entry> weight_change = new ArrayList<>();
 
-        for(int i=0;i<arrayList_weight.size();i++) {
+        for (int i = 0; i < arrayList_weight.size(); i++) {
 
-            weight_change.add(new Entry(i, Float.valueOf(arrayList_weight.get(i).toString()),"체중"));
+            weight_change.add(new Entry(i, Float.valueOf(arrayList_weight.get(i).toString()), "체중"));
         }
 
 
@@ -270,8 +281,7 @@ public class myState extends Fragment {
         lineChart.invalidate();
 
 
-
-        RadarChart set_chart = (RadarChart)v.findViewById(R.id.set_chart);
+        RadarChart set_chart = (RadarChart) v.findViewById(R.id.set_chart);
         ArrayList<RadarEntry> set_entries = new ArrayList<>();
         set_entries.add(new RadarEntry(Float.valueOf(arrayList_back.get(0).toString()), "등"));
         set_entries.add(new RadarEntry(Float.valueOf(arrayList_arm.get(0).toString()), "팔"));
@@ -282,16 +292,15 @@ public class myState extends Fragment {
 
         RadarDataSet dataset_comp1 = new RadarDataSet(set_entries, "세트");
 
-                dataset_comp1.setColor(Color.CYAN);
+        dataset_comp1.setColor(Color.CYAN);
 
-                dataset_comp1.setDrawFilled(true);
+        dataset_comp1.setDrawFilled(true);
 
-                dataset_comp1.setValueTextColor(Color.WHITE);
-                dataset_comp1.setValueTextSize(15f);
+        dataset_comp1.setValueTextColor(Color.WHITE);
+        dataset_comp1.setValueTextSize(15f);
 
-                RadarData setdata = new RadarData(dataset_comp1);
-                set_chart.setData(setdata);
-
+        RadarData setdata = new RadarData(dataset_comp1);
+        set_chart.setData(setdata);
 
 
         XAxis radar_xAxis = set_chart.getXAxis();
@@ -304,7 +313,7 @@ public class myState extends Fragment {
         radar_xAxis.setDrawGridLines(false);
         radar_xAxis.setValueFormatter(new IAxisValueFormatter() {
 
-            private String[] mActivities = new String[]{"등", "팔", "복근","하체", "가슴", "어깨"};
+            private String[] mActivities = new String[]{"등", "팔", "복근", "하체", "가슴", "어깨"};
 
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -317,11 +326,11 @@ public class myState extends Fragment {
         radar_yLAxis.setDrawGridLines(false);
         radar_yLAxis.setDrawAxisLine(false);
 
-       // YAxis radar_yRAxis = set_chart.getAxisRight();
+        // YAxis radar_yRAxis = set_chart.getAxisRight();
 
-       // radar_yRAxis.setDrawLabels(false);
-       // radar_yRAxis.setDrawAxisLine(false);
-       // radar_yRAxis.setDrawGridLines(false);
+        // radar_yRAxis.setDrawLabels(false);
+        // radar_yRAxis.setDrawAxisLine(false);
+        // radar_yRAxis.setDrawGridLines(false);
 
         set_chart.animateY(2000, Easing.EasingOption.EaseInCubic);
         set_chart.invalidate();
@@ -329,7 +338,7 @@ public class myState extends Fragment {
 
         PieChart calories_chart = (PieChart) v.findViewById(R.id.calories_chart);
         ArrayList<PieEntry> calories_entries = new ArrayList<>();
-        float tmp=all_spent_calories-sum_spent_calories;
+        float tmp = all_spent_calories - sum_spent_calories;
         calories_entries.add(new PieEntry(Float.valueOf(sum_spent_calories), "소모 칼로리"));
         calories_entries.add(new PieEntry(Float.valueOf(tmp), "남은 칼로리"));
 
@@ -341,7 +350,7 @@ public class myState extends Fragment {
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
-        colors.add(Color.rgb(34,116,28));
+        colors.add(Color.rgb(34, 116, 28));
         colors.add(Color.GRAY);
 
         colors.add(ColorTemplate.getHoloBlue());
@@ -365,27 +374,29 @@ public class myState extends Fragment {
         String id;
         String url_daily;
         String result;
+
         public ConnectThread(String url_daily, String id) {
-            this.url_daily=url_daily;
+            this.url_daily = url_daily;
             this.id = id;
         }
 
         public void run() {
             try {
-                final String output = request(url_daily,id);
-                result=output;
+                final String output = request(url_daily, id);
+                result = output;
 
-            }catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+
         private String request(String url_daily, String id) throws IOException {
             StringBuilder output = new StringBuilder();
             try {
                 URL url = new URL(url_daily);
 
-                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                if(conn != null) {
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                if (conn != null) {
                     String json = "";
 
                     // build jsonObject
@@ -409,7 +420,7 @@ public class myState extends Fragment {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
                     String line = null;
-                    while(true) {
+                    while (true) {
                         line = reader.readLine();
                         if (line == null) {
                             break;
@@ -425,9 +436,30 @@ public class myState extends Fragment {
             return output.toString();
         }
 
-        public String getResult(){
+        public String getResult() {
             return result;
         }
     }
+    @Override
+    public void onBack() {
+        Log.e("Other", "onBack()");
+        // 리스너를 설정하기 위해 Activity 를 받아옵니다.
+        Main2Activity activity = (Main2Activity) getActivity();
+        // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
+        activity.setOnBackPressedListener(null);
+        // MainFragment 로 교체
+        getActivity().getFragmentManager().beginTransaction()
+                .replace(R.id.content_main, mainFragment).commit();
+        // Activity 에서도 뭔가 처리하고 싶은 내용이 있다면 하단 문장처럼 호출해주면 됩니다.
+        // activity.onBackPressed();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.e("Other", "onAttach()");
+        ((Main2Activity) context).setOnBackPressedListener(this);
+    }
 }
+
 

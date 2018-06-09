@@ -43,4 +43,5 @@ dependencies {
     implementation 'com.naver.nid:naveridlogin-android-sdk:4.2.0'
     implementation 'com.felipecsl.asymmetricgridview:library:2.0.1'
     implementation 'com.android.support:design:27.0.1'
+    implementation 'com.android.support:recyclerview-v7:27.0.2'
 }
