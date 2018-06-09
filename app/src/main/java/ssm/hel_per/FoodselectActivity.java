@@ -109,24 +109,6 @@ public class FoodselectActivity extends AppCompatActivity {
         sumCalText = findViewById(R.id.sumCalories);
         sumCalText.setText(sumCalories(data) + " kcal"); // 실시간 갱신 필요
 
-        mFoodListView.addOnItemTouchListener(new RecyclerViewOnItemClickListener(this, mFoodListView, new RecyclerViewOnItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-//                int newAmount;
-//                FoodNumPicker fp = new FoodNumPicker();
-//                fp.show(getSupportFragmentManager(), "Test dialog");
-//
-//
-//                newAmount = fp.getmNewValue();
-//                data.set(position, new CustomFoodContent(data.get(position).getFoodName(), newAmount,
-//                        data.get(position).getAmount(), newAmount * data.get(position).getConsumeCal()));
-            }
-            @Override
-            public void onItemLongClick(View v, int position) {
-
-            }
-        }
-        ));
 
     }
 
