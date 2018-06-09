@@ -13,6 +13,17 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/food_recommend">
 
+        <TextView
+            android:id="@+id/reqCalText"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="68dp"
+            android:layout_marginLeft="120dp"
+            android:text="1000kcal"
+            android:textColor="#802020"
+            android:textSize="13pt"
+            android:textAlignment="center" />
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
