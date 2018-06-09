@@ -45,6 +45,7 @@ public class foodManage  extends Fragment {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getActivity(),FoodselectActivity.class);
+                intent.putExtra("id", getActivity().getIntent().getStringExtra("id"));
                 startActivity(intent);
                 // intent를 이용하여 목록 추가
 
