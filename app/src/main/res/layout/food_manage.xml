@@ -13,15 +13,13 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/food_recommend">
 
-        <Button
-            android:id="@+id/customFood"
-            android:layout_height="wrap_content"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
             android:layout_width="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_below="@id/food"
-            android:text="식단 입력하기"
-            />
-
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/create" />
     </FrameLayout>
 
 

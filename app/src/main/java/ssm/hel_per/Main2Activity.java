@@ -67,11 +67,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     String bt;
 
     //   private Context c;
-    FloatingActionButton fab;
-
-    public FloatingActionButton getFloatingActionButton() {
-        return fab;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,18 +183,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                     });
                 }
             }, 0, 2000);
-
-
-            /*체중입력을 받기위한 FloatingActionButton*/
-            fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //       Snackbar.make(view, "현재 체중을 입력하세요", Snackbar.LENGTH_LONG)
-                    //           .setAction("Action", null).show();
-                    showAddWeightDialog(Main2Activity.this);
-                }
-            });
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

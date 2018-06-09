@@ -110,10 +110,6 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
 
         id = getActivity().getIntent().getStringExtra("id");
 
-        FloatingActionButton floatingActionButton = ((Main2Activity) getActivity()).getFloatingActionButton();
-        if (floatingActionButton != null) {
-            floatingActionButton.show();
-        }
         weight = getActivity().getIntent().getDoubleExtra("weight", 0);
         targetweight = getActivity().getIntent().getDoubleExtra("targetweight", 0);
         targetperiod = getActivity().getIntent().getIntExtra("targetperiod", 0);

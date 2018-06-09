@@ -65,10 +65,6 @@ public class bodyCheck extends Fragment implements Main2Activity.OnBackPressedLi
 
         mainFragment = new home();
 
-        FloatingActionButton floatingActionButton = ((Main2Activity) getActivity()).getFloatingActionButton();
-        if (floatingActionButton != null) {
-            floatingActionButton.hide();
-        }
        String bt = getActivity().getIntent().getStringExtra("bodytype");
 
         iv = (ImageView) v.findViewById(R.id.imageView4);
