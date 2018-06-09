@@ -1,28 +1,47 @@
 package ssm.hel_per;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class FoodselectActivity extends AppCompatActivity {
+
+    public static String urlStr = "http://13.209.40.50:3000/calorie"; // 웹
 
     private RecyclerView mFoodListView;
     private FoodListAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
 
+    Button calButton;
     Button addButton;
     Button registButton;
     TextView sumCalText;
+    String id;
+    Handler handler = new Handler();
 
     ArrayList<CustomFoodContent> data = new ArrayList<>();
 
@@ -31,11 +50,23 @@ public class FoodselectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foodselect);
 
+        Intent intent = getIntent();
+        id = intent.getStringExtra("id");
+
+        calButton = (Button) findViewById(R.id.calFix);
         addButton = (Button) findViewById(R.id.addFood);
         registButton = (Button) findViewById(R.id.registerFood);
 //        ReviewData task = new ReviewData();
 //        task.execute(R_number);
 
+
+        calButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sumCalText = findViewById(R.id.sumCalories);
+                sumCalText.setText(sumCalories(data) + " kcal"); // 실시간 갱신 필요
+            }
+        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +81,8 @@ public class FoodselectActivity extends AppCompatActivity {
                 sumCalText = findViewById(R.id.sumCalories);
                 sumCalText.setText(sumCalories(data) + " kcal"); // 실시간 갱신 필요
                 //서버에 칼로리 저장
+                ConnectThread thread = new ConnectThread(urlStr, id, sumCalories(data));
+                thread.start();
             }
         });
     }
@@ -98,6 +131,90 @@ public class FoodselectActivity extends AppCompatActivity {
         }
 
         return sum;
+    }
+
+
+    class ConnectThread extends Thread {
+        String urlStr;
+        String id;
+        String workoutday;
+        int eat_calories;
+
+        public ConnectThread(String inStr, String id, int eat_calories) {
+            this.urlStr = inStr;
+            this.id = id;
+            this.eat_calories = eat_calories;
+
+        }
+
+        public void run() {
+            try {
+                final String output = request(urlStr, id, eat_calories);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject obj = new JSONObject(output);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        private String request(String urlStr, String id, int eat_calories) throws IOException {
+            StringBuilder output = new StringBuilder();
+            try {
+                URL url = new URL(urlStr);
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                workoutday = simpleDateFormat.format(new Date(System.currentTimeMillis()));
+
+                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                if(conn != null) {
+                    String json = "";
+
+                    // build jsonObject
+                    JSONObject jsonObject = new JSONObject();
+
+                    jsonObject.put("id", id);
+                    jsonObject.put("workoutday", workoutday);
+                    jsonObject.put("eat_calories", eat_calories);
+
+                    // convert JSONObject to JSON to String
+                    json = jsonObject.toString();
+                    conn.setConnectTimeout(1000);
+                    conn.setRequestMethod("POST");
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
+                    OutputStream os = conn.getOutputStream();
+                    os.write(json.getBytes("euc-kr")); // 출력 스트림에 출력.
+                    os.flush(); // 출력 스트림을 플러시(비운다)하고 버퍼링 된 모든 출력 바이트를 강제 실행.
+                    os.close();
+
+                    int resCode = conn.getResponseCode();
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                    String line = null;
+                    while(true) {
+                        line = reader.readLine();
+                        if (line == null) {
+                            break;
+                        }
+                        output.append(line + "\n");
+                    }
+                    reader.close();
+                    conn.disconnect();
+                }
+            } catch (Exception e) {
+                Log.e("SampleHTTP", "Exception in processing response.", e);
+            }
+            return output.toString();
+        }
     }
 }
 
