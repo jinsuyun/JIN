@@ -5,8 +5,6 @@ var bodyTypeAdapter = require('../adapters/bodytype-adapter');
 var dbConnection = require('./result');
 
 var userId;
-var userSex;
-var userAge;
 var userWeight;
 var userHeight;
 var userTargetWeight;
@@ -20,8 +18,6 @@ router.post('/', function(req, res) {
     var str = Object.keys(req.body);
     var obj = JSON.parse(str[0]);
     userId = obj.id;
-    userSex = obj.sex;
-    userAge = obj.age;
     userWeight = obj.weight;
     userHeight = obj.height;
     userTargetWeight = obj.targetweight;
@@ -29,12 +25,11 @@ router.post('/', function(req, res) {
     userWorkPeriod = obj.workperiod;
     userWorkLevel = obj.worklevel;
 
-    // if(userId == '' || userSex == '' || userAge == '' || userWeight == ''  || userHeight == ''
-    //     || userTargetWeight == '' || userTargetPeriod == '' || userWorkPeriod == '' || userWorkLevel == '') {
-    //     return res.json({success:false});
-    // } else {
-    //
-    // }
+    if(userId == '' || userWeight == ''  || userHeight == '' || userTargetWeight == '' || userTargetPeriod == '' || userWorkPeriod == '' || userWorkLevel == '') {
+        return res.json({success:false});
+    } else {
+
+    }
 
     bodyTypeAdapter.classifyBodyType(obj, function (rows) {
         userBodyType = rows.bodytype;

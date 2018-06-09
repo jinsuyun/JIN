@@ -27,7 +27,7 @@ adapter.write = function(user, cb) {
         } else {
             connection.query(userIdSearchQuery, [user.id], function(err, rows) {
                 if (!err) { // query가 오는 경우
-                    if(!rows[0]) { // 중복 id 존재x
+                    if(rows[0]) { // 중복 id 존재x
                         console.log('not duplicated id');
                         resultCode = dbResult.Fail;
                         connection.release();
