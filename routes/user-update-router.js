@@ -17,6 +17,7 @@ router.post('/', function(req, res) {
 
     var str = Object.keys(req.body);
     var obj = JSON.parse(str[0]);
+    console.log(obj);
     userId = obj.id;
     userWeight = obj.weight;
     userHeight = obj.height;
