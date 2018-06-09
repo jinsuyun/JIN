@@ -33,11 +33,11 @@ adapter.dailySearch = function(id, cb) {
                     console.log(err);
                     resultCode = dbResult.Fail;
                     connection.release();
-                    cb(resultCode, []);
+                    cb(resultCode, Object.assign([], [{"success":false}]));
                 } else { // daily o
                     resultCode = dbResult.OK;
                     connection.release();
-                    cb(resultCode, rows);
+                    cb(resultCode, Object.assign(rows, [{"success":true}]));
                 }
             });
         }
@@ -54,7 +54,7 @@ adapter.dailyWrite = function(daily, cb) {
             connection.release();
             cb(resultCode);
         } else {
-            connection.query(dailyDupSearchQuery, [user.id, user.workoutday], function(err, rows) {
+            connection.query(dailyDupSearchQuery, [daily.id, user.workoutday], function(err, rows) {
                 if (!err) { // query가 오는 경우
                     console.log(rows);
                     if(!rows[0]) { // 중복 id x

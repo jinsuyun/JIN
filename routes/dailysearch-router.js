@@ -11,9 +11,7 @@ router.post('/', function(req, res) {
 
     dailyAdapter.dailySearch(obj.id, function(resultCode,rows){
         if(resultCode == dbConnection.OK){
-            var response;
-            response = Object.assign(rows, {"success":true});
-            res.json(response);
+            res.json(rows);
         } else {
             res.json({"success":false});
         }
