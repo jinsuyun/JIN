@@ -7,7 +7,7 @@
 
 
     <RelativeLayout
-        android:id="@+id/textinsert"
+        android:id="@+id/imagestack"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
@@ -27,15 +27,13 @@
                     android:id="@+id/exercise_1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    >
-
+                    android:orientation="horizontal">
 
 
                     <ImageView
                         android:id="@+id/exer_opt1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="115dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentStart="true"
                         android:layout_weight="1"
@@ -56,7 +54,7 @@
                     <ImageView
                         android:id="@+id/test1"
                         android:layout_width="93dp"
-                        android:layout_height="105dp"
+                        android:layout_height="115dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentTop="true"
                         android:layout_weight="1"
@@ -73,7 +71,7 @@
                     <ImageView
                         android:id="@+id/exer_opt2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="115dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/running3km" />
 
@@ -89,13 +87,13 @@
                         android:textSize="18sp" />
 
                     <ImageView
+                        android:id="@+id/imageView2"
                         android:layout_width="93dp"
-                        android:layout_height="105dp"
+                        android:layout_height="115dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentTop="true"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/youtube"
-                        android:id="@+id/imageView2" />
+                        app:srcCompat="@drawable/youtube" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -107,7 +105,7 @@
                     <ImageView
                         android:id="@+id/exer_opt3"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="115dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/cycle" />
 
@@ -122,13 +120,13 @@
                         android:textSize="18sp" />
 
                     <ImageView
+                        android:id="@+id/imageView6"
                         android:layout_width="93dp"
-                        android:layout_height="105dp"
+                        android:layout_height="115dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentTop="true"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/youtube"
-                        android:id="@+id/imageView6" />
+                        app:srcCompat="@drawable/youtube" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -140,8 +138,7 @@
                     <ImageView
                         android:id="@+id/exer_opt4"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignEnd="@+id/exer_opt5"
+                        android:layout_height="115dp"
                         android:layout_alignParentBottom="true"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/jumprope" />
@@ -150,21 +147,21 @@
                         android:id="@+id/textView13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/imageView7"
-                        android:layout_marginBottom="23dp"
-                        android:layout_toStartOf="@+id/imageView7"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="101dp"
                         android:text="5분"
                         android:textColor="@android:color/background_dark"
                         android:textSize="18sp" />
 
                     <ImageView
+                        android:id="@+id/imageView7"
                         android:layout_width="93dp"
-                        android:layout_height="105dp"
+                        android:layout_height="115dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentTop="true"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/youtube"
-                        android:id="@+id/imageView7" />
+                        app:srcCompat="@drawable/youtube" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -176,7 +173,7 @@
                     <ImageView
                         android:id="@+id/exer_opt5"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="115dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/plank" />
 
@@ -184,8 +181,7 @@
                         android:id="@+id/textView14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/imageView5"
-                        android:layout_marginBottom="26dp"
+                        android:layout_centerVertical="true"
                         android:layout_toStartOf="@+id/imageView5"
                         android:text="30초"
                         android:textColor="@android:color/background_dark"
@@ -194,7 +190,7 @@
                     <ImageView
                         android:id="@+id/imageView5"
                         android:layout_width="93dp"
-                        android:layout_height="105dp"
+                        android:layout_height="115dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentTop="true"
                         android:layout_weight="1"
@@ -202,12 +198,27 @@
 
                 </RelativeLayout>
 
-                <Button
-                    android:id="@+id/exercise"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="운동하기" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/exercise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_weight="1"
+                        android:text="운동하기" />
+
+                    <Button
+                        android:id="@+id/part"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="부위별 운동하기" />
+
+                </LinearLayout>
 
             </LinearLayout>
         </ScrollView>

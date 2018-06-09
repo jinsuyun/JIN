@@ -53,6 +53,7 @@ public class bodyCheck extends Fragment implements Main2Activity.OnBackPressedLi
     TextView tv5;
     TextView tv6;
     TextView tv7;
+    TextView tv8;
 
     Handler handler = new Handler();
 

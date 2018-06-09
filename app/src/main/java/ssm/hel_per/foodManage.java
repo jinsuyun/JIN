@@ -3,7 +3,6 @@ package ssm.hel_per;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,9 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import static android.support.constraint.Constraints.TAG;
@@ -26,7 +23,11 @@ public class foodManage  extends Fragment implements Main2Activity.OnBackPressed
     FrameLayout food;
     String bt;
     ImageView graph;
-    Button button;
+    FloatingActionButton fab;
+
+    public FloatingActionButton getFloatingActionButton() {
+        return fab;
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -34,14 +35,13 @@ public class foodManage  extends Fragment implements Main2Activity.OnBackPressed
         v2 = inflater.inflate(R.layout.food_calori, container, false);
         food = (FrameLayout)v.findViewById(R.id.food);
         graph =(ImageView)v2.findViewById(R.id.graph);
-        button = (Button) v.findViewById(R.id.customFood);
         bt = getActivity().getIntent().getStringExtra("bodytype");
 
         Log.d(TAG,"SSIBAL"+bt);
 
         mainFragment = new home();
-
-        button.setOnClickListener(new View.OnClickListener() {
+        fab = (FloatingActionButton) v.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

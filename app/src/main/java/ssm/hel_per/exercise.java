@@ -3,15 +3,16 @@ package ssm.hel_per;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +21,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
+import android.support.v7.app.AlertDialog;
 
 import com.airbnb.lottie.L;
 
@@ -35,87 +38,121 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+
 
 import static android.support.constraint.Constraints.TAG;
 
 public class exercise extends Fragment implements Main2Activity.OnBackPressedListener{
-    home mainFragment;
     String id;
     View v;
-    Button button;
-    CountDownTimer countDownTimer;
-    public int MILLISINFUTURE=11*1000;
-    public int COUNT_DOWN_INTERVAL=1000;
+    home mainFragment;
+    Button button1,re_select;
     TextView countTxt;
-    public int count=10;
     ImageView urltest,exer1,exer2,exer3,exer4,exer5;
     VideoView video;
     String bt;
     static final String VIDEO_URL = "https://ko.gl/youtube.php?download=aHR0cHM6Ly9yMi0tLXNuLWE1bWVrbmVsLmdvb2dsZXZpZGVvLmNvbS92aWRlb3BsYXliYWNrP2R1cj0zNC44MjkmZXhwaXJlPTE1MjgwNjA2Njkmc291cmNlPXlvdXR1YmUmbG10PTE0NzEwNTI1NTM5NDY3MzkmZWk9blFZVVctejBHTV9vLVFPV3VLckFCQSZpZD1vLUFIWUpuUWUxNUJXQjVnR1dtT19wVlFZYkFST2tacDVlelNnT1lKNkRFWjE0Jm1zPWF1JTJDcmR1Jm10PTE1MjgwMzg5NDkmbXY9bSZyYXRlYnlwYXNzPXllcyZpcGJpdHM9MCZmdmlwPTQmbW09MzElMkMyOSZzaWduYXR1cmU9NUJDQ0RBQkNERTc0NTU1Mzc1MkVFQjAyOUQ5QjM3MDZEMEI2MkYzOC4xMUJEQzhCRDYwOTcyQUE1NTIzRDA0QjQ1N0UwNDE3NjQwQkRDQ0JFJm1uPXNuLWE1bWVrbmVsJTJDc24tYTVtN2xubHomcmVxdWlyZXNzbD15ZXMma2V5PXl0NiZpcD0yMDkuMTQxLjM0LjIzOSZwbD0yMyZtaW1lPXZpZGVvJTJGbXA0JmluaXRjd25kYnBzPTY5NjI1MCZpdGFnPTIyJmM9V0VCJnNwYXJhbXM9ZHVyJTJDZWklMkNpZCUyQ2luaXRjd25kYnBzJTJDaXAlMkNpcGJpdHMlMkNpdGFnJTJDbG10JTJDbWltZSUyQ21tJTJDbW4lMkNtcyUyQ212JTJDcGwlMkNyYXRlYnlwYXNzJTJDcmVxdWlyZXNzbCUyQ3NvdXJjZSUyQ2V4cGlyZSZ0aXRsZT0lRUQlOTQlOEMlRUIlOUUlQUQlRUQlODElQUMrJUVDJTlBJUI0JUVCJThGJTk5KyZrZWVwYWxpdmU9eWVz&title=%ED%94%8C%EB%9E%AD%ED%81%AC%20%EC%9A%B4%EB%8F%99";
     public static String urlStr = "http://13.209.40.50:3000/daily"; // 웹
+    RelativeLayout imagestack;
+    public FragmentManager manager;
+    public RelativeLayout R_image,Rela_exer5;
+    public CharSequence[] items ={"1.유산소", "2.웨이트", "3.무작위"};
+    public  CharSequence[] weighttrain={"1.가슴","2.등","3.어깨","4.하체","5.팔","6.복근"};
+    public AlertDialog.Builder builder;
 
-    //Date workoutday=null;
-    int running_time = 0;
-    int weight_time = 0;
-    int arm = 0;
-    int back = 0;
-    int shoulder = 0;
-    int chest = 0;
-    int leg = 0;
-    int sixpack = 0;
-    int eat_calories = 0;
-    int all_eat_calories = 0;
-    int spent_calories = 0;
-    int all_spent_calories = 0;
-    Double weight = 0d;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+    RelativeLayout routine1,routine2,routine3,routine4,routine5,routine6,routine7,Layout;
+    int test;
+
+    int workperiod=0,count=0;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.exercise, container, false);
+        exer1 = v.findViewById(R.id.exer_opt1);exer2 = v.findViewById(R.id.exer_opt2);exer3 = v.findViewById(R.id.exer_opt3);exer4 = v.findViewById(R.id.exer_opt4);exer5 = v.findViewById(R.id.exer_opt5);
+        Rela_exer5= (RelativeLayout)v.findViewById(R.id.exercise_5);
+        Rela_exer5.setVisibility(View.VISIBLE);
 
         mainFragment = new home();
-
-        bt = getActivity().getIntent().getStringExtra("bodytype");
-        Log.d(TAG,"FUCKING"+bt);
-
-        exer1 = (ImageView)v.findViewById(R.id.exer_opt1);
-        exer2 = (ImageView)v.findViewById(R.id.exer_opt2);
-        exer3 = (ImageView)v.findViewById(R.id.exer_opt3);
-        exer4 = (ImageView)v.findViewById(R.id.exer_opt4);
-        exer5 = (ImageView)v.findViewById(R.id.exer_opt5);
-
+        routine1=lwRestore(workperiod);routine2=swRestore(workperiod);routine3=obRestore(workperiod);routine4=sfRestore(workperiod);routine5=lbRestore(workperiod);routine6=sbRestore(workperiod);routine7=ssRestore(workperiod);
+        final RelativeLayout[] ran={routine1,routine2,routine3,routine4,routine5,routine6,routine7};
+        test=(int)(Math.random()*7);
+        workperiod = getActivity().getIntent().getIntExtra("workperiod",0);
         id = getActivity().getIntent().getStringExtra("id");
-
-        button = (Button)v.findViewById(R.id.exercise);
+        bt = getActivity().getIntent().getStringExtra("bodytype");
+        button1 = (Button)v.findViewById(R.id.part);
+        R_image = (RelativeLayout)v.findViewById(R.id.imagestack);
 
         if(bt!=null) {
-            if (bt.equals("LW") || bt.equals("LF") || bt.equals("LB") || bt.equals("SB") || bt.equals("SW")) {
-                exer1.setImageResource(R.drawable.pushup);
-                exer2.setImageResource(R.drawable.pullup);
-                exer3.setImageResource(R.drawable.squat);
-                exer4.setImageResource(R.drawable.dumbel);
-                exer5.setImageResource(R.drawable.cycle);
-            } else {
-                exer1.setImageResource(R.drawable.buffet);
-                exer2.setImageResource(R.drawable.running3km);
-                exer3.setImageResource(R.drawable.cycle);
-                exer4.setImageResource(R.drawable.jumprope);
-                exer5.setImageResource(R.drawable.plank);
-            }
+            if (bt.equals("LW"))
+                Layout=lwRestore(workperiod);
+            else if (bt.equals("SW"))
+                Layout=swRestore(workperiod);
+            else if (bt.equals("OB"))
+                Layout=obRestore(workperiod);
+            else if (bt.equals("SF"))
+                Layout=sfRestore(workperiod);
+            else if (bt.equals("OF"))
+                Layout=ofRestore(workperiod);
+            else if (bt.equals("LB"))
+                Layout=lbRestore(workperiod);
+            else if (bt.equals("SB"))
+                Layout=sbRestore(workperiod);
+            else if (bt.equals("SS"))
+                Layout=ssRestore(workperiod);
+            else if (bt.equals("OS"))
+                Toast.makeText(getApplicationContext(), "Hel_per를 사용할만한 수준이 아닙니다", Toast.LENGTH_LONG).show();
         }
 
+        builder = new AlertDialog.Builder(getActivity());
         countTxt = (TextView)v.findViewById(R.id.count);
-        button.setOnClickListener(new View.OnClickListener() {
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),exercise_buffet.class);
-                ConnectThread thread = new exercise.ConnectThread(urlStr, id);
-                thread.start();
-                startActivity(intent);
+                builder.setTitle("오늘은 어떤 운동을 하시겠습니까?")
+                        .setItems(items, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch(which)
+                                {
+                                    case 0: // 유산소
+                                        aerobicRestore(workperiod);
+                                        break;
+                                    case 1: // 웨이트
+                                        builder.setTitle("운동부위를 선택하세요")
+                                                .setItems(weighttrain, new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        switch(which) {
+                                                            case 0: // 가슴
+                                                                chestRestore(workperiod);
+                                                                break;
+                                                            case 1: // 등
+                                                                backRestore(workperiod);
+                                                                break;
+                                                            case 2: // 어깨
+                                                                shoulderRestore(workperiod);
+                                                                break;
+                                                            case 3: // 하체
+                                                                legRestore(workperiod);
+                                                                break;
+                                                            case 4: // 팔
+                                                                armRestore(workperiod);
+                                                                break;
+                                                            case 5: // 복근
+                                                                abdoRestore(workperiod);
+                                                                break;
+                                                        }
+                                                    }
+                                                }).show();
+                                        break;
+                                    case 2: // 무작위
+                                        //Layout=ran[test];
+                                        break;
+                                }
+                            }
+                        }).show();
             }
         });
 
@@ -123,7 +160,6 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
             @Override
             public void onClick(View v) {
                 Dialog dialog = new Dialog(getActivity());
-
                 dialog.setContentView(R.layout.plankinformation);
                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                 dialog.show();
@@ -146,14 +182,274 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                 video.setVideoURI(Uri.parse(VIDEO_URL));
                 video.requestFocus();
                 dialog.show();
-
             }
         });
 
-
-
         return v;
     }
+
+    public RelativeLayout aerobicRestore(int level){ // 유산소
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1) {
+            exer1.setImageResource(R.drawable.running3km);
+            exer2.setImageResource(R.drawable.jumprope);
+            exer3.setImageResource(R.drawable.buffet);
+            exer4.setImageResource(R.drawable.step);
+            Rela_exer5.setVisibility(View.GONE);
+        }else {
+            exer1.setImageResource(R.drawable.running5km);
+            exer2.setImageResource(R.drawable.buffet);
+            exer3.setImageResource(R.drawable.cycle);
+            exer4.setImageResource(R.drawable.plank);
+            Rela_exer5.setVisibility(View.GONE);
+        }
+        return imagestack;
+    }
+    public RelativeLayout chestRestore(int level){
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1){
+            exer1.setImageResource(R.drawable.knee_pushup);
+            exer2.setImageResource(R.drawable.wall_pushup);
+            exer3.setImageResource(R.drawable.wide_pushup);
+            exer4.setImageResource(R.drawable.fly_3kg);
+            Rela_exer5.setVisibility(View.GONE);
+        } else {
+            exer1.setImageResource(R.drawable.knee_pushup);
+            exer2.setImageResource(R.drawable.narrow_pushup);
+            exer3.setImageResource(R.drawable.incline_pushup);
+            exer4.setImageResource(R.drawable.fly_5kg);
+            Rela_exer5.setVisibility(View.GONE);
+        }
+        return imagestack;
+    }
+    public RelativeLayout backRestore(int level){
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1){
+            exer1.setImageResource(R.drawable.jump_pullup);
+            exer2.setImageResource(R.drawable.bentover_3);
+            exer3.setImageResource(R.drawable.onearm_3);
+            exer4.setImageResource(R.drawable.backex);
+            Rela_exer5.setVisibility(View.GONE);
+        } else {
+            exer1.setImageResource(R.drawable.bentover_5);
+            exer2.setImageResource(R.drawable.pullup);
+            exer3.setImageResource(R.drawable.onearm_5);
+            exer4.setImageResource(R.drawable.backex);
+            Rela_exer5.setVisibility(View.GONE);
+        }
+        return imagestack;
+    }
+    public RelativeLayout shoulderRestore(int level){
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1){
+            exer1.setImageResource(R.drawable.pike_pushup);
+            exer2.setImageResource(R.drawable.sitdum_3);
+            exer3.setImageResource(R.drawable.plank);
+            exer4.setImageResource(R.drawable.fdum_3);
+            Rela_exer5.setVisibility(View.GONE);
+        } else {
+            exer1.setImageResource(R.drawable.handstand_pushup);
+            exer2.setImageResource(R.drawable.squat);
+            exer3.setImageResource(R.drawable.cycle);
+            exer4.setImageResource(R.drawable.lunge);
+            Rela_exer5.setVisibility(View.GONE);
+        }
+        return imagestack;
+    }
+    public RelativeLayout legRestore(int level){
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1){
+            exer1.setImageResource(R.drawable.one_squat);
+            exer2.setImageResource(R.drawable.jump_squat);
+            exer3.setImageResource(R.drawable.lunge);
+            exer4.setImageResource(R.drawable.wide_squat);
+            Rela_exer5.setVisibility(View.GONE);
+        } else {
+            exer1.setImageResource(R.drawable.handstand_pushup);
+            exer2.setImageResource(R.drawable.sitdum_5);
+            exer3.setImageResource(R.drawable.rfum_5);
+            exer4.setImageResource(R.drawable.pike_pushup);
+            Rela_exer5.setVisibility(View.GONE);
+        }
+        return imagestack;
+    }
+    public RelativeLayout armRestore(int level){
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1){
+            exer1.setImageResource(R.drawable.dips);
+            exer2.setImageResource(R.drawable.extension_1);
+            exer3.setImageResource(R.drawable.dumcurl_1);
+            exer4.setImageResource(R.drawable.dumkick_1);
+            Rela_exer5.setVisibility(View.GONE);
+        } else {
+            exer1.setImageResource(R.drawable.dips);
+            exer2.setImageResource(R.drawable.dumcurl_3);
+            exer3.setImageResource(R.drawable.dumkick_3);
+            exer4.setImageResource(R.drawable.extension_3);
+            Rela_exer5.setVisibility(View.GONE);
+        }
+        return imagestack;
+    }
+    public RelativeLayout abdoRestore(int level){
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1){
+            exer1.setImageResource(R.drawable.crunch);
+            exer2.setImageResource(R.drawable.leg_raise);
+            exer3.setImageResource(R.drawable.bicycle);
+            exer4.setImageResource(R.drawable.plank);
+            Rela_exer5.setVisibility(View.GONE);
+        } else {
+            exer1.setImageResource(R.drawable.vup);
+            exer2.setImageResource(R.drawable.cross_crunch);
+            exer3.setImageResource(R.drawable.leg_raise);
+            exer4.setImageResource(R.drawable.russian_twist);
+            Rela_exer5.setVisibility(View.GONE);
+        }
+        return imagestack;
+    }
+    public RelativeLayout lwRestore(int level){
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1){
+            exer1.setImageResource(R.drawable.knee_pushup);
+            exer2.setImageResource(R.drawable.fly_3kg);
+            exer3.setImageResource(R.drawable.jump_pullup);
+            exer4.setImageResource(R.drawable.pike_pushup);
+            exer5.setImageResource(R.drawable.step);
+        } else {
+            exer1.setImageResource(R.drawable.wall_pushup);
+            exer2.setImageResource(R.drawable.bentover_3);
+            exer3.setImageResource(R.drawable.dumcurl_1);
+            exer4.setImageResource(R.drawable.squat);
+            exer5.setImageResource(R.drawable.plank);
+        }
+        return imagestack;
+    }
+    public RelativeLayout swRestore(int level){
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1){
+            exer1.setImageResource(R.drawable.wide_pushup);
+            exer2.setImageResource(R.drawable.onearm_3);
+            exer3.setImageResource(R.drawable.sitdum_3);
+            exer4.setImageResource(R.drawable.squat);
+            exer5.setImageResource(R.drawable.knee_dips);
+        } else {
+            exer1.setImageResource(R.drawable.pushup);
+            exer2.setImageResource(R.drawable.fly_5kg);
+            exer3.setImageResource(R.drawable.fdum_3);
+            exer4.setImageResource(R.drawable.jump_squat);
+            exer5.setImageResource(R.drawable.dumkick_1);
+        }
+        return imagestack;
+    }
+
+    public RelativeLayout lbRestore(int level){
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1){
+            exer1.setImageResource(R.drawable.narrow_pushup);
+            exer2.setImageResource(R.drawable.jump_pullup);
+            exer3.setImageResource(R.drawable.step);
+            exer4.setImageResource(R.drawable.buffet_test);
+            exer5.setImageResource(R.drawable.running5km);
+        } else {
+            exer1.setImageResource(R.drawable.wall_pushup);
+            exer2.setImageResource(R.drawable.pike_pushup);
+            exer3.setImageResource(R.drawable.plank);
+            exer4.setImageResource(R.drawable.jumprope);
+            exer5.setImageResource(R.drawable.cycle);
+        }
+        return imagestack;
+    }
+    public RelativeLayout obRestore(int level){
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1){
+            exer1.setImageResource(R.drawable.knee_pushup);
+            exer2.setImageResource(R.drawable.jump_pullup);
+            exer3.setImageResource(R.drawable.step);
+            exer4.setImageResource(R.drawable.buffet_test);
+            exer5.setImageResource(R.drawable.running5km);
+        } else {
+            exer1.setImageResource(R.drawable.wall_pushup);
+            exer2.setImageResource(R.drawable.pike_pushup);
+            exer3.setImageResource(R.drawable.plank);
+            exer4.setImageResource(R.drawable.jumprope);
+            exer5.setImageResource(R.drawable.cycle);
+        }
+        return imagestack;
+    }
+
+    public RelativeLayout sbRestore(int level){
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1){
+            exer1.setImageResource(R.drawable.handstand_pushup);
+            exer2.setImageResource(R.drawable.incline_pushup);
+            exer3.setImageResource(R.drawable.one_squat);
+            exer4.setImageResource(R.drawable.buffet_test);
+            exer5.setImageResource(R.drawable.cycle);
+        } else {
+            exer1.setImageResource(R.drawable.pullup);
+            exer2.setImageResource(R.drawable.jump_squat);
+            exer3.setImageResource(R.drawable.narrow_pushup);
+            exer4.setImageResource(R.drawable.plank);
+            exer5.setImageResource(R.drawable.running5km);
+        }
+        return imagestack;
+    }
+
+    public RelativeLayout ssRestore(int level){
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1){
+            exer1.setImageResource(R.drawable.pushup);
+            exer2.setImageResource(R.drawable.fly_5kg);
+            exer3.setImageResource(R.drawable.jumprope);
+            exer4.setImageResource(R.drawable.buffet_test);
+            exer5.setImageResource(R.drawable.running5km);
+        } else {
+            exer1.setImageResource(R.drawable.pullup);
+            exer2.setImageResource(R.drawable.onearm_5);
+            exer3.setImageResource(R.drawable.plank);
+            exer4.setImageResource(R.drawable.step);
+            exer5.setImageResource(R.drawable.cycle);
+        }
+        return imagestack;
+    }
+
+    public RelativeLayout sfRestore(int level){
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1){
+            exer1.setImageResource(R.drawable.running5km);
+            exer2.setImageResource(R.drawable.cycle);
+            exer3.setImageResource(R.drawable.jumprope);
+            exer4.setImageResource(R.drawable.backex);
+            exer5.setImageResource(R.drawable.bicycle);
+        } else {
+            exer1.setImageResource(R.drawable.step);
+            exer2.setImageResource(R.drawable.buffet_test);
+            exer3.setImageResource(R.drawable.cycle);
+            exer4.setImageResource(R.drawable.cross_crunch);
+            exer5.setImageResource(R.drawable.plank);
+        }
+        return imagestack;
+    }
+
+    public RelativeLayout ofRestore(int level){
+        RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
+        if(level==1){
+            exer1.setImageResource(R.drawable.jumprope);
+            exer2.setImageResource(R.drawable.step);
+            exer3.setImageResource(R.drawable.buffet_test);
+            exer4.setImageResource(R.drawable.crunch);
+            exer5.setImageResource(R.drawable.leg_raise);
+        } else {
+            exer1.setImageResource(R.drawable.running3km);
+            exer2.setImageResource(R.drawable.plank);
+            exer3.setImageResource(R.drawable.cycle);
+            exer4.setImageResource(R.drawable.bicycle);
+            exer5.setImageResource(R.drawable.russian_twist);
+        }
+        return imagestack;
+    }
+
+
 
     class ConnectThread extends Thread {
         String urlStr;
@@ -200,6 +496,8 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
 
             try {
                 URL url = new URL(urlStr);
+                //workoutday=new Date(now);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
                 workoutday=simpleDateFormat.format(new Date(System.currentTimeMillis()));
 
                 HttpURLConnection conn = (HttpURLConnection)url.openConnection();
@@ -260,7 +558,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
     public void onBack() {
         Log.e("Other", "onBack()");
         // 리스너를 설정하기 위해 Activity 를 받아옵니다.
-        Main2Activity activity = (Main2Activity)getActivity();
+        Main2Activity activity = (Main2Activity) getActivity();
         // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
         activity.setOnBackPressedListener(null);
         // MainFragment 로 교체
@@ -270,12 +568,10 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
         // activity.onBackPressed();
     }
 
-    // Fragment 호출 시 반드시 호출되는 오버라이드 메소드입니다.
     @Override
-    //                     혹시 Context 로 안되시는분은 Activity 로 바꿔보시기 바랍니다.
     public void onAttach(Context context) {
         super.onAttach(context);
         Log.e("Other", "onAttach()");
-        ((Main2Activity)context).setOnBackPressedListener(this);
+        ((Main2Activity) context).setOnBackPressedListener(this);
     }
 }

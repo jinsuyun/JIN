@@ -1,10 +1,9 @@
 package ssm.hel_per;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,7 +23,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Survey extends AppCompatActivity {
+public class Re_Survey extends AppCompatActivity {
 
     public static String url = "http://13.209.40.50:3000/userinput"; // 웹
     //public static String url = "http://192.168.0.58:3000/userinput"; // 로컬
@@ -43,48 +43,49 @@ public class Survey extends AppCompatActivity {
     RadioGroup rgsex;RadioButton rgm;RadioButton rgw;
     RadioGroup rgwl;RadioButton rgwl1;RadioButton rgwl2;RadioButton rgwl3;RadioButton rgwl4;RadioButton rgwl5;
     Handler handler = new Handler();
+    String tag="TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_survey);
+        setContentView(R.layout.activity_re_survey);
 
         Intent intent = getIntent();
         final String id = intent.getStringExtra("id");
         final String name = intent.getStringExtra("name");
 
-        etage = (EditText) findViewById(R.id.age);
-        etheight = (EditText) findViewById(R.id.height);
-        etweight = (EditText) findViewById(R.id.weight);
-        ettw = (EditText) findViewById(R.id.weighttarget);
-        ettp = (EditText) findViewById(R.id.timetarget);
-        etsm = (EditText) findViewById(R.id.musclemass);
-        etbf = (EditText) findViewById(R.id.fat);
-        rgsex =(RadioGroup) findViewById(R.id.sex);
-        rgm=(RadioButton)findViewById(R.id.sex_man);
-        rgw=(RadioButton)findViewById(R.id.sex_woman);
+        etage = (EditText) findViewById(R.id.age_re);
+        etheight = (EditText) findViewById(R.id.height_re);
+        etweight = (EditText) findViewById(R.id.weight_re);
+        ettw = (EditText) findViewById(R.id.weighttarget_re);
+        ettp = (EditText) findViewById(R.id.timetarget_re);
+        etsm = (EditText) findViewById(R.id.musclemass_re);
+        etbf = (EditText) findViewById(R.id.fat_re);
+        rgsex =(RadioGroup) findViewById(R.id.sex_re);
+        rgm=(RadioButton)findViewById(R.id.sex_man_re);
+        rgw=(RadioButton)findViewById(R.id.sex_woman_re);
         rgwp = (RadioGroup)  findViewById(R.id.exer_state);
-        rgwp1 = (RadioButton) findViewById(R.id.ca_one);
-        rgwp2 = (RadioButton) findViewById(R.id.ca_one_three);
-        rgwp3 = (RadioButton) findViewById(R.id.ca_three);
-        rgwl = (RadioGroup)  findViewById(R.id.exer_level);
-        rgwl1 = (RadioButton) findViewById(R.id.no_exer);
-        rgwl2 = (RadioButton) findViewById(R.id.usual_exer);
-        rgwl3 = (RadioButton) findViewById(R.id.normal_exer);
-        rgwl4 = (RadioButton) findViewById(R.id.many_exer);
-        rgwl5 = (RadioButton) findViewById(R.id.heavy_exer);
-        sback = (ImageView)findViewById(R.id.sback);
+        rgwp1 = (RadioButton) findViewById(R.id.ca_one_re);
+        rgwp2 = (RadioButton) findViewById(R.id.ca_one_three_re);
+        rgwp3 = (RadioButton) findViewById(R.id.ca_three_re);
+        rgwl = (RadioGroup)  findViewById(R.id.exer_level_re);
+        rgwl1 = (RadioButton) findViewById(R.id.no_exer_re);
+        rgwl2 = (RadioButton) findViewById(R.id.usual_exer_re);
+        rgwl3 = (RadioButton) findViewById(R.id.normal_exer_re);
+        rgwl4 = (RadioButton) findViewById(R.id.many_exer_re);
+        rgwl5 = (RadioButton) findViewById(R.id.heavy_exer_re);
+        sback = (ImageView)findViewById(R.id.sback_re);
 
         sback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                Intent it = new Intent(Survey.this, SignUpActivity.class);
+                Intent it = new Intent(Re_Survey.this, Main2Activity.class);
                 startActivity(it);
             }
         });
 
-        createbutton = (TextView) findViewById(R.id.create);
+        createbutton = (TextView) findViewById(R.id.create_re);
         createbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,11 +175,12 @@ public class Survey extends AppCompatActivity {
                     public void run() {
                         try {
                             JSONObject obj = new JSONObject(output);
-                            signupCheck = obj.getBoolean("success");
+                            //signupCheck = obj.getBoolean("success");
                             String bodytype = obj.getString("bodytype");
-                            if(signupCheck) {
+                           // String bodytype = getIntent().getStringExtra("bodytype");
+                             //if(signupCheck) {
                                 Toast.makeText(getApplicationContext(), "설문조사 완료!.", Toast.LENGTH_LONG).show();
-                                Intent it = new Intent(Survey.this, Main2Activity.class);
+                                Intent it = new Intent(Re_Survey.this, Main2Activity.class);
                                 it.putExtra("alert", 1);
                                 it.putExtra("id", id);
                                 it.putExtra("name", name);
@@ -197,9 +199,9 @@ public class Survey extends AppCompatActivity {
                                 startActivity(it);
 
                                 finish();
-                            } else {
+                            /*} else {
                                 Toast.makeText(getApplicationContext(), "빈 칸을 채워주세요.", Toast.LENGTH_LONG).show();
-                            }
+                            }*/
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

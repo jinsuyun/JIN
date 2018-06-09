@@ -36,15 +36,11 @@
             android:name=".Survey"
             android:label="YourActivity"
             android:theme="@style/Theme.AppCompat.Translucent" />
-        <activity android:name=".Main2Activity" />
         <activity
-            android:name=".exercise_cycle"
-            android:label="@string/title_activity_exercise_cycle"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".exercise_buffet" />
-        <activity android:name=".exercise_jumpingrope" />
-        <activity android:name=".exercise_flank" />
-        <activity android:name=".exercise_running" />
+            android:name=".Re_Survey"
+            android:label="YourActivity"
+            android:theme="@style/Theme.AppCompat.Translucent" />
+        <activity android:name=".Main2Activity" />
         <activity android:name=".CustomfoodActivity" />
         <activity android:name=".FoodselectActivity"></activity>
     </application>
