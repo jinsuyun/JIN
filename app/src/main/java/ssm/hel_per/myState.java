@@ -241,6 +241,8 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
         horizontalBarChart.animateY(2000, Easing.EasingOption.EaseInCubic);
         horizontalBarChart.invalidate();
 
+        horizontalBarChart.getDescription().setEnabled(false);
+///////////////////////////////////////////////////////////////////////////////////////////
         LineChart lineChart = v.findViewById(R.id.weight_chart);
         List<Entry> weight_change = new ArrayList<>();
 
@@ -281,6 +283,8 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
         lineChart.invalidate();
 
 
+        lineChart.getDescription().setEnabled(false);
+///////////////////////////////////////////////////////////////////////////////////////////////////
         RadarChart set_chart = (RadarChart) v.findViewById(R.id.set_chart);
         ArrayList<RadarEntry> set_entries = new ArrayList<>();
         set_entries.add(new RadarEntry(Float.valueOf(arrayList_back.get(0).toString()), "등"));
@@ -334,6 +338,8 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
 
         set_chart.animateY(2000, Easing.EasingOption.EaseInCubic);
         set_chart.invalidate();
+
+        set_chart.getDescription().setEnabled(false);
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
         PieChart calories_chart = (PieChart) v.findViewById(R.id.calories_chart);
@@ -367,6 +373,7 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
         calories_chart.animateY(2000, Easing.EasingOption.EaseInCubic);
         calories_chart.invalidate();
 
+        calories_chart.getDescription().setEnabled(false);
         return v;
     }
 
