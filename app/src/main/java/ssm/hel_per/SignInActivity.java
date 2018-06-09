@@ -101,6 +101,8 @@ public class SignInActivity extends AppCompatActivity {
         signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                id = etid.getText().toString();
+                pw = etpw.getText().toString();
                 // 로그인 성공시 저장 처리
                 save();
                 ConnectThread thread = new ConnectThread(urlStr, id, pw);
