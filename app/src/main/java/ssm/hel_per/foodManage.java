@@ -50,9 +50,9 @@ public class foodManage  extends Fragment implements Main2Activity.OnBackPressed
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.food_manage, container, false);
-        v2 = inflater.inflate(R.layout.food_calori, container, false);
+        //v2 = inflater.inflate(R.layout.food_calori, container, false);
         food = (FrameLayout)v.findViewById(R.id.food);
-        graph =(ImageView)v2.findViewById(R.id.foodinfograph);
+        graph =(ImageView)v.findViewById(R.id.foodinfograph);
         tv = (TextView) v.findViewById(R.id.reqCalText);
         btn = (Button) v.findViewById(R.id.regCalButton);
         bt = getActivity().getIntent().getStringExtra("bodytype");
@@ -85,169 +85,68 @@ public class foodManage  extends Fragment implements Main2Activity.OnBackPressed
             }
         });
 
-        if (reqCalorie < 1150)
+        if (reqCalorie < 1150) {
             regCalorie = 1100;
-        else if (reqCalorie < 1250 && reqCalorie >= 1150)
+            food.setBackgroundResource(R.drawable.menu_1100);
+            graph.setImageResource(R.drawable.nut_1100);
+        } else if (reqCalorie < 1250 && reqCalorie >= 1150) {
             regCalorie = 1200;
-        else if (reqCalorie < 1350 && reqCalorie >= 1250)
+            food.setBackgroundResource(R.drawable.menu_1200);
+            graph.setImageResource(R.drawable.nut_1200);
+        } else if (reqCalorie < 1350 && reqCalorie >= 1250) {
             regCalorie = 1300;
-        else if (reqCalorie < 1450 && reqCalorie >= 1350)
+            food.setBackgroundResource(R.drawable.menu_1300);
+            graph.setImageResource(R.drawable.nut_1300);
+        } else if (reqCalorie < 1450 && reqCalorie >= 1350) {
             regCalorie = 1400;
-        else if (reqCalorie < 1550 && reqCalorie >= 1450)
+            food.setBackgroundResource(R.drawable.menu_1400);
+            graph.setImageResource(R.drawable.nut_1400);
+        } else if (reqCalorie < 1550 && reqCalorie >= 1450) {
             regCalorie = 1500;
-        else if (reqCalorie < 1650 && reqCalorie >= 1550)
+            food.setBackgroundResource(R.drawable.menu_1500);
+            graph.setImageResource(R.drawable.nut_1500);
+        } else if (reqCalorie < 1650 && reqCalorie >= 1550) {
             regCalorie = 1600;
-        else if (reqCalorie < 1750 && reqCalorie >= 1650)
+            food.setBackgroundResource(R.drawable.menu_1600);
+            graph.setImageResource(R.drawable.nut_1600);
+        } else if (reqCalorie < 1750 && reqCalorie >= 1650) {
             regCalorie = 1700;
-        else if (reqCalorie < 1850 && reqCalorie >= 1750)
+            food.setBackgroundResource(R.drawable.menu_1700);
+            graph.setImageResource(R.drawable.nut_1700);
+        } else if (reqCalorie < 1850 && reqCalorie >= 1750) {
             regCalorie = 1800;
-        else if (reqCalorie < 1950 && reqCalorie >= 1850)
+            food.setBackgroundResource(R.drawable.menu_1800);
+            graph.setImageResource(R.drawable.nut_1800);
+        } else if (reqCalorie < 1950 && reqCalorie >= 1850) {
             regCalorie = 1900;
-        else
+            food.setBackgroundResource(R.drawable.menu_1900);
+            graph.setImageResource(R.drawable.nut_1900);
+        } else {
             regCalorie = 2000;
+            food.setBackgroundResource(R.drawable.menu_2000);
+            graph.setImageResource(R.drawable.nut_2000);
 
-        if(bt !=null) {
-            if (reqCalorie < 1150) {
-                food.setBackgroundResource(R.drawable.menu_1100);
-                graph.setImageResource(R.drawable.nut_1100);
-                food.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dialog dialog = new Dialog(getActivity());
-
-                        dialog.setContentView(R.layout.food_calori);
-                        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                        dialog.show();
-                    }
-                });
-            } else if (reqCalorie < 1250 && reqCalorie >= 1150) {
-                food.setBackgroundResource(R.drawable.menu_1200);
-                graph.setImageResource(R.drawable.nut_1200);
-                food.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dialog dialog = new Dialog(getActivity());
-
-                        dialog.setContentView(R.layout.food_calori);
-                        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                        dialog.show();
-                    }
-                });
-            } else if (reqCalorie < 1350 && reqCalorie >= 1250) {
-                food.setBackgroundResource(R.drawable.menu_1300);
-                graph.setImageResource(R.drawable.nut_1300);
-                food.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dialog dialog = new Dialog(getActivity());
-
-                        dialog.setContentView(R.layout.food_calori);
-                        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                        dialog.show();
-                    }
-                });
-            } else if (reqCalorie < 1450 && reqCalorie >= 1350) {
-                food.setBackgroundResource(R.drawable.menu_1400);
-                graph.setImageResource(R.drawable.nut_1400);
-                food.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dialog dialog = new Dialog(getActivity());
-
-                        dialog.setContentView(R.layout.food_calori);
-                        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                        dialog.show();
-                    }
-                });
-            } else if (reqCalorie < 1550 && reqCalorie >= 1450) {
-                food.setBackgroundResource(R.drawable.menu_1500);
-                graph.setImageResource(R.drawable.nut_1500);
-                food.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dialog dialog = new Dialog(getActivity());
-
-                        dialog.setContentView(R.layout.food_calori);
-                        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                        dialog.show();
-                    }
-                });
-            } else if (reqCalorie < 1650 && reqCalorie >= 1550) {
-                food.setBackgroundResource(R.drawable.menu_1600);
-                graph.setImageResource(R.drawable.nut_1600);
-                food.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dialog dialog = new Dialog(getActivity());
-
-                        dialog.setContentView(R.layout.food_calori);
-                        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                        dialog.show();
-                    }
-                });
-            } else if (reqCalorie < 1750 && reqCalorie >= 1650) {
-                food.setBackgroundResource(R.drawable.menu_1700);
-                graph.setImageResource(R.drawable.nut_1700);
-                food.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dialog dialog = new Dialog(getActivity());
-
-                        dialog.setContentView(R.layout.food_calori);
-                        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                        dialog.show();
-                    }
-                });
-            } else if (reqCalorie < 1850 && reqCalorie >= 1750) {
-                food.setBackgroundResource(R.drawable.menu_1800);
-                graph.setImageResource(R.drawable.nut_1800);
-                food.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dialog dialog = new Dialog(getActivity());
-
-                        dialog.setContentView(R.layout.food_calori);
-                        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                        dialog.show();
-                    }
-                });
-            } else if (reqCalorie < 1950 && reqCalorie >= 1850) {
-                food.setBackgroundResource(R.drawable.menu_1900);
-                graph.setImageResource(R.drawable.nut_1900);
-                food.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dialog dialog = new Dialog(getActivity());
-
-                        dialog.setContentView(R.layout.food_calori);
-                        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                        dialog.show();
-                    }
-                });
-            } else {
-                food.setBackgroundResource(R.drawable.menu_2000);
-                graph.setImageResource(R.drawable.nut_2000);
-                food.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dialog dialog = new Dialog(getActivity());
-
-                        dialog.setContentView(R.layout.food_calori);
-                        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                        dialog.show();
-                    }
-                });
-            }
-
-            final int finalRegCalorie = regCalorie;
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ConnectThread thread = new ConnectThread(urlStr, getActivity().getIntent().getStringExtra("id"), finalRegCalorie);
-                    thread.start();
-                }
-            });
         }
+
+        food.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(graph.getVisibility() == View.VISIBLE)
+                    graph.setVisibility(getView().INVISIBLE);
+                else
+                    graph.setVisibility(getView().VISIBLE);
+
+            }
+        });
+
+        final int finalRegCalorie = regCalorie;
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConnectThread thread = new ConnectThread(urlStr, getActivity().getIntent().getStringExtra("id"), finalRegCalorie);
+                thread.start();
+            }
+        });
         return v;
     }
 
