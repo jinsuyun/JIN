@@ -14,6 +14,7 @@ var userInputRouter = require('./routes/user-input-router');
 var dailyRouter = require('./routes/daily-router')
 var dailysearchRouter = require('./routes/dailysearch-router')
 var foodlistRouter = require('./routes/foodlist-router');
+var calorieRouter = require('./routes/calorie-router');
 
 var graphRouter = require('./routes/graph-router');
 var appUserjsonRouter = require('./routes/appuserjson-router');
@@ -52,6 +53,7 @@ app.use('/userinput', userInputRouter);
 app.use('/daily', dailyRouter);
 app.use('/dailysearch', dailysearchRouter);
 app.use('/foodlist', foodlistRouter);
+app.use('/calorie', calorieRouter);
 
 app.use('/usergraph', graphRouter);
 app.use('/appuserjson', appUserjsonRouter);
