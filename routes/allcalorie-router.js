@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var allCalorieAdapter = require('../adapters/calorie-db-adapter');
+var allCalorieAdapter = require('../adapters/allcalorie-db-adapter');
 var dbConnection = require('./result');
 
 router.post('/', function(req, res) {
