@@ -2,12 +2,17 @@ package ssm.hel_per;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+<<<<<<< HEAD
 import android.app.FragmentTransaction;
+=======
+import android.content.Context;
+>>>>>>> c8e871618a4f65d3744041573a64710d9c35f156
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,10 +62,14 @@ import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class myState extends Fragment {
+public class myState extends Fragment implements Main2Activity.OnBackPressedListener{
     View v;
+<<<<<<< HEAD
 
     String url_daily="http://13.209.40.50:3000/dailysearch";
+=======
+    home mainFragment;
+>>>>>>> c8e871618a4f65d3744041573a64710d9c35f156
     double weight=0;
     double height=0;
     double targetweight=0;
@@ -100,8 +109,16 @@ public class myState extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.my_state, container, false);
+        mainFragment = new home();
 
+<<<<<<< HEAD
         id = getActivity().getIntent().getStringExtra("id");
+=======
+        FloatingActionButton floatingActionButton = ((Main2Activity) getActivity()).getFloatingActionButton();
+        if (floatingActionButton != null) {
+            floatingActionButton.show();
+        }
+>>>>>>> c8e871618a4f65d3744041573a64710d9c35f156
         weight=getActivity().getIntent().getDoubleExtra("weight",0);
         targetweight=getActivity().getIntent().getDoubleExtra("targetweight",0);
         targetperiod=getActivity().getIntent().getIntExtra("targetperiod",0);
@@ -360,6 +377,7 @@ public class myState extends Fragment {
 
         return v;
     }
+<<<<<<< HEAD
 
     class ConnectThread extends Thread {
         String id;
@@ -428,6 +446,27 @@ public class myState extends Fragment {
         public String getResult(){
             return result;
         }
+=======
+    @Override
+    public void onBack() {
+        Log.e("Other", "onBack()");
+        // 리스너를 설정하기 위해 Activity 를 받아옵니다.
+        Main2Activity activity = (Main2Activity)getActivity();
+        // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
+        activity.setOnBackPressedListener(null);
+        // MainFragment 로 교체
+        getActivity().getFragmentManager().beginTransaction()
+                .replace(R.id.content_main, mainFragment).commit();
+        // Activity 에서도 뭔가 처리하고 싶은 내용이 있다면 하단 문장처럼 호출해주면 됩니다.
+        // activity.onBackPressed();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.e("Other", "onAttach()");
+        ((Main2Activity)context).setOnBackPressedListener(this);
+>>>>>>> c8e871618a4f65d3744041573a64710d9c35f156
     }
 }
 

@@ -3,14 +3,20 @@ package ssm.hel_per;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,8 +30,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.github.lzyzsd.circleprogress.ArcProgress;
@@ -39,8 +47,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Date;
+=======
+import java.util.Calendar;
+>>>>>>> c8e871618a4f65d3744041573a64710d9c35f156
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -62,6 +74,12 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     int workperiod;
     String bodytype;
     String bt;
+//   private Context c;
+    FloatingActionButton fab;
+
+    public FloatingActionButton getFloatingActionButton() {
+        return fab;
+    }
 
 
     Date workoutday=null;
@@ -83,7 +101,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -191,7 +208,20 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                 }
             }, 0, 2000);
 
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            /*체중입력을 받기위한 FloatingActionButton*/
+            fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //       Snackbar.make(view, "현재 체중을 입력하세요", Snackbar.LENGTH_LONG)
+                    //           .setAction("Action", null).show();
+                    showAddWeightDialog(Main2Activity.this);
+                }
+            });
+
+
+
+                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
             drawer.addDrawerListener(toggle);
@@ -199,10 +229,14 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
+<<<<<<< HEAD
 
+=======
+>>>>>>> c8e871618a4f65d3744041573a64710d9c35f156
         }
     }
-    @Override
+
+   /* @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -210,7 +244,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         } else {
             super.onBackPressed();
         }
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -263,9 +297,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             Intent it3_myState = new Intent(Main2Activity.this,foodManage.class);
             it3_myState.putExtra("state",bt);
             manager.beginTransaction().replace(R.id.content_main,new foodManage()).commit();
-        } else if (id == R.id.nav_add_user) {
-            manager.beginTransaction().replace(R.id.content_main,new addUser()).commit();
-        } else if (id == R.id.nav_body_check) {
+        }  else if (id == R.id.nav_body_check) {
             bodyAlgo bodyAlgo = new bodyAlgo();
             Intent it_bodytype = new Intent(Main2Activity.this,bodyCheck.class);
             age=getIntent().getIntExtra("age",0);
@@ -283,24 +315,83 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             bodyAlgo.bmrCal(height,weight,age,sex);
 
             manager.beginTransaction().replace(R.id.content_main,new bodyCheck()).commit();
-        } else if (id == R.id.nav_qna) {
-            manager.beginTransaction().replace(R.id.content_main,new QnA()).commit();
-        } else if (id == R.id.nav_my_home) {
+        }else if (id == R.id.nav_my_home) {
             manager.beginTransaction().replace(R.id.content_main,new home()).commit(); // 홈화면
+        }
+        else if (id == R.id.nav_alarm_push) {
+
+            manager.beginTransaction().replace(R.id.content_main,new alarmPush()).commit(); // 알람설정
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    private void showAddWeightDialog(Context c) {
+        final EditText weightEditText = new EditText(c);
+        AlertDialog dialog = new AlertDialog.Builder(c)
+                .setTitle("Add a new Weight")
+                //.setMessage("What do you want to do next?")
+                .setView(weightEditText)
+                .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String currentWeight = String.valueOf(weightEditText.getText());
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .create();
+        dialog.show();
+    }
+    // 뒤로가기 버튼 입력시간이 담길 long 객체
+    private long pressedTime = 0;
 
-
-    public interface onKeyBackPressedListener {
+    // 리스너 생성
+    public interface OnBackPressedListener {
         public void onBack();
     }
-    private onKeyBackPressedListener mOnKeyBackPressedListener;
 
-    public void setOnKeyBackPressedListener(onKeyBackPressedListener listener) {
-        mOnKeyBackPressedListener = listener;
+    // 리스너 객체 생성
+    private OnBackPressedListener mBackListener;
+
+    // 리스너 설정 메소드
+    public void setOnBackPressedListener(OnBackPressedListener listener) {
+        mBackListener = listener;
     }
+
+    // 뒤로가기 버튼을 눌렀을 때의 오버라이드 메소드
+    @Override
+    public void onBackPressed() {
+
+        // 다른 Fragment 에서 리스너를 설정했을 때 처리됩니다.
+        if(mBackListener != null) {
+            mBackListener.onBack();
+            Log.e("!!!", "Listener is not null");
+            // 리스너가 설정되지 않은 상태(예를들어 메인Fragment)라면
+            // 뒤로가기 버튼을 연속적으로 두번 눌렀을 때 앱이 종료됩니다.
+        } else {
+            Log.e("!!!", "Listener is null");
+            if ( pressedTime == 0 ) {
+                Snackbar.make(findViewById(R.id.content_main),
+                        " 한 번 더 누르면 종료됩니다." , Snackbar.LENGTH_LONG).show();
+                pressedTime = System.currentTimeMillis();
+            }
+            else {
+                int seconds = (int) (System.currentTimeMillis() - pressedTime);
+
+                if ( seconds > 2000 ) {
+                    Snackbar.make(findViewById(R.id.content_main),
+                            " 한 번 더 누르면 종료됩니다." , Snackbar.LENGTH_LONG).show();
+                    pressedTime = 0 ;
+                }
+                else {
+                    super.onBackPressed();
+                    Log.e("!!!", "onBackPressed : finish, killProcess");
+                    finish();
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                }
+            }
+        }
+    }
+
 }

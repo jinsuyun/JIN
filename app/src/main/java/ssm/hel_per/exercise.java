@@ -2,14 +2,19 @@ package ssm.hel_per;
 
 import android.app.Dialog;
 import android.app.Fragment;
+<<<<<<< HEAD
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+=======
+import android.content.Context;
+>>>>>>> c8e871618a4f65d3744041573a64710d9c35f156
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +44,8 @@ import java.util.Date;
 import static android.support.constraint.Constraints.TAG;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class exercise extends Fragment {
+public class exercise extends Fragment implements Main2Activity.OnBackPressedListener{
+    home mainFragment;
     String id;
     View v;
     Button button;
@@ -75,6 +81,11 @@ public class exercise extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.exercise, container, false);
 
+        mainFragment = new home();
+        FloatingActionButton floatingActionButton = ((Main2Activity) getActivity()).getFloatingActionButton();
+        if (floatingActionButton != null) {
+            floatingActionButton.hide();
+        }
         bt = getActivity().getIntent().getStringExtra("bodytype");
         Log.d(TAG,"FUCKING"+bt);
 
@@ -251,5 +262,27 @@ public class exercise extends Fragment {
             }
             return output.toString();
         }
+    }
+    @Override
+    public void onBack() {
+        Log.e("Other", "onBack()");
+        // 리스너를 설정하기 위해 Activity 를 받아옵니다.
+        Main2Activity activity = (Main2Activity)getActivity();
+        // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
+        activity.setOnBackPressedListener(null);
+        // MainFragment 로 교체
+        getActivity().getFragmentManager().beginTransaction()
+                .replace(R.id.content_main, mainFragment).commit();
+        // Activity 에서도 뭔가 처리하고 싶은 내용이 있다면 하단 문장처럼 호출해주면 됩니다.
+        // activity.onBackPressed();
+    }
+
+    // Fragment 호출 시 반드시 호출되는 오버라이드 메소드입니다.
+    @Override
+    //                     혹시 Context 로 안되시는분은 Activity 로 바꿔보시기 바랍니다.
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.e("Other", "onAttach()");
+        ((Main2Activity)context).setOnBackPressedListener(this);
     }
 }
