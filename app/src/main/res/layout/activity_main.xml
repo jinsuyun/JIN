@@ -1,114 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ssm.hel_per.MainActivity">
-
-    <LinearLayout
+    android:background="@drawable/img">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:background="@drawable/background">
+
+        <customfonts.MyTextView
+            android:id="@+id/create_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="로그인하기"
+            android:textColor="#54abee"
+            android:textSize="25dp" />
+
+        <customfonts.MyTextView
+            android:id="@+id/account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/create_2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:text="Already have an account?"
+            android:textColor="#c4c5c9"
+            android:textSize="16dp" />
 
         <LinearLayout
+            android:id="@+id/circle"
             android:layout_width="match_parent"
-            android:layout_height="277dp"
-            android:orientation="vertical"
-            android:background="@color/colorPrimary">
-
-
-
-            <ImageView
-                android:layout_width="331dp"
-                android:layout_height="125dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/images"
-                android:layout_weight="0.12" />
-
-            <TextView
+            android:layout_height="wrap_content"
+            android:background="@drawable/circleangle"
+            android:padding="16dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="140dp"
+            >
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Hel-per"
-                android:textColor="#ffffff"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginLeft="1dp">
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/angle2"
+                    />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/bag"
+                    android:paddingLeft="3dp"
+                    android:layout_gravity="center"
+                    />
+            </FrameLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+
+            <customfonts.MyTextView
+                android:id="@+id/signupforfree"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Health Personal training"
-                android:textColor="#ffffff"
-                android:textSize="18dp"
-                android:textStyle="bold">
-
-            </TextView>
-
+                android:layout_marginLeft="16dp"
+                android:text="회원 가입 하시겠어요?"
+                android:textColor="@android:color/black"
+                android:textSize="22dp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <com.facebook.login.widget.LoginButton
+            xmlns:facebook="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/face_login_button"
+            android:layout_width="270dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/circle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:textSize="18sp"
+            android:paddingBottom="16sp"
+            android:paddingTop="16sp"
+            facebook:com_facebook_login_text="페이스북으로 로그인" />
 
-            <EditText
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:hint="아이디"
-                android:layout_gravity="center"
-                android:padding="10dp"
-                android:textColor="#ffffff"
-                android:textColorHint="#ffffff"
-                android:id="@+id/idText"
-                android:drawableStart="@drawable/ic_person_black_24dp"
-                android:drawableLeft="@drawable/ic_person_black_24dp"
-                android:layout_marginTop="50dp"
-                android:background="@color/colorPrimary" />
+        <com.kakao.usermgmt.LoginButton
+            android:id="@+id/Kakao_login_button"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_alignLeft="@+id/face_login_button"
+            android:layout_alignStart="@+id/face_login_button"
+            android:layout_below="@+id/face_login_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="13dp"
+            />
 
-            <EditText
-                android:inputType="textPassword"
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:hint="비밀번호"
-                android:layout_gravity="center"
-                android:padding="10dp"
-                android:textColor="#ffffff"
-                android:textColorHint="#ffffff"
-                android:id="@+id/passwordText"
-                android:drawableStart="@drawable/ic_https_black_24dp"
-                android:drawableLeft="@drawable/ic_https_black_24dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorPrimary"/>
+        <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
+            android:id="@+id/buttonOAuthLoginImg"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/Kakao_login_button"
+            android:layout_marginTop="13dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:scaleType="centerInside" />
 
-            <Button
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:background="@color/colorPrimaryDark"
-                android:text="로그인"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="18dp"
-                android:layout_marginTop="10dp"
-                android:text="회원가입"
-                android:id="@+id/registerButton"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>
