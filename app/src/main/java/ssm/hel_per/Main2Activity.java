@@ -303,10 +303,10 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         }else if (id == R.id.nav_my_home) {
             manager.beginTransaction().replace(R.id.content_main,new home()).commit(); // 홈화면
         }
-//        else if (id == R.id.nav_alarm_push) {
-//
-//            manager.beginTransaction().replace(R.id.content_main,new alarmPush()).commit(); // 알람설정
-//        }
+        else if (id == R.id.nav_alarm_push) {
+
+            manager.beginTransaction().replace(R.id.content_main,new alarmPush()).commit(); // 알람설정
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
