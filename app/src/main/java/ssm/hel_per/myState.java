@@ -25,6 +25,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -75,6 +76,7 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
     int worklevel = 0;
     int workperiod = 0;
     int sum_spent_calories = 0;
+    int sum_eat_calories=0;
     int all_spent_calories = 0;
     int spent_calories = 0;
     int all_eat_calories = 0;
@@ -136,8 +138,77 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
 
             for (int i = 0; i < ary.length(); i++) {
                 JSONObject obj = ary.getJSONObject(i);
-                Log.i("TTTT22", "" + obj);
-                workoutday = obj.getString("workoutday");
+                if(!obj.getString("workoutday").isEmpty()) {
+                    workoutday = obj.getString("workoutday");
+                }else{
+                    workoutday=null;
+                }
+                if(!obj.getString("weight").isEmpty()) {
+                    weight = obj.getDouble("weight");
+                }else{
+                    weight=0;
+                }
+                if(!obj.getString("all_spent_calories").isEmpty()) {
+                    all_spent_calories = obj.getInt("all_spent_calories");
+                }else{
+                    all_spent_calories=0;
+                }
+                if(!obj.getString("spent_calories").isEmpty()) {
+                    spent_calories = obj.getInt("spent_calories");
+                }else{
+                    spent_calories=0;
+                }
+                if(!obj.getString("all_eat_calories").isEmpty()) {
+                    all_eat_calories = obj.getInt("all_eat_calories");
+                }else{
+                    all_eat_calories=0;
+                }
+                if(!obj.getString("eat_calories").isEmpty()) {
+                    eat_calories = obj.getInt("eat_calories");
+                }else{
+                    eat_calories=0;
+                }
+                if(!obj.getString("sixpack").isEmpty()) {
+                    sixpack = obj.getInt("sixpack");
+                }else{
+                    sixpack=0;
+                }
+                if(!obj.getString("leg").isEmpty()) {
+                    leg = obj.getInt("leg");
+                }else{
+                    leg=0;
+                }
+                if(!obj.getString("chest").isEmpty()) {
+                    chest = obj.getInt("chest");
+                }else{
+                    chest=0;
+                }
+                if(!obj.getString("shoulder").isEmpty()) {
+                    shoulder = obj.getInt("shoulder");
+                }else{
+                    shoulder=0;
+                }
+                if(!obj.getString("back").isEmpty()) {
+                    back = obj.getInt("back");
+                }else{
+                    back=0;
+                }
+                if(!obj.getString("arm").isEmpty()) {
+                    arm = obj.getInt("arm");
+                }else{
+                    arm=0;
+                }
+                if(!obj.getString("running_time").isEmpty()) {
+                    running_time = obj.getInt("running_time");
+                }else{
+                    running_time=0;
+                }
+                if(!obj.getString("weight_time").isEmpty()) {
+                    weight_time = obj.getInt("weight_time");
+                }else{
+                    weight_time=0;
+                }
+                /*workoutday = obj.getString("workoutday");
                 weight = obj.getDouble("weight");
                 all_spent_calories = obj.getInt("all_spent_calories");
                 spent_calories = obj.getInt("spent_calories");
@@ -148,8 +219,9 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
                 back = obj.getInt("back");
                 arm = obj.getInt("arm");
                 running_time = obj.getInt("running_time");
-                weight_time = obj.getInt("weight_time");
+                weight_time = obj.getInt("weight_time");*/
 
+                sum_eat_calories=sum_eat_calories+eat_calories;
                 sum_spent_calories = sum_spent_calories + spent_calories;
                 arrayList_workoutday.add(workoutday);
                 arrayList_weight.add(weight);
@@ -221,6 +293,9 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
         //xAxis.setTextColor(Color.WHITE);
 
 
+        Legend legend=horizontalBarChart.getLegend();
+        legend.setTextSize(10f);
+        legend.setTextColor(Color.WHITE);
         // xAxis.enableGridDashedLine(8, 24, 0);
 
 
@@ -267,7 +342,9 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
         //xAxis.setTextColor(Color.YELLOW);
 
         // xAxis.enableGridDashedLine(8, 24, 0);
-
+        Legend line_legend=lineChart.getLegend();
+        line_legend.setTextSize(10f);
+        line_legend.setTextColor(Color.WHITE);
 
         YAxis line_yLAxis = lineChart.getAxisLeft();
         line_yLAxis.setTextColor(Color.WHITE);
@@ -294,7 +371,7 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
         set_entries.add(new RadarEntry(Float.valueOf(arrayList_chest.get(0).toString()), "가슴"));
         set_entries.add(new RadarEntry(Float.valueOf(arrayList_shoulder.get(0).toString()), "어깨"));
 
-        RadarDataSet dataset_comp1 = new RadarDataSet(set_entries, "세트");
+        RadarDataSet dataset_comp1 = new RadarDataSet(set_entries,"부위 별 세트 수");
 
         dataset_comp1.setColor(Color.CYAN);
 
@@ -330,11 +407,10 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
         radar_yLAxis.setDrawGridLines(false);
         radar_yLAxis.setDrawAxisLine(false);
 
-        // YAxis radar_yRAxis = set_chart.getAxisRight();
-
-        // radar_yRAxis.setDrawLabels(false);
-        // radar_yRAxis.setDrawAxisLine(false);
-        // radar_yRAxis.setDrawGridLines(false);
+        Legend set_legend=set_chart.getLegend();
+        set_legend.setTextSize(10f);
+        set_legend.setTextColor(Color.WHITE);
+        set_legend.setEnabled(false);
 
         set_chart.animateY(2000, Easing.EasingOption.EaseInCubic);
         set_chart.invalidate();
@@ -345,35 +421,69 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
         PieChart calories_chart = (PieChart) v.findViewById(R.id.calories_chart);
         ArrayList<PieEntry> calories_entries = new ArrayList<>();
         float tmp = all_spent_calories - sum_spent_calories;
-        calories_entries.add(new PieEntry(Float.valueOf(sum_spent_calories), "소모 칼로리"));
-        calories_entries.add(new PieEntry(Float.valueOf(tmp), "남은 칼로리"));
+        calories_entries.add(new PieEntry(Float.valueOf(sum_spent_calories), "소모량"));
+        calories_entries.add(new PieEntry(Float.valueOf(tmp), "남은량"));
 
         PieDataSet pieDataSet = new PieDataSet(calories_entries, "칼로리");
-
-        pieDataSet.setValueTextColor(Color.BLACK);
-        pieDataSet.setValueTextSize(15f);
         pieDataSet.setDrawIcons(false);
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
         colors.add(Color.rgb(34, 116, 28));
         colors.add(Color.GRAY);
-
         colors.add(ColorTemplate.getHoloBlue());
         pieDataSet.setColors(colors);
 
         PieData pieData = new PieData(pieDataSet);
         pieData.setDataSet(pieDataSet);
 
-        pieData.setValueTextSize(20f);
+        pieData.setValueTextSize(13f);
         pieData.setValueTextColor(Color.WHITE);
         calories_chart.setData(pieData);
 
+        Legend calories_legend=calories_chart.getLegend();
+        calories_legend.setTextSize(10f);
+        calories_legend.setTextColor(Color.WHITE);
 
         calories_chart.animateY(2000, Easing.EasingOption.EaseInCubic);
         calories_chart.invalidate();
 
         calories_chart.getDescription().setEnabled(false);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        PieChart eat_calories_chart = (PieChart) v.findViewById(R.id.eat_calories_chart);
+        ArrayList<PieEntry> eat_calories_entries = new ArrayList<>();
+        float tmp2 = all_eat_calories - sum_eat_calories;
+        eat_calories_entries.add(new PieEntry(Float.valueOf(sum_eat_calories), "섭취량"));
+        eat_calories_entries.add(new PieEntry(Float.valueOf(tmp2), "섭취할 량"));
+
+        PieDataSet eat_pieDataSet = new PieDataSet(eat_calories_entries, "칼로리");
+
+        eat_pieDataSet.setDrawIcons(false);
+
+        ArrayList<Integer> eat_colors = new ArrayList<Integer>();
+
+        eat_colors.add(Color.rgb(152, 0, 0));
+        eat_colors.add(Color.GRAY);
+
+        eat_colors.add(ColorTemplate.getHoloBlue());
+        eat_pieDataSet.setColors(eat_colors);
+
+        PieData eat_pieData = new PieData(eat_pieDataSet);
+        eat_pieData.setDataSet(eat_pieDataSet);
+
+        eat_pieData.setValueTextSize(13f);
+        eat_pieData.setValueTextColor(Color.WHITE);
+        eat_calories_chart.setData(eat_pieData);
+
+        Legend eat_calories_legend=eat_calories_chart.getLegend();
+        eat_calories_legend.setTextSize(10f);
+        eat_calories_legend.setTextColor(Color.WHITE);
+
+        eat_calories_chart.animateY(2000, Easing.EasingOption.EaseInCubic);
+        eat_calories_chart.invalidate();
+
+        eat_calories_chart.getDescription().setEnabled(false);
         return v;
     }
 
