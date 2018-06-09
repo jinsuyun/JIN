@@ -2,6 +2,7 @@ package ssm.hel_per;
 
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +20,8 @@ import android.widget.ImageView;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class foodManage  extends Fragment {
+public class foodManage  extends Fragment implements Main2Activity.OnBackPressedListener{
+    home mainFragment;
     View v,v2;
     FrameLayout food;
     String bt;
@@ -39,6 +41,8 @@ public class foodManage  extends Fragment {
             floatingActionButton.hide();
         }
         Log.d(TAG,"SSIBAL"+bt);
+
+        mainFragment = new home();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,5 +100,27 @@ public class foodManage  extends Fragment {
             }
         }
         return v;
+    }
+    @Override
+    public void onBack() {
+        Log.e("Other", "onBack()");
+        // 리스너를 설정하기 위해 Activity 를 받아옵니다.
+        Main2Activity activity = (Main2Activity)getActivity();
+        // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
+        activity.setOnBackPressedListener(null);
+        // MainFragment 로 교체
+        getActivity().getFragmentManager().beginTransaction()
+                .replace(R.id.content_main, mainFragment).commit();
+        // Activity 에서도 뭔가 처리하고 싶은 내용이 있다면 하단 문장처럼 호출해주면 됩니다.
+        // activity.onBackPressed();
+    }
+
+    // Fragment 호출 시 반드시 호출되는 오버라이드 메소드입니다.
+    @Override
+    //                     혹시 Context 로 안되시는분은 Activity 로 바꿔보시기 바랍니다.
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.e("Other", "onAttach()");
+        ((Main2Activity)context).setOnBackPressedListener(this);
     }
 }

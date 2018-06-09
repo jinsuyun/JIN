@@ -1,5 +1,7 @@
 package ssm.hel_per;
 
+import android.app.Dialog;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,9 +60,6 @@ public class FoodselectActivity extends AppCompatActivity {
         calButton = (Button) findViewById(R.id.calFix);
         addButton = (Button) findViewById(R.id.addFood);
         registButton = (Button) findViewById(R.id.registerFood);
-//        ReviewData task = new ReviewData();
-//        task.execute(R_number);
-
 
         calButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +109,25 @@ public class FoodselectActivity extends AppCompatActivity {
         sumCalText = findViewById(R.id.sumCalories);
         sumCalText.setText(sumCalories(data) + " kcal"); // 실시간 갱신 필요
 
+        mFoodListView.addOnItemTouchListener(new RecyclerViewOnItemClickListener(this, mFoodListView, new RecyclerViewOnItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+//                int newAmount;
+//                FoodNumPicker fp = new FoodNumPicker();
+//                fp.show(getSupportFragmentManager(), "Test dialog");
+//
+//
+//                newAmount = fp.getmNewValue();
+//                data.set(position, new CustomFoodContent(data.get(position).getFoodName(), newAmount,
+//                        data.get(position).getAmount(), newAmount * data.get(position).getConsumeCal()));
+            }
+            @Override
+            public void onItemLongClick(View v, int position) {
+
+            }
+        }
+        ));
+
     }
 
     @Override
@@ -116,7 +136,8 @@ public class FoodselectActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK) {
             switch(requestCode) {
                 case 3000 :
-                    data.add(new CustomFoodContent(resdata.getStringExtra("name"), resdata.getStringExtra("amount"), resdata.getIntExtra("consumeCal", 0)));
+                    data.add(new CustomFoodContent(resdata.getStringExtra("name"),resdata.getIntExtra("num", 0),
+                            resdata.getStringExtra("amount"), resdata.getIntExtra("num", 0) * resdata.getIntExtra("consumeCal", 0)));
                     // 데이터 추가
                     break;
             }
@@ -132,7 +153,6 @@ public class FoodselectActivity extends AppCompatActivity {
 
         return sum;
     }
-
 
     class ConnectThread extends Thread {
         String urlStr;
@@ -155,6 +175,7 @@ public class FoodselectActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             JSONObject obj = new JSONObject(output);
+                            Toast.makeText(getApplicationContext(), eat_calories + " kcal가 등록되었습니다..", Toast.LENGTH_LONG).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -243,7 +264,7 @@ class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodListViewH
         CustomFoodContent data = foodData.get(position);
 
         holder.name.setText(data.getFoodName());
-        holder.amount.setText(data.getAmount());
+        holder.amount.setText(data.getNum() + data.getAmount());
         holder.consumeCal.setText(data.getConsumeCal() + " kcal");
     }
 
@@ -273,6 +294,14 @@ class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodListViewH
             consumeCal = foodView.findViewById(R.id.regFoodCalories);
             delbtn = foodView.findViewById(R.id.delBtn);
 
+            amount.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 수량 조절 dialogue
+
+                }
+            });
+
             delbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -283,3 +312,9 @@ class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodListViewH
         }
     }
 }
+
+
+
+
+
+
