@@ -39,6 +39,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -61,6 +63,22 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     String bodytype;
     String bt;
 
+
+    Date workoutday=null;
+    int running_time = 0;
+    int weight_time = 0;
+    int arm = 0;
+    int back = 0;
+    int shoulder = 0;
+    int chest = 0;
+    int leg = 0;
+    int sixpack = 0;
+    int eat_calories = 0;
+    int all_eat_calories = 0;
+    int spent_calories = 0;
+    int all_spent_calories = 0;
+
+    ArrayList arrayList_receive;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -181,13 +199,8 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
+
         }
-
-
-
-
-
-
     }
     @Override
     public void onBackPressed() {
@@ -240,6 +253,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             it_myState.putExtra("height",height);
 
 
+
             manager.beginTransaction().replace(R.id.content_main,new myState()).commit();
         } else if (id == R.id.nav_exercise) {
             Intent it2_myState = new Intent(Main2Activity.this,exercise.class);
@@ -267,17 +281,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
             bodyAlgo.bmiCal(height,weight);
             bodyAlgo.bmrCal(height,weight,age,sex);
-
-            it_bodytype.putExtra("age",age);
-            it_bodytype.putExtra("weight",weight);
-            it_bodytype.putExtra("height",height);
-            it_bodytype.putExtra("sex",sex);
-            it_bodytype.putExtra("name",name);
-            it_bodytype.putExtra("targetweight",targetweight);
-            it_bodytype.putExtra("targetperiod",targetperiod);
-            it_bodytype.putExtra("worklevel",worklevel);
-            it_bodytype.putExtra("workperiod",workperiod);
-            it_bodytype.putExtra("bodytype",bodytype);
 
             manager.beginTransaction().replace(R.id.content_main,new bodyCheck()).commit();
         } else if (id == R.id.nav_qna) {
