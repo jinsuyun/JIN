@@ -29,7 +29,7 @@ adapter.dailySearch = function(id, cb) {
             cb(resultCode, []);
         } else { // db연결성공
             connection.query(dailySearchQuery, [id], function(err, rows) {
-                if (err) { // daily x
+                if (!rows[0]) { // daily x
                     console.log(err);
                     resultCode = dbResult.Fail;
                     connection.release();
@@ -54,7 +54,7 @@ adapter.dailyWrite = function(daily, cb) {
             connection.release();
             cb(resultCode);
         } else {
-            connection.query(dailyDupSearchQuery, [daily.id, user.workoutday], function(err, rows) {
+            connection.query(dailyDupSearchQuery, [daily.id, daily.workoutday], function(err, rows) {
                 if (!err) { // query가 오는 경우
                     console.log(rows);
                     if(!rows[0]) { // 중복 id x
