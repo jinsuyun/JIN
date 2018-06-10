@@ -23,7 +23,6 @@ router.post('/', function(req, res) {
 
     dailyAdapter.dailyWrite(obj, function(resultCode,rows){
         if(resultCode == dbConnection.OK){
-            console.log(rows);
             res.json({"success":true});
         } else {
             console.log("false reason: id duplicated");

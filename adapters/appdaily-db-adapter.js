@@ -58,7 +58,7 @@ adapter.dailyWrite = function(daily, cb) {
                 if (!err) { // query가 오는 경우
                     console.log(rows);
                     if(!rows[0]) { // 중복 id x
-                        console.log('duplicated id');
+                        console.log('not duplicated id');
                         connection.query(dailyNewWriteQuery, [daily.id, daily.workoutday, daily.running_time,
                             daily.weight_time, daily.arm, daily.back, daily.shoulder, daily.chest, daily.leg,
                             daily.sixpack, daily.spent_calories, daily.all_spent_calories, daily.weight, daily.objective], function(err) {
