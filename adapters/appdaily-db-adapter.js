@@ -14,7 +14,7 @@ var adapter = {};
 
 var dailySearchQuery = 'SELECT * FROM daily WHERE id=? ORDER BY workoutday DESC'; // id/pw를 이용하여 유저 정보 search
 var dailyDupSearchQuery = 'SELECT workoutday FROM daily WHERE id=? AND workoutday=?'; // 유저 daily query
-var dailyNewWriteQuery = 'INSERT INTO daily(id, workoutday, running_time, weight_time, arm, back, shoulder, chest, leg, sixpack, spent_calories, all_spent_calories, weight, objective) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?)'; // id 없는경우 새로등록
+var dailyNewWriteQuery = 'INSERT INTO daily VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'; // id 없는경우 새로등록
 var dailyWriteQuery = 'UPDATE daily SET running_time=?, weight_time=?, arm=?, back=?, shoulder=?, chest=?, leg=?, sixpack=?, spent_calories=?, all_spent_calories=?, weight=?, objective=? WHERE id=? AND workoutday=?'; // id 있는경우 update
 
 adapter.dailySearch = function(id, cb) {
@@ -61,7 +61,7 @@ adapter.dailyWrite = function(daily, cb) {
                         console.log('not duplicated id');
                         connection.query(dailyNewWriteQuery, [daily.id, daily.workoutday, daily.running_time,
                             daily.weight_time, daily.arm, daily.back, daily.shoulder, daily.chest, daily.leg,
-                            daily.sixpack, daily.spent_calories, daily.all_spent_calories, daily.weight, daily.objective], function(err) {
+                            daily.sixpack, daily.eat_calories, daily.all_eat_calories, daily.spent_calories, daily.all_spent_calories, daily.weight, daily.objective], function(err) {
                             if (err) {
                                 console.log(err)
                                 resultCode = dbResult.Fail;

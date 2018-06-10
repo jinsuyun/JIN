@@ -12,7 +12,7 @@ var pool = mysql.createPool(dbConfig);
 var adapter = {};
 
 var userDataSearchQuery = 'SELECT * FROM daily WHERE id=? AND workoutday=?';
-var calorieNewWriteQuery = 'INSERT INTO daily(eat_calories, id, workoutday) VALUE (?,?,?)'; // id 없는경우 새로등록
+var calorieNewWriteQuery = 'INSERT INTO daily VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'; // id 없는경우 새로등록
 var calorieWriteQuery = 'UPDATE daily SET eat_calories=? WHERE id=? AND workoutday=?'; // id 있는경우 update
 
 adapter.calorieWrite = function(user, cb) {
@@ -29,8 +29,8 @@ adapter.calorieWrite = function(user, cb) {
                 if (!err) { // query가 오는 경우
                     console.log(rows);
                     if(!rows[0]) { // 중복 id x
-                        console.log('duplicated id');
-                        connection.query(calorieNewWriteQuery, [user.eat_calories, user.id, user.workoutday], function(err) {
+                        console.log('not duplicated id');
+                        connection.query(calorieNewWriteQuery, [user.id, user.workoutday, 0, 0, 0, 0, 0, 0, 0, 0, user.eat_calories, 0, 0, 0, 0, 0], function(err) {
                             if (err) {
                                 console.log(err)
                                 resultCode = dbResult.Fail;
@@ -44,6 +44,7 @@ adapter.calorieWrite = function(user, cb) {
                             }
                         });
                     } else {
+                        console.log('duplicated id');
                         connection.query(calorieWriteQuery, [user.eat_calories, user.id, user.workoutday], function(err) {
                             if (err) {
                                 console.log(err)
