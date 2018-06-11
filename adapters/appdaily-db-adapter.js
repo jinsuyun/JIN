@@ -73,7 +73,7 @@ adapter.dailyWrite = function(daily, cb) {
                             }
                         });
                     } else {
-                        connection.query(dailyWriteQuery, [daily.running_time, daily.weight_time, daily.arm, daily.back, aily.shoulder, daily.chest,
+                        connection.query(dailyWriteQuery, [daily.running_time, daily.weight_time, daily.arm, daily.back, daily.shoulder, daily.chest,
                             daily.leg, daily.sixpack, daily.spent_calories, daily.all_spent_calories, daily.weight, daily.objective, daily.id, daily.workoutday], function(err) {
                             if (err) {
                                 console.log(err)
