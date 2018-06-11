@@ -30,6 +30,8 @@ import android.support.v7.app.AlertDialog;
 
 import com.airbnb.lottie.L;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -71,7 +73,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
 //    static final String VIDEO_URL4 = "https://ko.gl/youtube.php?download=aHR0cHM6Ly9yMi0tLXNuLWE1bWVrbmVsLmdvb2dsZXZpZGVvLmNvbS92aWRlb3BsYXliYWNrP2R1cj0zNC44MjkmZXhwaXJlPTE1MjgwNjA2Njkmc291cmNlPXlvdXR1YmUmbG10PTE0NzEwNTI1NTM5NDY3MzkmZWk9blFZVVctejBHTV9vLVFPV3VLckFCQSZpZD1vLUFIWUpuUWUxNUJXQjVnR1dtT19wVlFZYkFST2tacDVlelNnT1lKNkRFWjE0Jm1zPWF1JTJDcmR1Jm10PTE1MjgwMzg5NDkmbXY9bSZyYXRlYnlwYXNzPXllcyZpcGJpdHM9MCZmdmlwPTQmbW09MzElMkMyOSZzaWduYXR1cmU9NUJDQ0RBQkNERTc0NTU1Mzc1MkVFQjAyOUQ5QjM3MDZEMEI2MkYzOC4xMUJEQzhCRDYwOTcyQUE1NTIzRDA0QjQ1N0UwNDE3NjQwQkRDQ0JFJm1uPXNuLWE1bWVrbmVsJTJDc24tYTVtN2xubHomcmVxdWlyZXNzbD15ZXMma2V5PXl0NiZpcD0yMDkuMTQxLjM0LjIzOSZwbD0yMyZtaW1lPXZpZGVvJTJGbXA0JmluaXRjd25kYnBzPTY5NjI1MCZpdGFnPTIyJmM9V0VCJnNwYXJhbXM9ZHVyJTJDZWklMkNpZCUyQ2luaXRjd25kYnBzJTJDaXAlMkNpcGJpdHMlMkNpdGFnJTJDbG10JTJDbWltZSUyQ21tJTJDbW4lMkNtcyUyQ212JTJDcGwlMkNyYXRlYnlwYXNzJTJDcmVxdWlyZXNzbCUyQ3NvdXJjZSUyQ2V4cGlyZSZ0aXRsZT0lRUQlOTQlOEMlRUIlOUUlQUQlRUQlODElQUMrJUVDJTlBJUI0JUVCJThGJTk5KyZrZWVwYWxpdmU9eWVz&title=%ED%94%8C%EB%9E%AD%ED%81%AC%20%EC%9A%B4%EB%8F%99";
 //    static final String VIDEO_URL5 = "https://ko.gl/youtube.php?download=aHR0cHM6Ly9yMi0tLXNuLWE1bWVrbmVsLmdvb2dsZXZpZGVvLmNvbS92aWRlb3BsYXliYWNrP2R1cj0zNC44MjkmZXhwaXJlPTE1MjgwNjA2Njkmc291cmNlPXlvdXR1YmUmbG10PTE0NzEwNTI1NTM5NDY3MzkmZWk9blFZVVctejBHTV9vLVFPV3VLckFCQSZpZD1vLUFIWUpuUWUxNUJXQjVnR1dtT19wVlFZYkFST2tacDVlelNnT1lKNkRFWjE0Jm1zPWF1JTJDcmR1Jm10PTE1MjgwMzg5NDkmbXY9bSZyYXRlYnlwYXNzPXllcyZpcGJpdHM9MCZmdmlwPTQmbW09MzElMkMyOSZzaWduYXR1cmU9NUJDQ0RBQkNERTc0NTU1Mzc1MkVFQjAyOUQ5QjM3MDZEMEI2MkYzOC4xMUJEQzhCRDYwOTcyQUE1NTIzRDA0QjQ1N0UwNDE3NjQwQkRDQ0JFJm1uPXNuLWE1bWVrbmVsJTJDc24tYTVtN2xubHomcmVxdWlyZXNzbD15ZXMma2V5PXl0NiZpcD0yMDkuMTQxLjM0LjIzOSZwbD0yMyZtaW1lPXZpZGVvJTJGbXA0JmluaXRjd25kYnBzPTY5NjI1MCZpdGFnPTIyJmM9V0VCJnNwYXJhbXM9ZHVyJTJDZWklMkNpZCUyQ2luaXRjd25kYnBzJTJDaXAlMkNpcGJpdHMlMkNpdGFnJTJDbG10JTJDbWltZSUyQ21tJTJDbW4lMkNtcyUyQ212JTJDcGwlMkNyYXRlYnlwYXNzJTJDcmVxdWlyZXNzbCUyQ3NvdXJjZSUyQ2V4cGlyZSZ0aXRsZT0lRUQlOTQlOEMlRUIlOUUlQUQlRUQlODElQUMrJUVDJTlBJUI0JUVCJThGJTk5KyZrZWVwYWxpdmU9eWVz&title=%ED%94%8C%EB%9E%AD%ED%81%AC%20%EC%9A%B4%EB%8F%99";
 
-    public static String urlStr = "http://13.209.40.50:3000/daily"; // 웹
+    public static String urlStr = "http://13.209.40.50:3000/appuser"; // 웹
     RelativeLayout imagestack;
     public FragmentManager manager;
     public RelativeLayout R_image,Rela_exer5;
@@ -104,6 +106,25 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
         exercisebtn=(Button)v.findViewById(R.id.exercise);
         button1 = (Button)v.findViewById(R.id.part);
         R_image = (RelativeLayout)v.findViewById(R.id.imagestack);
+
+       // exerlevel = getArguments().getInt("exerlevel",0);
+        ConnectThread thread = new ConnectThread(urlStr, id, exercount);
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String result=thread.getResult();
+
+        try {
+            JSONArray ary = new JSONArray(result);
+            JSONObject jsonObject = ary.getJSONObject(0);
+            exercount = jsonObject.getInt("exercount");
+            exerlevel = jsonObject.getInt("exerlevel");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         if(bt!=null) {
             if (bt.equals("LW"))
@@ -332,7 +353,81 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
         return v;
     }
 
+    class ConnectThread extends Thread {
+        String urlStr;
+        String id;
+        int exercount;
+        String result;
 
+
+        public ConnectThread(String inStr, String id,int exercount) {
+            this.urlStr = inStr;
+            this.id = id;
+            this.exercount=exercount;
+        }
+
+        public void run() {
+            try {
+                final String output = request(urlStr, id,exerlevel);
+                result=output;
+                JSONObject json = new JSONObject(output);
+                exercount = json.getInt("exercount");
+                exerlevel = json.getInt("exerlevel");
+
+            }catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        private String request(String urlStr, String id,int exercount) throws IOException {
+            StringBuilder output = new StringBuilder();
+            long now = System.currentTimeMillis();
+
+            try {
+                URL url = new URL(urlStr);
+
+                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                if(conn != null) {
+                    String json = "";
+
+                    // build jsonObject
+                    JSONObject jsonObject = new JSONObject();
+
+                    jsonObject.put("id", id);
+                    // convert JSONObject to JSON to String
+                    json = jsonObject.toString();
+                    conn.setConnectTimeout(1000);
+                    conn.setRequestMethod("POST");
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
+                    OutputStream os = conn.getOutputStream();
+                    os.write(json.getBytes("euc-kr")); // 출력 스트림에 출력.
+                    os.flush(); // 출력 스트림을 플러시(비운다)하고 버퍼링 된 모든 출력 바이트를 강제 실행.
+                    os.close();
+
+                    int resCode = conn.getResponseCode();
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                    String line = null;
+                    while(true) {
+                        line = reader.readLine();
+                        if (line == null) {
+                            break;
+                        }
+                        output.append(line + "\n");
+                    }
+                    reader.close();
+                    conn.disconnect();
+                }
+            } catch (Exception e) {
+                Log.e("SampleHTTP", "Exception in processing response.", e);
+            }
+            return output.toString();
+        }
+        public String getResult() {
+            return result;
+        }
+    }
 
     public RelativeLayout aerobicRestore(int level){ // 유산소
         RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
@@ -3193,111 +3288,6 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
         return imagestack;
     }
 
-
-
-    class ConnectThread extends Thread {
-        String urlStr;
-        String id;
-        String workoutday;
-        String running_time = "68";
-        String weight_time = "40";
-        String arm = "3";
-        String back = "5";
-        String shoulder = "2";
-        String chest = "8";
-        String leg = "5";
-        String sixpack = "4";
-        String eat_calories = "493";
-        String all_eat_calories = "1200";
-        String spent_calories = "395";
-        String all_spent_calories = "694";
-        String weight = "74";
-
-        Handler handler = new Handler();
-
-        public ConnectThread(String inStr, String id) {
-            this.urlStr = inStr;
-            this.id = id;
-        }
-
-        public void run() {
-            try {
-                final String output = request(urlStr, id);
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        //Toast.makeText(getApplicationContext(), "등록 성공!", Toast.LENGTH_LONG).show();
-
-                    }
-                });
-            }catch(Exception e) {
-                e.printStackTrace();
-            }
-        }
-        private String request(String urlStr, String id) throws IOException {
-            StringBuilder output = new StringBuilder();
-            long now = System.currentTimeMillis();
-
-            try {
-                URL url = new URL(urlStr);
-                //workoutday=new Date(now);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-                workoutday=simpleDateFormat.format(new Date(System.currentTimeMillis()));
-
-                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                if(conn != null) {
-                    String json = "";
-
-                    // build jsonObject
-                    JSONObject jsonObject = new JSONObject();
-
-                    jsonObject.put("id", id);
-                    jsonObject.put("workoutday", workoutday);
-                    jsonObject.put("running_time", running_time);
-                    jsonObject.put("weight_time", weight_time);
-                    jsonObject.put("arm", arm);
-                    jsonObject.put("back", back);
-                    jsonObject.put("shoulder", shoulder);
-                    jsonObject.put("chest", chest);
-                    jsonObject.put("leg", leg);
-                    jsonObject.put("sixpack", sixpack);
-                    jsonObject.put("eat_calories", eat_calories);
-                    jsonObject.put("all_eat_calories", all_eat_calories);
-                    jsonObject.put("spent_calories", spent_calories);
-                    jsonObject.put("all_spent_calories", all_spent_calories);
-                    jsonObject.put("weight", weight);
-                    // convert JSONObject to JSON to String
-                    json = jsonObject.toString();
-                    conn.setConnectTimeout(1000);
-                    conn.setRequestMethod("POST");
-                    conn.setDoInput(true);
-                    conn.setDoOutput(true);
-                    OutputStream os = conn.getOutputStream();
-                    os.write(json.getBytes("euc-kr")); // 출력 스트림에 출력.
-                    os.flush(); // 출력 스트림을 플러시(비운다)하고 버퍼링 된 모든 출력 바이트를 강제 실행.
-                    os.close();
-
-                    int resCode = conn.getResponseCode();
-
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-                    String line = null;
-                    while(true) {
-                        line = reader.readLine();
-                        if (line == null) {
-                            break;
-                        }
-                        output.append(line + "\n");
-                    }
-                    reader.close();
-                    conn.disconnect();
-                }
-            } catch (Exception e) {
-                Log.e("SampleHTTP", "Exception in processing response.", e);
-            }
-            return output.toString();
-        }
-    }
     @Override
     public void onBack() {
         Log.e("Other", "onBack()");

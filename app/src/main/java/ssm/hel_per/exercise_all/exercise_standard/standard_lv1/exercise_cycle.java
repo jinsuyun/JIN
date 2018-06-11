@@ -44,7 +44,7 @@ public class exercise_cycle extends AppCompatActivity {
     Animation shakeAnimation;
     Animation dropAnimation;
     Animation flowAnimation;
-
+    //public static String urlStr = "http://192.168.0.58:3000/daily";
     public static String urlStr = "http://13.209.40.50:3000/daily";
     @Override
     protected void onCreate(Bundle savedInstanceState) {

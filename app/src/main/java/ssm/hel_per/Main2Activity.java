@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import com.github.lzyzsd.circleprogress.ArcProgress;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -67,53 +68,34 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     String bt;
     int exercount = 0 ;
     int exerlevel = 1;
+
+    public static String urlStr = "http://13.209.40.50:3000/appuser";
+//    public static String urlStr = "http://192.168.0.58:3000/appuser";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         Intent it1 = getIntent();
         alert = (int)it1.getSerializableExtra("alert");
         id2=it1.getStringExtra("id");
 
-
-//        if(alert==1234) {
-//            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-//            builder1.setMessage("안녕하세요 저희 앱의 신규회원이 되신 것을 축하드립니다. 저희 앱의 서비스를 받으시려면 설문조사를 통해 고객의 신체유형을 파악하는 과정을 거쳐야합니다.")
-//                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            AlertDialog.Builder builder2 = new AlertDialog.Builder(Main2Activity.this);
-//                            builder2.setTitle("설문조사를 하시겠습니까?");
-//                            builder2.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//
-//                                }
-//                            });
-//                            builder2.setNegativeButton("예", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    Intent it = new Intent(Main2Activity.this,Survey.class);
-//                                    it.putExtra("id", id);
-//                                    startActivity(it);
-//                                }
-//                            });
-//                            builder2.show();
-//                        }
-//                    }).setCancelable(false).show();
-//        }else
-            if(alert ==1){
+        if(alert ==1){
             bt=getIntent().getStringExtra("bodytype");
             age = (int)it1.getIntExtra("age", 0);
             weight =it1.getDoubleExtra("weight",0);
             height =it1.getDoubleExtra("height",0);
             sex =it1.getStringExtra("sex");
-            exercount=it1.getIntExtra("exercount",0);
-            exerlevel=it1.getIntExtra("exerlevel",1);
+//            exercount=it1.getIntExtra("exercount",0);
+//            exerlevel=it1.getIntExtra("exerlevel",1);
             String human="";
 
             if(sex.equals("M"))
@@ -130,8 +112,23 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             textView_weight.setText(String.valueOf(weight));
             textView_height.setText(""+height);
             textView_sex.setText(human);
+            ConnectThread thread = new ConnectThread(urlStr, id2, exercount);
+            thread.start();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            String result=thread.getResult();
 
-
+            try {
+                JSONArray ary = new JSONArray(result);
+                JSONObject jsonObject = ary.getJSONObject(0);
+                exercount = jsonObject.getInt("exercount");
+                exerlevel = jsonObject.getInt("exerlevel");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             ImageView iv = findViewById(R.id.information);
 
             if(bt!= null) {
@@ -156,18 +153,19 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             }
 
             targetperiod=getIntent().getIntExtra("targetperiod",0);
-           // count=getIntent().getIntExtra("count",0);
+            // count=getIntent().getIntExtra("count",0);
             final ArcProgress arcProgress = findViewById(R.id.arc_progress);
             double successPer = (double)exercount/(double)targetperiod*100;
+            if(successPer >= 100) {
+                exerlevel = 2;
+                successPer=0;
+            }
             if(exercount == 0 ){
                 arcProgress.setProgress(0);
             }
             else arcProgress.setProgress((int) successPer);
 
-            if(successPer >= 100) {
-                exerlevel = 2;
-                successPer=0;
-            }
+
             Intent in2 = new Intent(Main2Activity.this,exercise.class);
             in2.putExtra("exerlevel",exerlevel);
 
@@ -237,6 +235,10 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
             manager.beginTransaction().replace(R.id.content_main,new myState()).commit();
         } else if (id == R.id.nav_exercise) {
+            Fragment fragment = new Fragment();
+            Bundle bundle = new Bundle(1);
+            bundle.putInt("exerlevel", exerlevel);
+            fragment.setArguments(bundle);
             manager.beginTransaction().replace(R.id.content_main,new exercise()).commit();
         } else if (id == R.id.nav_food_manage) {
             Intent it3_myState = new Intent(Main2Activity.this,foodManage.class);
@@ -327,6 +329,82 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                     android.os.Process.killProcess(android.os.Process.myPid());
                 }
             }
+        }
+    }
+
+    class ConnectThread extends Thread {
+        String urlStr;
+        String id;
+        int exercount;
+        String result;
+
+
+        public ConnectThread(String inStr, String id,int exercount) {
+            this.urlStr = inStr;
+            this.id = id;
+            this.exercount=exercount;
+        }
+
+        public void run() {
+            try {
+                final String output = request(urlStr, id,exerlevel);
+                result=output;
+                JSONObject json = new JSONObject(output);
+                exercount = json.getInt("exercount");
+                exerlevel = json.getInt("exerlevel");
+
+            }catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        private String request(String urlStr, String id,int exercount) throws IOException {
+            StringBuilder output = new StringBuilder();
+            long now = System.currentTimeMillis();
+
+            try {
+                URL url = new URL(urlStr);
+
+                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                if(conn != null) {
+                    String json = "";
+
+                    // build jsonObject
+                    JSONObject jsonObject = new JSONObject();
+
+                    jsonObject.put("id", id);
+                    // convert JSONObject to JSON to String
+                    json = jsonObject.toString();
+                    conn.setConnectTimeout(1000);
+                    conn.setRequestMethod("POST");
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
+                    OutputStream os = conn.getOutputStream();
+                    os.write(json.getBytes("euc-kr")); // 출력 스트림에 출력.
+                    os.flush(); // 출력 스트림을 플러시(비운다)하고 버퍼링 된 모든 출력 바이트를 강제 실행.
+                    os.close();
+
+                    int resCode = conn.getResponseCode();
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                    String line = null;
+                    while(true) {
+                        line = reader.readLine();
+                        if (line == null) {
+                            break;
+                        }
+                        output.append(line + "\n");
+                    }
+                    reader.close();
+                    conn.disconnect();
+                }
+            } catch (Exception e) {
+                Log.e("SampleHTTP", "Exception in processing response.", e);
+            }
+            return output.toString();
+        }
+        public String getResult() {
+            return result;
         }
     }
 
