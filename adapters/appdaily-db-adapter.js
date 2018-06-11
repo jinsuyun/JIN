@@ -31,7 +31,7 @@ adapter.dailySearch = function(id, cb) {
             cb(resultCode, []);
         } else { // db연결성공
             connection.query(dailySearchQuery, [id], function(err, rows) {
-                if (Object.keys(rows).length < 0) { // daily x
+                if (!rows[0]) { // daily x
                     console.log(err);
                     resultCode = dbResult.Fail;
                     connection.release();
