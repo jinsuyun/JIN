@@ -19,7 +19,6 @@ var dailyWriteQuery = 'UPDATE daily SET running_time=?, weight_time=?, arm=?, ba
 
 adapter.dailySearch = function(id, cb) {
     var resultCode = dbResult.Fail;
-    var response;
 
     pool.getConnection(function(err, connection) {
         if (err) { // db연결실패
@@ -37,7 +36,7 @@ adapter.dailySearch = function(id, cb) {
                 } else { // daily o
                     resultCode = dbResult.OK;
                     connection.release();
-                    cb(resultCode, Object.assign(rows, [{"success":true}]));
+                    cb(resultCode, rows);
                 }
             });
         }
