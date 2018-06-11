@@ -16,7 +16,7 @@ var dailySearchQuery = 'SELECT * FROM daily WHERE id=? ORDER BY workoutday DESC 
 var dailyDupSearchQuery = 'SELECT workoutday FROM daily WHERE id=? AND workoutday=?'; // 유저 daily query
 var dailyNewWriteQuery = 'INSERT INTO daily VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'; // id 없는경우 새로등록
 var dailyWriteQuery = 'UPDATE daily SET running_time=running_time+?, weight_time=weight_time+?, arm=arm+?, back=back+?, shoulder=shoulder+?, chest=chest+?, leg=leg+?, sixpack=sixpack+?, spent_calories=spent_calories+?, all_spent_calories=?, weight=?, objective=? WHERE id=? AND workoutday=?'; // id 있는경우 update로 누적
-var countWriteQuery = 'UPDATE appuser SET exercount=?+?+?+?+?+? WHERE id=?';
+var countWriteQuery = 'UPDATE appuser SET exercount=exercount+1 WHERE id=?';
 
 adapter.dailySearch = function(id, cb) {
     var resultCode = dbResult.Fail;
@@ -81,7 +81,7 @@ adapter.dailyWrite = function(daily, cb) {
                             }
                         });
                     }
-                    connection.query(countWriteQuery, [daily.arm, daily.back, daily.shoulder, daily.chest, daily.leg, daily.sixpack, daily.id], function(err) {
+                    connection.query(countWriteQuery, [daily.id], function(err) {
                         if (err) {
                             console.log(err)
                             resultCode = dbResult.Fail;
