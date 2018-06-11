@@ -27,6 +27,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -45,6 +47,8 @@ public class SignInActivity extends AppCompatActivity {
     int targetperiod;
     int worklevel;
     int workperiod;
+    int exer_count = 0;
+    int exer_level = 1;
     String bodytype;
     ImageView sback;
     TextView signinButton;
@@ -115,6 +119,7 @@ public class SignInActivity extends AppCompatActivity {
         String urlStr;
         String id;
         String password;
+        String workoutday;
 
         public ConnectThread(String inStr, String id, String password) {
             this.urlStr = inStr;
@@ -157,6 +162,8 @@ public class SignInActivity extends AppCompatActivity {
                                     worklevel = obj.getInt("worklevel");//일주일에 얼마나 운동하는지
                                     workperiod = obj.getInt("workperiod");//그동안 운동을 얼마나 해봤는지
                                     bodytype = obj.getString("bodytype");
+                                    exer_count = obj.getInt("exercount");
+                                    exer_level = obj.getInt("exerlevel");
 
                                     Intent it = new Intent(SignInActivity.this, Main2Activity.class);
                                     it.putExtra("id", id);
@@ -171,7 +178,8 @@ public class SignInActivity extends AppCompatActivity {
                                     it.putExtra("bodytype",bodytype);
                                     it.putExtra("weight",weight);
                                     it.putExtra("height",height);
-
+                                    it.putExtra("exerlevel",exer_level);
+                                    it.putExtra("exercount",exer_count);
                                     startActivity(it);
                                     finish();
                                 }
@@ -192,14 +200,15 @@ public class SignInActivity extends AppCompatActivity {
             StringBuilder output = new StringBuilder();
             try {
                 URL url = new URL(urlStr);
-
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                workoutday = simpleDateFormat.format(new Date(System.currentTimeMillis()));
                 HttpURLConnection conn = (HttpURLConnection)url.openConnection();
                 if(conn != null) {
                     String json = "";
 
                     // build jsonObject
                     JSONObject jsonObject = new JSONObject();
-
+                    jsonObject.put("workoutday", workoutday);
                     jsonObject.put("id", id);
                     jsonObject.put("password", password);
 

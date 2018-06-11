@@ -74,64 +74,58 @@ public class Re_Survey extends AppCompatActivity {
         rgwl3 = (RadioButton) findViewById(R.id.normal_exer_re);
         rgwl4 = (RadioButton) findViewById(R.id.many_exer_re);
         rgwl5 = (RadioButton) findViewById(R.id.heavy_exer_re);
-        sback = (ImageView)findViewById(R.id.sback_re);
-
-        sback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent it = new Intent(Re_Survey.this, Main2Activity.class);
-                startActivity(it);
-            }
-        });
 
         createbutton = (TextView) findViewById(R.id.create_re);
         createbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String urlStr = url;
-                int age = Integer.parseInt(etage.getText().toString());
-                double height = Float.parseFloat(etheight.getText().toString());
-                double weight = Float.parseFloat(etweight.getText().toString());
-                String select_sex = "";
-                double targetweight = Float.parseFloat(ettw.getText().toString());
-                int targetperiod = Integer.parseInt(ettp.getText().toString());
-                int workperiod;
-                int worklevel;
-
-
-                if(rgm.isChecked()){
-                    select_sex="M";
-                } else if(rgw.isChecked())
-                    select_sex="W";
-
-                if(rgwp3.isChecked()) {
-                    workperiod = 3;
-                } else if (rgwp2.isChecked()) {
-                    workperiod = 2;
-                } else {
-                    workperiod = 1;
+                if(etage.getText().toString().equals("") || etheight.getText().toString().equals("") || etweight.getText().toString().equals("")||
+                        ettp.getText().toString().equals("") || ettw.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(), "빈 칸을 채워주세요.", Toast.LENGTH_LONG).show();
                 }
+                else {
+                    String urlStr = url;
+                    int age = Integer.parseInt(etage.getText().toString());
+                    double height = Float.parseFloat(etheight.getText().toString());
+                    double weight = Float.parseFloat(etweight.getText().toString());
+                    String select_sex = "";
+                    double targetweight = Float.parseFloat(ettw.getText().toString());
+                    int targetperiod = Integer.parseInt(ettp.getText().toString());
+                    int workperiod;
+                    int worklevel;
 
-                if(rgwl5.isChecked()) {
-                    worklevel = 5;
-                } else if(rgwl4.isChecked()) {
-                    worklevel = 4;
-                } else if(rgwl3.isChecked()) {
-                    worklevel = 3;
-                } else if(rgwl2.isChecked()) {
-                    worklevel = 2;
-                } else {
-                    worklevel = 1;
+
+                    if (rgm.isChecked()) {
+                        select_sex = "M";
+                    } else if (rgw.isChecked())
+                        select_sex = "W";
+
+                    if (rgwp3.isChecked()) {
+                        workperiod = 3;
+                    } else if (rgwp2.isChecked()) {
+                        workperiod = 2;
+                    } else {
+                        workperiod = 1;
+                    }
+
+                    if (rgwl5.isChecked()) {
+                        worklevel = 5;
+                    } else if (rgwl4.isChecked()) {
+                        worklevel = 4;
+                    } else if (rgwl3.isChecked()) {
+                        worklevel = 3;
+                    } else if (rgwl2.isChecked()) {
+                        worklevel = 2;
+                    } else {
+                        worklevel = 1;
+                    }
+
+                    ConnectThread thread = new ConnectThread(urlStr, id, name, select_sex, age, weight, height, targetweight, targetperiod, workperiod, worklevel);
+                    thread.start();
+
+                    //Intent it = new Intent(Survey.this, Main2Activity.class);
+                    //startActivity(it);
                 }
-
-                ConnectThread thread = new ConnectThread(urlStr, id, name, select_sex, age, weight, height, targetweight, targetperiod, workperiod, worklevel);
-                thread.start();
-
-                //Intent it = new Intent(Survey.this, Main2Activity.class);
-                //startActivity(it);
-
             }
         });
 
@@ -179,7 +173,7 @@ public class Re_Survey extends AppCompatActivity {
                             String bodytype = obj.getString("bodytype");
                            // String bodytype = getIntent().getStringExtra("bodytype");
                              //if(signupCheck) {
-                                Toast.makeText(getApplicationContext(), "설문조사 완료!.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "정보수정 완료!.", Toast.LENGTH_LONG).show();
                                 Intent it = new Intent(Re_Survey.this, Main2Activity.class);
                                 it.putExtra("alert", 1);
                                 it.putExtra("id", id);

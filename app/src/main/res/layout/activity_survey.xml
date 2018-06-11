@@ -39,7 +39,7 @@
                     android:background="#0000"
                     android:freezesText="false"
                     android:hint="나이 * "
-                    android:inputType="text"
+                    android:inputType="number|numberSigned"
                     android:padding="16dp"
                     android:textColor="#ADCCE2"
                     android:textColorHint="#ADCCE2"
@@ -62,7 +62,7 @@
                     android:background="#0000"
                     android:freezesText="false"
                     android:hint="키 * "
-                    android:inputType="text"
+                    android:inputType="number|numberSigned|numberDecimal"
                     android:padding="16dp"
                     android:textColor="#ADCCE2"
                     android:textColorHint="#ADCCE2"
@@ -84,7 +84,7 @@
                     android:layout_marginRight="35dp"
                     android:background="#0000"
                     android:hint="몸무게 *"
-                    android:inputType="text"
+                    android:inputType="number|numberSigned|numberDecimal"
                     android:padding="16dp"
                     android:textColor="#ADCCE2"
                     android:textColorHint="#ADCCE2"
@@ -98,7 +98,7 @@
                     android:layout_marginRight="40dp"
                     android:background="#ADCCE2" />
 
-                <customfonts.MyEditText
+                <customfonts.MyTextView
                     android:id="@+id/sex_font"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -106,35 +106,34 @@
                     android:layout_marginRight="35dp"
                     android:background="#0000"
                     android:hint="성별 *"
-                    android:inputType="textPassword"
                     android:maxLength="12"
                     android:padding="16dp"
                     android:textColor="#ADCCE2"
                     android:textColorHint="#ADCCE2"
-                    android:textSize="14dp"></customfonts.MyEditText>
+                    android:textSize="14dp"></customfonts.MyTextView>
                 <RadioGroup
                     android:id="@+id/sex"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                <RadioButton
-                    android:id="@+id/sex_man"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="남자" />
+                    <RadioButton
+                        android:id="@+id/sex_man"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="남자" />
 
-                <RadioButton
-                    android:id="@+id/sex_woman"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_weight="1"
-                    android:text="여자" /> />
+                    <RadioButton
+                        android:id="@+id/sex_woman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_weight="1"
+                        android:text="여자" /> />
 
 
                 </RadioGroup>
@@ -155,7 +154,7 @@
                     android:layout_marginRight="35dp"
                     android:background="#0000"
                     android:hint="목표체중 *"
-                    android:inputType="text"
+                    android:inputType="number|numberSigned|numberDecimal"
                     android:maxLength="12"
                     android:padding="16dp"
                     android:textColor="#ADCCE2"
@@ -178,7 +177,7 @@
                     android:layout_marginRight="35dp"
                     android:background="#0000"
                     android:hint="목표기간 *"
-                    android:inputType="text"
+                    android:inputType="number|numberSigned|numberDecimal"
                     android:maxLength="12"
                     android:padding="16dp"
                     android:textColor="#ADCCE2"
@@ -201,7 +200,7 @@
                     android:layout_marginRight="35dp"
                     android:background="#0000"
                     android:hint="골격근량"
-                    android:inputType="textPassword"
+                    android:inputType="number|numberSigned|numberDecimal"
                     android:maxLength="12"
                     android:padding="16dp"
                     android:textColor="#ADCCE2"
@@ -224,7 +223,7 @@
                     android:layout_marginRight="35dp"
                     android:background="#0000"
                     android:hint="체지방량"
-                    android:inputType="textPassword"
+                    android:inputType="number|numberSigned|numberDecimal"
                     android:maxLength="12"
                     android:padding="16dp"
                     android:textColor="#ADCCE2"
@@ -239,7 +238,7 @@
                     android:layout_marginRight="40dp"
                     android:background="#ADCCE2" />
 
-                <customfonts.MyEditText
+                <customfonts.MyTextView
                     android:id="@+id/whether"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -247,7 +246,6 @@
                     android:layout_marginRight="35dp"
                     android:background="#0000"
                     android:hint="술,담배 여부"
-                    android:inputType="textPassword"
                     android:maxLength="12"
                     android:padding="16dp"
                     android:textAppearance="@style/TextAppearance.AppCompat"
@@ -293,7 +291,7 @@
                         android:layout_weight="1"
                         android:background="#ADCCE2" />
 
-                    <customfonts.MyEditText
+                    <customfonts.MyTextView
                         android:id="@+id/exercise_set"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -306,7 +304,7 @@
                         android:padding="16dp"
                         android:textColor="#ADCCE2"
                         android:textColorHint="#ADCCE2"
-                        android:textSize="14dp"></customfonts.MyEditText>
+                        android:textSize="14dp"></customfonts.MyTextView>
 
                     <RadioGroup
                         android:id="@+id/exer_state"
@@ -354,7 +352,7 @@
                         android:layout_weight="1"
                         android:background="#ADCCE2" />
 
-                    <customfonts.MyEditText
+                    <customfonts.MyTextView
                         android:id="@+id/exercise_career"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -454,14 +452,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/sback"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="10dp"
-                android:src="@drawable/left" />
 
         </LinearLayout>
 

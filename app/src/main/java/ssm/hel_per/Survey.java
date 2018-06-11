@@ -177,7 +177,7 @@ public class Survey extends AppCompatActivity {
                             signupCheck = obj.getBoolean("success");
                             String bodytype = obj.getString("bodytype");
                             if(signupCheck) {
-                                Toast.makeText(getApplicationContext(), "설문조사 완료!.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "정보입력 완료!.", Toast.LENGTH_LONG).show();
                                 Intent it = new Intent(Survey.this, Main2Activity.class);
                                 it.putExtra("alert", 1);
                                 it.putExtra("id", id);

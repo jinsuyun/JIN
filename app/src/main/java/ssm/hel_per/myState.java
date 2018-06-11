@@ -59,10 +59,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static android.support.constraint.Constraints.TAG;
-import static com.facebook.FacebookSdk.getApplicationContext;
-import static com.github.mikephil.charting.components.Legend.LegendPosition.RIGHT_OF_CHART_CENTER;
-
 public class myState extends Fragment implements Main2Activity.OnBackPressedListener {
     View v;
 
@@ -132,7 +128,7 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
         }
         String test = thread.getResult();
         if(!datacheck){
-            Toast.makeText(getApplicationContext(), "운동 정보가 없습니다!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "운동 정보가 없습니다.", Toast.LENGTH_LONG).show();
 
         } else {
 

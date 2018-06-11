@@ -18,7 +18,7 @@
             android:title="체형 분석" />
         <item
             android:id="@+id/nav_exercise"
-            android:icon="@drawable/run"
+            android:icon="@drawable/fitness"
             android:title="운동하기" />
         <item
             android:id="@+id/nav_food_manage"
@@ -26,7 +26,7 @@
             android:title="식단 관리" />
         <item
             android:id="@+id/nav_re_survey"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/create"
             android:title="내 정보 수정" />
     </group>
 </menu>

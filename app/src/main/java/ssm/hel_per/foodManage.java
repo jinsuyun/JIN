@@ -169,7 +169,7 @@ public class foodManage  extends Fragment implements Main2Activity.OnBackPressed
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getActivity().getBaseContext(), eat_calories + " kcal가 등록되었습니다..", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getBaseContext(), "칼로리가 등록되었습니다..", Toast.LENGTH_LONG).show();
                     }
                 });
             }catch(Exception e) {

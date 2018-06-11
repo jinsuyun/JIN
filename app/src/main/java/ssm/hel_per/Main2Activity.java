@@ -65,7 +65,8 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     int workperiod;
     String bodytype;
     String bt;
-
+    int exercount = 0 ;
+    int exerlevel = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +112,8 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             weight =it1.getDoubleExtra("weight",0);
             height =it1.getDoubleExtra("height",0);
             sex =it1.getStringExtra("sex");
+            exercount=it1.getIntExtra("exercount",0);
+            exerlevel=it1.getIntExtra("exerlevel",1);
             String human="";
 
             if(sex.equals("M"))
@@ -155,9 +158,16 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             targetperiod=getIntent().getIntExtra("targetperiod",0);
            // count=getIntent().getIntExtra("count",0);
             final ArcProgress arcProgress = findViewById(R.id.arc_progress);
-            arcProgress.setProgress(1);
-                    //count/targetperiod*100);
+            double successPer = exercount/targetperiod*100;
+            if(exercount == 0 ){
+                arcProgress.setProgress(0);
+            }
+            else arcProgress.setProgress((int) successPer);
 
+            if(successPer == 100) exerlevel = 2;
+
+            Intent in2 = new Intent(Main2Activity.this,exercise.class);
+            in2.putExtra("exerlevel",exerlevel);
 
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
@@ -258,6 +268,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             it.putExtra("age",age);*/
             //Log.d(TAG,"asdf"+id+sex+age);
             startActivity(it);
+            finish();
         } else if (id == R.id.nav_my_home) {
             manager.beginTransaction().replace(R.id.content_main,new home()).commit(); // 홈화면
         }
