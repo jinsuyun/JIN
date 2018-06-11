@@ -74,8 +74,10 @@ adapter.dailyWrite = function(daily, cb) {
                             }
                         });
                     } else {
-                        connection.query(dailyWriteQuery, [daily.running_time, daily.weight_time, daily.arm, daily.back, daily.shoulder, daily.chest, daily.leg,
-                            daily.sixpack, daily.spent_calories, daily.all_spent_calories, daily.weight, daily.objective, daily.id, daily.workoutday], function(err) {
+                        connection.query(dailyWriteQuery, [rows[0].running_time + daily.running_time, rows[0].weight_time + daily.weight_time,
+                            rows[0].arm + daily.arm, rows[0].back + daily.back, rows[0].shoulder + daily.shoulder, rows[0].chest + daily.chest,
+                            rows[0].leg + daily.leg, rows[0].sixpack + daily.sixpack, rows[0].spent_calories + daily.spent_calories,
+                            daily.all_spent_calories, daily.weight, daily.objective, daily.id, daily.workoutday], function(err) {
                             if (err) {
                                 console.log(err)
                                 resultCode = dbResult.Fail;
