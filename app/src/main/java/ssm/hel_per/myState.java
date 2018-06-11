@@ -134,7 +134,7 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
         try {
             JSONArray ary = new JSONArray(test);
 
-            for (int i = 0; i < ary.length(); i++) {
+            for (int i = 1; i < ary.length()+1; i++) {
                 JSONObject obj = ary.getJSONObject(i);
                 if ((obj.getString("workoutday")) != null) {
                     workoutday = obj.getString("workoutday");
