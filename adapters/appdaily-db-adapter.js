@@ -17,6 +17,8 @@ var dailyDupSearchQuery = 'SELECT workoutday FROM daily WHERE id=? AND workoutda
 var dailyNewWriteQuery = 'INSERT INTO daily VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'; // id 없는경우 새로등록
 var dailyWriteQuery = 'UPDATE daily SET running_time=running_time+?, weight_time=weight_time+?, arm=arm+?, back=back+?, shoulder=shoulder+?, chest=chest+?, leg=leg+?, sixpack=sixpack+?, spent_calories=spent_calories+?, all_spent_calories=?, weight=?, objective=? WHERE id=? AND workoutday=?'; // id 있는경우 update로 누적
 var countWriteQuery = 'UPDATE appuser SET exercount=exercount+1 WHERE id=?';
+var userSearchQuery = 'SELECT exercount, targetperiod FROM appuser WHERE id=?';
+var levelWriteQuery = 'UPDATE appuser SET exercount=?, exerlevel=exerlevel+1 WHERE id=?';
 
 adapter.dailySearch = function(id, cb) {
     var resultCode = dbResult.Fail;
@@ -85,14 +87,36 @@ adapter.dailyWrite = function(daily, cb) {
                         if (err) {
                             console.log(err)
                             resultCode = dbResult.Fail;
-                            connection.release();
-                            cb(resultCode);
+                            // connection.release();
+                            // cb(resultCode);
                         } else {
                             console.log("count success");
                             resultCode = dbResult.OK;
-                            connection.release();
-                            cb(resultCode);
+                            // connection.release();
+                            // cb(resultCode);
                         }
+                        connection.query(userSearchQuery, [daily.id], function(err, rows) {
+                            if (rows[0].exercount / rows[0].targetperiod < 1) {
+                                resultCode = dbResult.OK;
+                                connection.release();
+                                cb(resultCode);
+                            } else { // daily o
+                                resultCode = dbResult.OK;
+                                connection.query(levelWriteQuery, [0, daily.id], function(err) {
+                                    if (err) {
+                                        console.log(err)
+                                        resultCode = dbResult.Fail;
+                                        connection.release();
+                                        cb(resultCode);
+                                    } else {
+                                        console.log("level up success");
+                                        resultCode = dbResult.OK;
+                                        connection.release();
+                                        cb(resultCode);
+                                    }
+                                });
+                            }
+                        });
                     });
                 } else { // query가 오지 않는 경우
                     console.log(err);
