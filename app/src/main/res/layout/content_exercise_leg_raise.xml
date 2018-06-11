@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_leg_raise"
         android:layout_toEndOf="@+id/leg_raise"
-        android:text="다음" />
+        android:text="완료" />
 
     <TextView
         android:id="@+id/text_leg_raise"

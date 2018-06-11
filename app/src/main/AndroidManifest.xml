@@ -161,7 +161,7 @@
         <activity
             android:name=".exercise_all.exercise_weak.weak_lv2.exercise_plank"
             android:label="@string/title_activity_exercise_plank"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

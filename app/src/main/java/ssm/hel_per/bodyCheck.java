@@ -120,7 +120,9 @@ public class bodyCheck extends Fragment implements Main2Activity.OnBackPressedLi
                 + (double)(Math.round(bodyalgo.targetCal(weight, targetweight, targetperiod) * 0.3 * 100d) / 100d) + "kcal를 소모해야 하고, 식사는 하루 "
                 + (double)(Math.round(bodyalgo.eatCal(height, weight, age, sex, worklevel, targetweight, targetperiod) * 100d) / 100d) + "kcal 를 섭취해야 합니다..");
 
-        ConnectThread thread = new ConnectThread(urlStr, getActivity().getIntent().getStringExtra("id"), (double)(Math.round(bodyalgo.eatCal(height, weight, age, sex, worklevel, targetweight, targetperiod) * 100d) / 100d));
+        ConnectThread thread = new ConnectThread(urlStr, getActivity().getIntent().getStringExtra("id"),
+        (double)(Math.round(bodyalgo.eatCal(height, weight, age, sex, worklevel, targetweight, targetperiod) * 100d) / 100d),
+        (double)(Math.round(bodyalgo.targetCal(weight, targetweight, targetperiod) * 0.3 * 100d) / 100d));
         thread.start();
 
         return v;
@@ -132,11 +134,13 @@ public class bodyCheck extends Fragment implements Main2Activity.OnBackPressedLi
         String id;
         String workoutday;
         double all_eat_calories;
+        double all_spent_calories;
 
-        public ConnectThread(String inStr, String id, double all_eat_calories) {
+        public ConnectThread(String inStr, String id, double all_eat_calories, double all_spent_calories) {
             this.urlStr = inStr;
             this.id = id;
             this.all_eat_calories = all_eat_calories;
+            this.all_spent_calories=all_spent_calories;
 
         }
 
@@ -177,6 +181,7 @@ public class bodyCheck extends Fragment implements Main2Activity.OnBackPressedLi
                     jsonObject.put("id", id);
                     jsonObject.put("workoutday", workoutday);
                     jsonObject.put("all_eat_calories", all_eat_calories);
+                    jsonObject.put("all_spent_calories",all_spent_calories);
 
                     // convert JSONObject to JSON to String
                     json = jsonObject.toString();

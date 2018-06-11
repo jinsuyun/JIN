@@ -41,6 +41,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+import ssm.hel_per.exercise_all.exercise_obesity.obesity_lv1.exercise_jumprope;
+import ssm.hel_per.exercise_all.exercise_obesity.obesity_lv2.exercise_running3km;
+import ssm.hel_per.exercise_all.exercise_standard.standard_lv1.exercise_handstand_pushup;
+import ssm.hel_per.exercise_all.exercise_standard.standard_lv2.exercise_pullup;
+import ssm.hel_per.exercise_all.exercise_weak.weak_lv1.exercise_knee_pushup;
+import ssm.hel_per.exercise_all.exercise_weak.weak_lv2.exercise_wall_pushup;
+
 import static android.support.constraint.Constraints.TAG;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -49,10 +56,12 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
     View v;
     home mainFragment;
     Button button1,re_select;
+    Button exercisebtn;
     TextView countTxt;
     ImageView urltest,exer1,exer2,exer3,exer4,exer5;
     VideoView video;
     String bt;
+    Double weight;
     static final String VIDEO_URL = "https://ko.gl/youtube.php?download=aHR0cHM6Ly9yMi0tLXNuLWE1bWVrbmVsLmdvb2dsZXZpZGVvLmNvbS92aWRlb3BsYXliYWNrP2R1cj0zNC44MjkmZXhwaXJlPTE1MjgwNjA2Njkmc291cmNlPXlvdXR1YmUmbG10PTE0NzEwNTI1NTM5NDY3MzkmZWk9blFZVVctejBHTV9vLVFPV3VLckFCQSZpZD1vLUFIWUpuUWUxNUJXQjVnR1dtT19wVlFZYkFST2tacDVlelNnT1lKNkRFWjE0Jm1zPWF1JTJDcmR1Jm10PTE1MjgwMzg5NDkmbXY9bSZyYXRlYnlwYXNzPXllcyZpcGJpdHM9MCZmdmlwPTQmbW09MzElMkMyOSZzaWduYXR1cmU9NUJDQ0RBQkNERTc0NTU1Mzc1MkVFQjAyOUQ5QjM3MDZEMEI2MkYzOC4xMUJEQzhCRDYwOTcyQUE1NTIzRDA0QjQ1N0UwNDE3NjQwQkRDQ0JFJm1uPXNuLWE1bWVrbmVsJTJDc24tYTVtN2xubHomcmVxdWlyZXNzbD15ZXMma2V5PXl0NiZpcD0yMDkuMTQxLjM0LjIzOSZwbD0yMyZtaW1lPXZpZGVvJTJGbXA0JmluaXRjd25kYnBzPTY5NjI1MCZpdGFnPTIyJmM9V0VCJnNwYXJhbXM9ZHVyJTJDZWklMkNpZCUyQ2luaXRjd25kYnBzJTJDaXAlMkNpcGJpdHMlMkNpdGFnJTJDbG10JTJDbWltZSUyQ21tJTJDbW4lMkNtcyUyQ212JTJDcGwlMkNyYXRlYnlwYXNzJTJDcmVxdWlyZXNzbCUyQ3NvdXJjZSUyQ2V4cGlyZSZ0aXRsZT0lRUQlOTQlOEMlRUIlOUUlQUQlRUQlODElQUMrJUVDJTlBJUI0JUVCJThGJTk5KyZrZWVwYWxpdmU9eWVz&title=%ED%94%8C%EB%9E%AD%ED%81%AC%20%EC%9A%B4%EB%8F%99";
     public static String urlStr = "http://13.209.40.50:3000/daily"; // 웹
     RelativeLayout imagestack;
@@ -81,7 +90,9 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
         test=(int)(Math.random()*7);
         workperiod = getActivity().getIntent().getIntExtra("workperiod",0);
         id = getActivity().getIntent().getStringExtra("id");
+        weight=getActivity().getIntent().getDoubleExtra("weight",0);
         bt = getActivity().getIntent().getStringExtra("bodytype");
+        exercisebtn=(Button)v.findViewById(R.id.exercise);
         button1 = (Button)v.findViewById(R.id.part);
         R_image = (RelativeLayout)v.findViewById(R.id.imagestack);
 
@@ -108,6 +119,123 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
 
         builder = new AlertDialog.Builder(getActivity());
         countTxt = (TextView)v.findViewById(R.id.count);
+
+        exercisebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =null;
+                if (bt.equals("LW")) {
+                    if (workperiod == 1) {
+                        intent = new Intent(getActivity(), exercise_knee_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                    else {
+                        intent = new Intent(getActivity(), exercise_wall_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                }
+                else if (bt.equals("SW")) {
+                    if (workperiod == 1) {
+                        intent = new Intent(getActivity(), exercise_knee_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                    else {
+                        intent = new Intent(getActivity(), exercise_wall_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                }
+                else if (bt.equals("OB")) {
+                    if (workperiod == 1) {
+                        intent = new Intent(getActivity(), exercise_knee_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                    else {
+                        intent = new Intent(getActivity(), exercise_wall_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                        }
+                    }
+                else if (bt.equals("SF")) {
+                    if (workperiod == 1) {
+                        intent = new Intent(getActivity(), exercise_knee_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                    else {
+                        intent = new Intent(getActivity(), exercise_wall_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                }
+                else if (bt.equals("OF")) {
+                    if (workperiod == 1) {
+                        intent = new Intent(getActivity(), exercise_jumprope.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                    else {
+                        intent = new Intent(getActivity(), exercise_running3km.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                }
+                else if (bt.equals("LB")) {
+                    if (workperiod == 1) {
+                        intent = new Intent(getActivity(), exercise_knee_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                    else {
+                        intent = new Intent(getActivity(), exercise_wall_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                }
+                else if (bt.equals("SB")) {
+                    if (workperiod == 1) {
+                        intent = new Intent(getActivity(), exercise_handstand_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                    else {
+                        intent = new Intent(getActivity(), exercise_pullup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                }
+                else if (bt.equals("SS")) {
+                    if (workperiod == 1) {
+                        intent = new Intent(getActivity(), exercise_knee_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                    else {
+                        intent = new Intent(getActivity(), exercise_wall_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                }
+                else if (bt.equals("OS")) {
+                    if (workperiod == 1) {
+                        intent = new Intent(getActivity(), exercise_knee_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                    else {
+                        intent = new Intent(getActivity(), exercise_wall_pushup.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("weight",weight);
+                    }
+                }
+                startActivity(intent);
+            }
+        });
+
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

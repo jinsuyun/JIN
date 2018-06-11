@@ -45,6 +45,8 @@ public class SignInActivity extends AppCompatActivity {
     int targetperiod;
     int worklevel;
     int workperiod;
+    int exercount;
+    int exerlevel;
     String bodytype;
     ImageView sback;
     TextView signinButton;
@@ -157,6 +159,8 @@ public class SignInActivity extends AppCompatActivity {
                                     worklevel = obj.getInt("worklevel");//일주일에 얼마나 운동하는지
                                     workperiod = obj.getInt("workperiod");//그동안 운동을 얼마나 해봤는지
                                     bodytype = obj.getString("bodytype");
+                                    exercount=obj.getInt("exercount");
+                                    exerlevel=obj.getInt("exerlevel");
 
                                     Intent it = new Intent(SignInActivity.this, Main2Activity.class);
                                     it.putExtra("id", id);
@@ -171,6 +175,8 @@ public class SignInActivity extends AppCompatActivity {
                                     it.putExtra("bodytype",bodytype);
                                     it.putExtra("weight",weight);
                                     it.putExtra("height",height);
+                                    it.putExtra("exercount",exercount);
+                                    it.putExtra("exerlevel",exerlevel);
 
                                     startActivity(it);
                                     finish();
