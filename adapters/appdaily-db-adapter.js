@@ -55,7 +55,6 @@ adapter.dailyWrite = function(daily, cb) {
         } else {
             connection.query(dailyDupSearchQuery, [daily.id, daily.workoutday], function(err, rows) {
                 if (!err) { // query가 오는 경우
-                    console.log(rows);
                     if(!rows[0]) { // 중복 id x
                         console.log('not duplicated id');
                         connection.query(dailyNewWriteQuery, [daily.id, daily.workoutday, daily.running_time,
@@ -74,9 +73,9 @@ adapter.dailyWrite = function(daily, cb) {
                             }
                         });
                     } else {
-                        connection.query(dailyWriteQuery, [rows[0].running_time + daily.running_time, rows[0].weight_time + daily.weight_time,
-                            rows[0].arm + daily.arm, rows[0].back + daily.back, rows[0].shoulder + daily.shoulder, rows[0].chest + daily.chest,
-                            rows[0].leg + daily.leg, rows[0].sixpack + daily.sixpack, rows[0].spent_calories + daily.spent_calories,
+                        connection.query(dailyWriteQuery, [parseInt(rows[0].running_time) + daily.running_time, parseInt(rows[0].weight_time) + daily.weight_time,
+                            parseInt(rows[0].arm) + daily.arm, parseInt(rows[0].back) + daily.back, parseInt(rows[0].shoulder) + daily.shoulder, parseInt(rows[0].chest) + daily.chest,
+                            parseInt(rows[0].leg) + daily.leg, parseInt(rows[0].sixpack) + daily.sixpack, parseInt(rows[0].spent_calories) + daily.spent_calories,
                             daily.all_spent_calories, daily.weight, daily.objective, daily.id, daily.workoutday], function(err) {
                             if (err) {
                                 console.log(err)
