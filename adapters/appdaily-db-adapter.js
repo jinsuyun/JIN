@@ -12,7 +12,7 @@ var dbResult = require('../routes/result');
 var pool = mysql.createPool(dbConfig);
 var adapter = {};
 
-var dailySearchQuery = 'SELECT * FROM daily WHERE id=? ORDER BY workoutday DESC'; // id/pw를 이용하여 유저 정보 search
+var dailySearchQuery = 'SELECT * FROM daily WHERE id=? ORDER BY workoutday DESC limit 7'; // id/pw를 이용하여 유저 정보 search
 var dailyDupSearchQuery = 'SELECT workoutday FROM daily WHERE id=? AND workoutday=?'; // 유저 daily query
 var dailyNewWriteQuery = 'INSERT INTO daily VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'; // id 없는경우 새로등록
 var dailyWriteQuery = 'UPDATE daily SET running_time=?, weight_time=?, arm=?, back=?, shoulder=?, chest=?, leg=?, sixpack=?, spent_calories=?, all_spent_calories=?, weight=?, objective=? WHERE id=? AND workoutday=?'; // id 있는경우 update
