@@ -39,7 +39,7 @@ adapter.classifyBodyType = function(obj, cb) {
                 bodytype = type1.concat(type2);
                 break;
             case 2 :
-                if(obj.worklevel == "1" || obj.worklevel == "2") {
+                if(obj.worklevel == "1" || obj.worklevel == "2" | obj.worklevel == "3") {
                     if(BMI > 24.5) {
                         type2 = "F";
                     } else {
