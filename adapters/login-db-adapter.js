@@ -26,14 +26,14 @@ adapter.loginSearch = function(id, password, workoutday, cb) {
             connection.release();
             cb(resultCode, []);
         } else { // db연결성공
-            connection.query(loginSearchQuery, [id, password], function(err, rows) {
+            connection.query(loginSearchQuery, [id, password], function(err, rows1) {
                 if (err) { // 로그인 실패
                     console.log(err);
                     resultCode = dbResult.Fail;
                     connection.release();
                     cb(resultCode, []);
                 } else { // 로그인 성공
-                    connection.query(userDailySearchQuery, [id, workoutday], function(err, rows) {
+                    connection.query(userDailySearchQuery, [id, workoutday], function(err, rows2) {
                         if (!err) { // query가 오는 경우
                             console.log(rows);
                             if(!rows[0]) { // 중복 id x
@@ -43,21 +43,18 @@ adapter.loginSearch = function(id, password, workoutday, cb) {
                                         console.log(err)
                                         resultCode = dbResult.Fail;
                                         connection.release();
-                                        cb(resultCode);
+                                        cb(resultCode, rows1);
                                     } else {
                                         console.log("calorie success");
                                         resultCode = dbResult.OK;
                                         connection.release();
+                                        cb(resultCode, rows1);
                                         cb(resultCode);
                                     }
                                 });
                             } else {}
-                        } else {
-                        }
+                        } else {}
                     });
-                    resultCode = dbResult.OK;
-                    connection.release();
-                    cb(resultCode, rows);
                 }
             });
         }
