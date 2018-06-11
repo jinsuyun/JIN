@@ -12,7 +12,7 @@ var dbResult = require('../routes/result');
 var pool = mysql.createPool(dbConfig);
 var adapter = {};
 
-var userSearchQuery = 'SELECT * FROM daily WHERE id=?'; // id/pw를 이용하여 유저 정보 search
+var userSearchQuery = 'SELECT * FROM appuser WHERE id=?'; // id/pw를 이용하여 유저 정보 search
 
 adapter.appuserSearch = function(id, cb) {
     var resultCode = dbResult.Fail;

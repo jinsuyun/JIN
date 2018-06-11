@@ -13,7 +13,7 @@ router.post('/', function(req, res) {
         if(resultCode == dbConnection.OK){
             res.json(rows);
         } else {
-            res.json([{"success":false}]);
+            res.json({"success":false});
         }
     });
 
