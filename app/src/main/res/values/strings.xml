@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Hel_per</string>
-    <string name="facebook_app_id">163952780965949</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -12,4 +11,28 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_exercise_handstand_pushup">exercise_handstand_pushup</string>
+    <string name="title_activity_exercise_incline_pushup">exercise_incline_pushup</string>
+    <string name="title_activity_exercise_one_squat">exercise_one_squat</string>
+    <string name="title_activity_exercise_buffet_test">exercise_buffet_test</string>
+    <string name="title_activity_exercise_pullup">exercise_pullup</string>
+    <string name="title_activity_exercise_jump_squat">exercise_jump_squat</string>
+    <string name="title_activity_exercise_narrow_pushup">exercise_narrow_pushup</string>
+    <string name="title_activity_exercise_plank">exercise_plank</string>
+    <string name="title_activity_exercise_running5km">exercise_running5km</string>
+    <string name="title_activity_exercise_jumprope">exercise_jumprope</string>
+    <string name="title_activity_exercise_step">exercise_step</string>
+    <string name="title_activity_exercise_crunch">exercise_crunch</string>
+    <string name="title_activity_exercise_leg_raise">exercise_leg_raise</string>
+    <string name="title_activity_exercise_running3km">exercise_running3km</string>
+    <string name="title_activity_exercise_bicycle">exercise_bicycle</string>
+    <string name="title_activity_exercise_russian_twist">exercise_russian_twist</string>
+    <string name="title_activity_exercise_knee_pushup">exercise_knee_pushup</string>
+    <string name="title_activity_exercise_fly_3kg">exercise_fly_3kg</string>
+    <string name="title_activity_exercise_jump_pullup">exercise_jump_pullup</string>
+    <string name="title_activity_exercise_pike_pushup">exercise_pike_pushup</string>
+    <string name="title_activity_exercise_wall_pushup">exercise_wall_pushup</string>
+    <string name="title_activity_exercise_bentover_3">exercise_bentover_3</string>
+    <string name="title_activity_exercise_dumcurl_1">exercise_dumcurl_1</string>
+    <string name="title_activity_exercise_squat">exercise_squat</string>
 </resources>

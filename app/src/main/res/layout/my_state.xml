@@ -3,88 +3,92 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardview_light_background">
-    <ScrollView
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/background">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/textView_my_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="현재 정보"
+            android:layout_margin="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="#FFFFFF"
+            android:textSize="25dp"/>
+
+        <com.github.mikephil.charting.charts.HorizontalBarChart
+            android:id="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/background">
+            android:layout_height="180sp"
+            android:layout_below="@+id/textView_my_state"/>
 
-            <TextView
-                android:id="@+id/textView_my_state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="현재 정보"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                android:textColor="#FFFFFF"
-                android:textSize="25dp"/>
+        <TextView
+            android:id="@+id/textView_tarweight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/chart"
+            android:text="체중변화"
+            android:layout_margin="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="#FFFFFF"
+            android:textSize="25dp" />
 
-            <com.github.mikephil.charting.charts.HorizontalBarChart
-                android:id="@+id/chart"
-                android:layout_width="match_parent"
-                android:layout_height="180sp"
-                android:layout_below="@+id/textView_my_state"/>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/weight_chart"
+            android:layout_width="match_parent"
+            android:layout_height="300sp"
+            android:layout_below="@+id/textView_tarweight" />
 
-            <TextView
-                android:id="@+id/textView_tarweight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/chart"
-                android:text="체중변화"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                android:textColor="#FFFFFF"
-                android:textSize="25dp" />
+        <TextView
+            android:id="@+id/textView_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/weight_chart"
+            android:layout_margin="10dp"
+            android:text="부위 별 세트 수"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="#FFFFFF"
+            android:textSize="25dp" />
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/weight_chart"
-                android:layout_width="match_parent"
-                android:layout_height="300sp"
-                android:layout_below="@+id/textView_tarweight" />
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/set_chart"
+            android:layout_width="match_parent"
+            android:layout_height="300sp"
+            android:layout_below="@+id/textView_set" />
 
-            <TextView
-                android:id="@+id/textView_set"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/weight_chart"
-                android:text="부위 별 세트 수"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                android:textColor="#FFFFFF"
-                android:textSize="25dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="칼로리 소모 및 섭취 내역"
+            android:layout_below="@+id/set_chart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="#FFFFFF"
+            android:id="@+id/textView_calories"
+            android:textSize="25dp"/>
 
-            <com.github.mikephil.charting.charts.RadarChart
-                android:id="@+id/set_chart"
-                android:layout_width="match_parent"
-                android:layout_height="300sp"
-                android:layout_below="@+id/textView_set" />
+        <com.github.mikephil.charting.charts.PieChart
+            android:layout_width="200sp"
+            android:layout_height="300sp"
+            android:layout_below="@+id/textView_calories"
+            android:id="@+id/calories_chart"></com.github.mikephil.charting.charts.PieChart>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="칼로리 소모 및 섭취 내역"
-                android:layout_below="@+id/set_chart"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                android:textColor="#FFFFFF"
-                android:id="@+id/textView_calories"
-                android:textSize="25dp"/>
+        <com.github.mikephil.charting.charts.PieChart
+            android:layout_width="200sp"
+            android:layout_height="300sp"
+            android:layout_below="@+id/textView_calories"
+            android:layout_toRightOf="@+id/calories_chart"
+            android:id="@+id/eat_calories_chart"></com.github.mikephil.charting.charts.PieChart>
+    </RelativeLayout>
 
-            <com.github.mikephil.charting.charts.PieChart
-                android:layout_width="200sp"
-                android:layout_height="300sp"
-                android:layout_below="@+id/textView_calories"
-                android:id="@+id/calories_chart"></com.github.mikephil.charting.charts.PieChart>
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:layout_width="200sp"
-                android:layout_height="300sp"
-                android:layout_below="@+id/textView_calories"
-                android:layout_toRightOf="@+id/calories_chart"
-                android:id="@+id/eat_calories_chart"></com.github.mikephil.charting.charts.PieChart>
-        </RelativeLayout>
-
-    </ScrollView>
+</ScrollView>
 
 </RelativeLayout>

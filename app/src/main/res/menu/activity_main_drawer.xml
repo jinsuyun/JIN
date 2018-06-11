@@ -25,11 +25,6 @@
             android:icon="@drawable/food"
             android:title="식단 관리" />
         <item
-            android:id="@+id/nav_diary"
-            android:icon="@drawable/diarynote"
-            android:title="다이어리" />
-
-        <item
             android:id="@+id/nav_re_survey"
             android:icon="@drawable/ic_menu_camera"
             android:title="내 정보 수정" />

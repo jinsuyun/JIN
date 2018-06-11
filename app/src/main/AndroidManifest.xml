@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/helper_icon"
         android:label="@string/app_name"
@@ -14,10 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -34,27 +29,8 @@
             android:name=".SignUpActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            tools:replace="android:theme" />
-        <activity
             android:name=".SignInActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key" />
-
-        <activity
-            android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            tools:replace="android:theme" />
-        <activity
-            android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
-            android:label="OAuth2.0 In-app"
-            android:theme="@style/Theme.AppCompat.Translucent" />
         <activity
             android:name=".Survey"
             android:label="YourActivity"
@@ -65,7 +41,127 @@
             android:theme="@style/Theme.AppCompat.Translucent" />
         <activity android:name=".Main2Activity" />
         <activity android:name=".CustomfoodActivity" />
-        <activity android:name=".FoodselectActivity"></activity>
+        <activity android:name=".FoodselectActivity" />
+        <activity
+            android:name=".exercise_all.exercise_standard.standard_lv1.exercise_handstand_pushup"
+            android:label="@string/title_activity_exercise_handstand_pushup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_standard.standard_lv1.exercise_incline_pushup"
+            android:label="@string/title_activity_exercise_incline_pushup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_standard.standard_lv1.exercise_one_squat"
+            android:label="@string/title_activity_exercise_one_squat"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_standard.standard_lv1.exercise_buffet_test"
+            android:label="@string/title_activity_exercise_buffet_test"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_standard.standard_lv1.exercise_cycle"
+            android:label="@string/title_activity_exercise_cycle"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_standard.standard_lv2.exercise_pullup"
+            android:label="@string/title_activity_exercise_pullup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_standard.standard_lv2.exercise_jump_squat"
+            android:label="@string/title_activity_exercise_jump_squat"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_standard.standard_lv2.exercise_narrow_pushup"
+            android:label="@string/title_activity_exercise_narrow_pushup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_standard.standard_lv2.exercise_plank"
+            android:label="@string/title_activity_exercise_plank"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_standard.standard_lv2.exercise_running5km"
+            android:label="@string/title_activity_exercise_running5km"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_obesity.obesity_lv1.exercise_jumprope"
+            android:label="@string/title_activity_exercise_jumprope"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_obesity.obesity_lv1.exercise_step"
+            android:label="@string/title_activity_exercise_step"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_obesity.obesity_lv1.exercise_buffet_test"
+            android:label="@string/title_activity_exercise_buffet_test"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_obesity.obesity_lv1.exercise_crunch"
+            android:label="@string/title_activity_exercise_crunch"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_obesity.obesity_lv1.exercise_leg_raise"
+            android:label="@string/title_activity_exercise_leg_raise"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_obesity.obesity_lv2.exercise_running3km"
+            android:label="@string/title_activity_exercise_running3km"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_obesity.obesity_lv2.exercise_plank"
+            android:label="@string/title_activity_exercise_plank"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_obesity.obesity_lv2.exercise_cycle"
+            android:label="@string/title_activity_exercise_cycle"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_obesity.obesity_lv2.exercise_bicycle"
+            android:label="@string/title_activity_exercise_bicycle"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_obesity.obesity_lv2.exercise_russian_twist"
+            android:label="@string/title_activity_exercise_russian_twist"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_weak.weak_lv1.exercise_knee_pushup"
+            android:label="@string/title_activity_exercise_knee_pushup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_weak.weak_lv1.exercise_fly_3kg"
+            android:label="@string/title_activity_exercise_fly_3kg"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_weak.weak_lv1.exercise_jump_pullup"
+            android:label="@string/title_activity_exercise_jump_pullup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_weak.weak_lv1.exercise_pike_pushup"
+            android:label="@string/title_activity_exercise_pike_pushup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_weak.weak_lv1.exercise_step"
+            android:label="@string/title_activity_exercise_step"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_weak.weak_lv2.exercise_wall_pushup"
+            android:label="@string/title_activity_exercise_wall_pushup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_weak.weak_lv2.exercise_bentover_3"
+            android:label="@string/title_activity_exercise_bentover_3"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_weak.weak_lv2.exercise_dumcurl_1"
+            android:label="@string/title_activity_exercise_dumcurl_1"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_weak.weak_lv2.exercise_squat"
+            android:label="@string/title_activity_exercise_squat"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".exercise_all.exercise_weak.weak_lv2.exercise_plank"
+            android:label="@string/title_activity_exercise_plank"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

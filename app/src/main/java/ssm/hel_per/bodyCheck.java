@@ -65,6 +65,7 @@ public class bodyCheck extends Fragment implements Main2Activity.OnBackPressedLi
 
         mainFragment = new home();
 
+
        String bt = getActivity().getIntent().getStringExtra("bodytype");
 
         iv = (ImageView) v.findViewById(R.id.imageView4);
