@@ -9,17 +9,6 @@ router.post('/', function(req, res) {
     var str = Object.keys(req.body);
     var obj = JSON.parse(str[0]);
     console.log(obj);
-    //
-    // dailyAdapter.dailySearch(req.body.id, function(resultCode,rows){
-    //     if(resultCode == dbConnection.OK){
-    //         var response;
-    //         console.log(rows);
-    //         response = Object.assign(rows, {"success":true});
-    //         res.json(response);
-    //     } else {
-    //         res.json({"success":false});
-    //     }
-    // });
 
     dailyAdapter.dailyWrite(obj, function(resultCode,rows){
         if(resultCode == dbConnection.OK){

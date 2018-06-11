@@ -35,11 +35,11 @@ adapter.dailySearch = function(id, cb) {
                     console.log(err);
                     resultCode = dbResult.Fail;
                     connection.release();
-                    cb(resultCode, Object.assign([], [{"success":false}]));
+                    cb(resultCode, Object.assign([]));
                 } else { // daily o
                     resultCode = dbResult.OK;
                     connection.release();
-                    cb(resultCode, Object.assign(rows, [{"success":true}]));
+                    cb(resultCode, Object.assign(rows));
                 }
             });
         }
