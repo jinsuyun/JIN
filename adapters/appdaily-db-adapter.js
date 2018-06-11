@@ -15,7 +15,7 @@ var adapter = {};
 var dailySearchQuery = 'SELECT * FROM daily WHERE id=? ORDER BY workoutday DESC limit 7'; // id/pw를 이용하여 유저 정보 search
 var dailyDupSearchQuery = 'SELECT workoutday FROM daily WHERE id=? AND workoutday=?'; // 유저 daily query
 var dailyNewWriteQuery = 'INSERT INTO daily VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'; // id 없는경우 새로등록
-var dailyWriteQuery = 'UPDATE daily SET running_time=?, weight_time=?, arm=?, back=?, shoulder=?, chest=?, leg=?, sixpack=?, spent_calories=?, all_spent_calories=?, weight=?, objective=? WHERE id=? AND workoutday=?'; // id 있는경우 update
+var dailyWriteQuery = 'UPDATE daily SET running_time=running_time+?, weight_time=weight_time+?, arm=arm+?, back=back+?, shoulder=shoulder+?, chest=chest+?, leg=leg+?, sixpack=sixpack+?, spent_calories=spent_calories+?, all_spent_calories=?, weight=?, objective=? WHERE id=? AND workoutday=?'; // id 있는경우 update
 
 adapter.dailySearch = function(id, cb) {
     var resultCode = dbResult.Fail;
@@ -73,10 +73,8 @@ adapter.dailyWrite = function(daily, cb) {
                             }
                         });
                     } else {
-                        connection.query(dailyWriteQuery, [parseInt(rows[0].running_time) + daily.running_time, parseInt(rows[0].weight_time) + daily.weight_time,
-                            parseInt(rows[0].arm) + daily.arm, parseInt(rows[0].back) + daily.back, parseInt(rows[0].shoulder) + daily.shoulder, parseInt(rows[0].chest) + daily.chest,
-                            parseInt(rows[0].leg) + daily.leg, parseInt(rows[0].sixpack) + daily.sixpack, parseInt(rows[0].spent_calories) + daily.spent_calories,
-                            daily.all_spent_calories, daily.weight, daily.objective, daily.id, daily.workoutday], function(err) {
+                        connection.query(dailyWriteQuery, [daily.running_time, daily.weight_time, daily.arm, daily.back, aily.shoulder, daily.chest,
+                            daily.leg, daily.sixpack, daily.spent_calories, daily.all_spent_calories, daily.weight, daily.objective, daily.id, daily.workoutday], function(err) {
                             if (err) {
                                 console.log(err)
                                 resultCode = dbResult.Fail;
