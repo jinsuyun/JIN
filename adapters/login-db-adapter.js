@@ -37,7 +37,6 @@ adapter.loginSearch = function(id, password, workoutday, cb) {
                         if (!err) { // query가 오는 경우
                             if(!rows2[0]) { // 중복 id x
                                 console.log('not duplicated id');
-                                connection.release();
                                 connection.query(createDailyQuery, [id, workoutday, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], function(err) {
                                     if (err) {
                                         console.log(err)
