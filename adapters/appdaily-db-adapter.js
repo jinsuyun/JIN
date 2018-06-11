@@ -16,6 +16,7 @@ var dailySearchQuery = 'SELECT * FROM daily WHERE id=? ORDER BY workoutday DESC 
 var dailyDupSearchQuery = 'SELECT workoutday FROM daily WHERE id=? AND workoutday=?'; // 유저 daily query
 var dailyNewWriteQuery = 'INSERT INTO daily VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'; // id 없는경우 새로등록
 var dailyWriteQuery = 'UPDATE daily SET running_time=running_time+?, weight_time=weight_time+?, arm=arm+?, back=back+?, shoulder=shoulder+?, chest=chest+?, leg=leg+?, sixpack=sixpack+?, spent_calories=spent_calories+?, all_spent_calories=?, weight=?, objective=? WHERE id=? AND workoutday=?'; // id 있는경우 update로 누적
+var countWriteQuery = 'UPDATE appuser SET exercount=?+?+?+?+?+? WHERE id=?';
 
 adapter.dailySearch = function(id, cb) {
     var resultCode = dbResult.Fail;
@@ -36,7 +37,7 @@ adapter.dailySearch = function(id, cb) {
                 } else { // daily o
                     resultCode = dbResult.OK;
                     connection.release();
-                    cb(resultCode, rows);
+                    cb(resultCode, Object.assign(rows, [{"success":true}]));
                 }
             });
         }
@@ -63,13 +64,9 @@ adapter.dailyWrite = function(daily, cb) {
                             if (err) {
                                 console.log(err)
                                 resultCode = dbResult.Fail;
-                                connection.release();
-                                cb(resultCode);
                             } else {
                                 console.log("exercise success");
                                 resultCode = dbResult.OK;
-                                connection.release();
-                                cb(resultCode);
                             }
                         });
                     } else {
@@ -78,16 +75,25 @@ adapter.dailyWrite = function(daily, cb) {
                             if (err) {
                                 console.log(err)
                                 resultCode = dbResult.Fail;
-                                connection.release();
-                                cb(resultCode);
                             } else {
                                 console.log("exercise success");
                                 resultCode = dbResult.OK;
-                                connection.release();
-                                cb(resultCode);
                             }
                         });
                     }
+                    connection.query(countWriteQuery, [daily.arm, daily.back, daily.shoulder, daily.chest, daily.leg, daily.sixpack, daily.id], function(err) {
+                        if (err) {
+                            console.log(err)
+                            resultCode = dbResult.Fail;
+                            connection.release();
+                            cb(resultCode);
+                        } else {
+                            console.log("count success");
+                            resultCode = dbResult.OK;
+                            connection.release();
+                            cb(resultCode);
+                        }
+                    });
                 } else { // query가 오지 않는 경우
                     console.log(err);
                 }
