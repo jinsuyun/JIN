@@ -1,4 +1,4 @@
-package ssm.hel_per.exercise_all.exercise_standard.standard_lv1;
+package ssm.hel_per.exercise_all.exercise_weak.weak_lv2;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,9 +27,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import ssm.hel_per.R;
-import ssm.hel_per.myState;
 
-public class exercise_cycle extends AppCompatActivity {
+public class exercise_plank extends AppCompatActivity {
     TextView mText;
     Button mButton;
     int value=120;
@@ -46,12 +45,12 @@ public class exercise_cycle extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercise_cycle);
+        setContentView(R.layout.activity_exercise_plank);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mText=(TextView)findViewById(R.id.text_cycle);
-        mButton=(Button)findViewById(R.id.nextbtn_cycle);
+        mText=(TextView)findViewById(R.id.text_plank);
+        mButton=(Button)findViewById(R.id.nextbtn_plank);
 
         new CountDownTimer(120*1000, 1000){
 
@@ -76,6 +75,7 @@ public class exercise_cycle extends AppCompatActivity {
             public void onClick(View v) {
                 id = getIntent().getStringExtra("id");
                 weight=getIntent().getDoubleExtra("weight",0);
+
 
                 ConnectThread thread = new ConnectThread(urlStr, id,String.valueOf(weight));
                 thread.start();
@@ -155,106 +155,107 @@ public class exercise_cycle extends AppCompatActivity {
         public void onAnimationRepeat(Animation animation) {
 
         }
+
     }
 
-    class ConnectThread extends Thread {
-        String urlStr;
-        String id;
-        String workoutday;
-        String running_time = "30";
-        String weight_time = "15";
-        String arm = "0";
-        String back = "0";
-        String shoulder = "0";
-        String chest = "2";
-        String leg = "1";
-        String sixpack = "0";
+ class ConnectThread extends Thread {
+    String urlStr;
+    String id;
+    String workoutday;
+    String running_time = "0";
+    String weight_time = "25";
+    String arm = "1";
+    String back = "0";
+    String shoulder = "1";
+    String chest = "1";
+    String leg = "1";
+    String sixpack = "1";
+    String eat_calories = "0";
+    String all_eat_calories = "0";
+    String spent_calories = "191";
+    String all_spent_calories = "0";
+    String weight;
+    String objective="0";
 
-        String eat_calories = "0";
-        String all_eat_calories = "0";
-        String spent_calories = "123";
-        String all_spent_calories = "0";
-        String weight;
-        String objective="0";
 
+    public ConnectThread(String inStr, String id,String weight) {
+        this.urlStr = inStr;
+        this.id = id;
+        this.weight=weight;
+    }
 
-        public ConnectThread(String inStr, String id,String weight) {
-            this.urlStr = inStr;
-            this.id = id;
-            this.weight=weight;
+    public void run() {
+        try {
+            final String output = request(urlStr, id,weight);
+
+        }catch(Exception e) {
+            e.printStackTrace();
         }
+    }
+    private String request(String urlStr, String id,String weight) throws IOException {
+        StringBuilder output = new StringBuilder();
+        long now = System.currentTimeMillis();
 
-        public void run() {
-            try {
-                final String output = request(urlStr, id,weight);
+        try {
+            URL url = new URL(urlStr);
+            //workoutday=new Date(now);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            workoutday=simpleDateFormat.format(new Date(System.currentTimeMillis()));
 
-            }catch(Exception e) {
-                e.printStackTrace();
-            }
-        }
-        private String request(String urlStr, String id,String weight) throws IOException {
-            StringBuilder output = new StringBuilder();
-            long now = System.currentTimeMillis();
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            if(conn != null) {
+                String json = "";
 
-            try {
-                URL url = new URL(urlStr);
-                //workoutday=new Date(now);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-                workoutday=simpleDateFormat.format(new Date(System.currentTimeMillis()));
+                // build jsonObject
+                JSONObject jsonObject = new JSONObject();
 
-                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                if(conn != null) {
-                    String json = "";
+                jsonObject.put("id", id);
+                jsonObject.put("workoutday", workoutday);
+                jsonObject.put("running_time", running_time);
+                jsonObject.put("weight_time", weight_time);
+                jsonObject.put("arm", arm);
+                jsonObject.put("back", back);
+                jsonObject.put("shoulder", shoulder);
+                jsonObject.put("chest", chest);
+                jsonObject.put("leg", leg);
+                jsonObject.put("sixpack", sixpack);
+                jsonObject.put("eat_calories", eat_calories);
+                jsonObject.put("all_eat_calories", all_eat_calories);
+                jsonObject.put("spent_calories", spent_calories);
+                jsonObject.put("all_spent_calories", all_spent_calories);
+                jsonObject.put("weight", weight);
+                jsonObject.put("objective",objective);
+                // convert JSONObject to JSON to String
+                json = jsonObject.toString();
+                conn.setConnectTimeout(1000);
+                conn.setRequestMethod("POST");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+                OutputStream os = conn.getOutputStream();
+                os.write(json.getBytes("euc-kr")); // 출력 스트림에 출력.
+                os.flush(); // 출력 스트림을 플러시(비운다)하고 버퍼링 된 모든 출력 바이트를 강제 실행.
+                os.close();
 
-                    // build jsonObject
-                    JSONObject jsonObject = new JSONObject();
+                int resCode = conn.getResponseCode();
 
-                    jsonObject.put("id", id);
-                    jsonObject.put("workoutday", workoutday);
-                    jsonObject.put("running_time", running_time);
-                    jsonObject.put("weight_time", weight_time);
-                    jsonObject.put("arm", arm);
-                    jsonObject.put("back", back);
-                    jsonObject.put("shoulder", shoulder);
-                    jsonObject.put("chest", chest);
-                    jsonObject.put("leg", leg);
-                    jsonObject.put("sixpack", sixpack);
-                    jsonObject.put("eat_calories", eat_calories);
-                    jsonObject.put("all_eat_calories", all_eat_calories);
-                    jsonObject.put("spent_calories", spent_calories);
-                    jsonObject.put("all_spent_calories", all_spent_calories);
-                    jsonObject.put("weight", weight);
-                    jsonObject.put("objective",objective);
-                    // convert JSONObject to JSON to String
-                    json = jsonObject.toString();
-                    conn.setConnectTimeout(1000);
-                    conn.setRequestMethod("POST");
-                    conn.setDoInput(true);
-                    conn.setDoOutput(true);
-                    OutputStream os = conn.getOutputStream();
-                    os.write(json.getBytes("euc-kr")); // 출력 스트림에 출력.
-                    os.flush(); // 출력 스트림을 플러시(비운다)하고 버퍼링 된 모든 출력 바이트를 강제 실행.
-                    os.close();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
-                    int resCode = conn.getResponseCode();
-
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-                    String line = null;
-                    while(true) {
-                        line = reader.readLine();
-                        if (line == null) {
-                            break;
-                        }
-                        output.append(line + "\n");
+                String line = null;
+                while(true) {
+                    line = reader.readLine();
+                    if (line == null) {
+                        break;
                     }
-                    reader.close();
-                    conn.disconnect();
+                    output.append(line + "\n");
                 }
-            } catch (Exception e) {
-                Log.e("SampleHTTP", "Exception in processing response.", e);
+                reader.close();
+                conn.disconnect();
             }
-            return output.toString();
+        } catch (Exception e) {
+            Log.e("SampleHTTP", "Exception in processing response.", e);
         }
+        return output.toString();
     }
 }
+}
+

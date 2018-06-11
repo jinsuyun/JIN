@@ -1,4 +1,4 @@
-package ssm.hel_per.exercise_all.exercise_standard.standard_lv1;
+package ssm.hel_per.exercise_all.exercise_obesity.obesity_lv2;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import ssm.hel_per.R;
 
-public class exercise_handstand_pushup extends AppCompatActivity {
+public class exercise_plank extends AppCompatActivity {
     TextView mText;
     Button mButton;
     int value=120;
@@ -31,12 +31,12 @@ public class exercise_handstand_pushup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercise_handstand_pushup);
+        setContentView(R.layout.activity_exercise_plank);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mText=(TextView)findViewById(R.id.text_handstand_pushup);
-        mButton=(Button)findViewById(R.id.nextbtn_handstand_pushup);
+        mText=(TextView)findViewById(R.id.text_plank);
+        mButton=(Button)findViewById(R.id.nextbtn_plank);
 
         new CountDownTimer(120*1000, 1000){
 
@@ -59,7 +59,7 @@ public class exercise_handstand_pushup extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(exercise_handstand_pushup.this,exercise_incline_pushup.class);
+                Intent intent = new Intent(exercise_plank.this,exercise_cycle.class);
                 id = getIntent().getStringExtra("id");
                 intent.putExtra("id",id);
                 weight=getIntent().getDoubleExtra("weight",0);
