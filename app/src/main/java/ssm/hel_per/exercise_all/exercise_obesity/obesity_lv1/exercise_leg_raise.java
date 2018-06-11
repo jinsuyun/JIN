@@ -34,6 +34,8 @@ public class exercise_leg_raise extends AppCompatActivity {
     TextView mText;
     Button mButton;
     int value=120;
+    int exerlevel;
+    int exercount;
     String id;
     Double weight;
     ImageView swingImage;
@@ -77,6 +79,9 @@ public class exercise_leg_raise extends AppCompatActivity {
             public void onClick(View v) {
                 id = getIntent().getStringExtra("id");
                 weight=getIntent().getDoubleExtra("weight",0);
+                exerlevel=getIntent().getIntExtra("exerlevel",0);
+                exercount=getIntent().getIntExtra("exercount",0);
+
 
 
                 ConnectThread thread = new ConnectThread(urlStr, id, String.valueOf(weight));
@@ -86,6 +91,7 @@ public class exercise_leg_raise extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 finish();
             }
         });

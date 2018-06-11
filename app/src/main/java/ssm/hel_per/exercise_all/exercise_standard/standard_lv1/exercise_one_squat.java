@@ -20,6 +20,8 @@ public class exercise_one_squat extends AppCompatActivity {
     TextView mText;
     Button mButton;
     int value=120;
+    int exerlevel;
+    int exercount;
     Double weight;
     String id;
     ImageView swingImage;
@@ -64,6 +66,10 @@ public class exercise_one_squat extends AppCompatActivity {
                 intent.putExtra("id",id);
                 weight=getIntent().getDoubleExtra("weight",0);
                 intent.putExtra("weight",weight);
+                exerlevel=getIntent().getIntExtra("exerlevel",0);
+                intent.putExtra("exerlevel",0);
+                exercount=getIntent().getIntExtra("exercount",0);
+                intent.putExtra("exercount",0);
                 startActivity(intent);
                 finish();
             }

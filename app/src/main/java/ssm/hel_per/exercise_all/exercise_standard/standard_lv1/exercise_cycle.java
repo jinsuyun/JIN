@@ -26,6 +26,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import ssm.hel_per.Main2Activity;
 import ssm.hel_per.R;
 import ssm.hel_per.myState;
 
@@ -33,6 +34,8 @@ public class exercise_cycle extends AppCompatActivity {
     TextView mText;
     Button mButton;
     int value=120;
+    int exerlevel;
+    int exercount;
     String id;
     Double weight;
     ImageView swingImage;
@@ -76,6 +79,9 @@ public class exercise_cycle extends AppCompatActivity {
             public void onClick(View v) {
                 id = getIntent().getStringExtra("id");
                 weight=getIntent().getDoubleExtra("weight",0);
+                exerlevel=getIntent().getIntExtra("exerlevel",0);
+                exercount=getIntent().getIntExtra("exercount",0);
+
 
                 ConnectThread thread = new ConnectThread(urlStr, id,String.valueOf(weight));
                 thread.start();
@@ -84,7 +90,6 @@ public class exercise_cycle extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
                 finish();
             }
         });

@@ -158,14 +158,16 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             targetperiod=getIntent().getIntExtra("targetperiod",0);
            // count=getIntent().getIntExtra("count",0);
             final ArcProgress arcProgress = findViewById(R.id.arc_progress);
-            double successPer = exercount/targetperiod*100;
+            double successPer = (double)exercount/(double)targetperiod*100;
             if(exercount == 0 ){
                 arcProgress.setProgress(0);
             }
             else arcProgress.setProgress((int) successPer);
 
-            if(successPer == 100) exerlevel = 2;
-
+            if(successPer >= 100) {
+                exerlevel = 2;
+                successPer=0;
+            }
             Intent in2 = new Intent(Main2Activity.this,exercise.class);
             in2.putExtra("exerlevel",exerlevel);
 

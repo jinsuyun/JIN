@@ -82,6 +82,8 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
     RelativeLayout Layout;
     int test;
     int workperiod=0;
+    int exerlevel;
+    int exercount;
 
     @Nullable
     @Override
@@ -97,27 +99,29 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
         id = getActivity().getIntent().getStringExtra("id");
         weight=getActivity().getIntent().getDoubleExtra("weight",0);
         bt = getActivity().getIntent().getStringExtra("bodytype");
+        exerlevel=getActivity().getIntent().getIntExtra("exerlevel",0);
+        exercount=getActivity().getIntent().getIntExtra("exercount",0);
         exercisebtn=(Button)v.findViewById(R.id.exercise);
         button1 = (Button)v.findViewById(R.id.part);
         R_image = (RelativeLayout)v.findViewById(R.id.imagestack);
 
         if(bt!=null) {
             if (bt.equals("LW"))
-                Layout=lwRestore(workperiod);
+                Layout=lwRestore(exerlevel);
             else if (bt.equals("SW"))
-                Layout=swRestore(workperiod);
+                Layout=swRestore(exerlevel);
             else if (bt.equals("OB"))
-                Layout=obRestore(workperiod);
+                Layout=obRestore(exerlevel);
             else if (bt.equals("SF"))
-                Layout=sfRestore(workperiod);
+                Layout=sfRestore(exerlevel);
             else if (bt.equals("OF"))
-                Layout=ofRestore(workperiod);
+                Layout=ofRestore(exerlevel);
             else if (bt.equals("LB"))
-                Layout=lbRestore(workperiod);
+                Layout=lbRestore(exerlevel);
             else if (bt.equals("SB"))
-                Layout=sbRestore(workperiod);
+                Layout=sbRestore(exerlevel);
             else if (bt.equals("SS"))
-                Layout=ssRestore(workperiod);
+                Layout=ssRestore(exerlevel);
             else if (bt.equals("OS"))
                 Toast.makeText(getApplicationContext(), "Hel_per를 사용할만한 수준이 아닙니다", Toast.LENGTH_LONG).show();
         }
@@ -132,7 +136,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
             public void onClick(View view) {
                 Intent intent =null;
                 if (bt.equals("LW")) {
-                    if (workperiod == 1) {
+                    if (exerlevel == 1) {
                         intent = new Intent(getActivity(), exercise_knee_pushup.class);
                         intent.putExtra("id", id);
                         intent.putExtra("weight",weight);
@@ -144,7 +148,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     }
                 }
                 else if (bt.equals("SW")) {
-                    if (workperiod == 1) {
+                    if (exerlevel == 1) {
                         intent = new Intent(getActivity(), exercise_knee_pushup.class);
                         intent.putExtra("id", id);
                         intent.putExtra("weight",weight);
@@ -156,7 +160,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     }
                 }
                 else if (bt.equals("OB")) {
-                    if (workperiod == 1) {
+                    if (exerlevel == 1) {
                         intent = new Intent(getActivity(), exercise_knee_pushup.class);
                         intent.putExtra("id", id);
                         intent.putExtra("weight",weight);
@@ -168,7 +172,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                         }
                     }
                 else if (bt.equals("SF")) {
-                    if (workperiod == 1) {
+                    if (exerlevel == 1) {
                         intent = new Intent(getActivity(), exercise_knee_pushup.class);
                         intent.putExtra("id", id);
                         intent.putExtra("weight",weight);
@@ -180,7 +184,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     }
                 }
                 else if (bt.equals("OF")) {
-                    if (workperiod == 1) {
+                    if (exerlevel == 1) {
                         intent = new Intent(getActivity(), exercise_jumprope.class);
                         intent.putExtra("id", id);
                         intent.putExtra("weight",weight);
@@ -192,7 +196,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     }
                 }
                 else if (bt.equals("LB")) {
-                    if (workperiod == 1) {
+                    if (exerlevel == 1) {
                         intent = new Intent(getActivity(), exercise_knee_pushup.class);
                         intent.putExtra("id", id);
                         intent.putExtra("weight",weight);
@@ -204,7 +208,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     }
                 }
                 else if (bt.equals("SB")) {
-                    if (workperiod == 1) {
+                    if (exerlevel == 1) {
                         intent = new Intent(getActivity(), exercise_handstand_pushup.class);
                         intent.putExtra("id", id);
                         intent.putExtra("weight",weight);
@@ -216,7 +220,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     }
                 }
                 else if (bt.equals("SS")) {
-                    if (workperiod == 1) {
+                    if (exerlevel == 1) {
                         intent = new Intent(getActivity(), exercise_knee_pushup.class);
                         intent.putExtra("id", id);
                         intent.putExtra("weight",weight);
@@ -228,7 +232,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     }
                 }
                 else if (bt.equals("OS")) {
-                    if (workperiod == 1) {
+                    if (exerlevel == 1) {
                         intent = new Intent(getActivity(), exercise_knee_pushup.class);
                         intent.putExtra("id", id);
                         intent.putExtra("weight",weight);

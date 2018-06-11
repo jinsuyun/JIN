@@ -20,6 +20,8 @@ public class exercise_step extends AppCompatActivity {
     TextView mText;
     Button mButton;
     int value=120;
+    int exerlevel;
+    int exercount;
     String id;
     Double weight;
     ImageView swingImage;
@@ -66,6 +68,10 @@ public class exercise_step extends AppCompatActivity {
 
                 weight=getIntent().getDoubleExtra("weight",0);
                 intent.putExtra("weight",weight);
+                exerlevel=getIntent().getIntExtra("exerlevel",0);
+                intent.putExtra("exerlevel",0);
+                exercount=getIntent().getIntExtra("exercount",0);
+                intent.putExtra("exercount",0);
                 startActivity(intent);
                 finish();
             }
