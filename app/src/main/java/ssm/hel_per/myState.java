@@ -65,7 +65,6 @@ import static com.github.mikephil.charting.components.Legend.LegendPosition.RIGH
 
 public class myState extends Fragment implements Main2Activity.OnBackPressedListener {
     View v;
-
     String url_daily = "http://13.209.40.50:3000/dailysearch";
     home mainFragment;
     double weight = 0;
@@ -134,7 +133,7 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
         try {
             JSONArray ary = new JSONArray(test);
 
-            for (int i = 1; i < ary.length()+1; i++) {
+            for (int i = 1; i < ary.length(); i++) {
                 JSONObject obj = ary.getJSONObject(i);
                 if ((obj.getString("workoutday")) != null) {
                     workoutday = obj.getString("workoutday");

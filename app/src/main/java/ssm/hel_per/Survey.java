@@ -73,16 +73,6 @@ public class Survey extends AppCompatActivity {
         rgwl3 = (RadioButton) findViewById(R.id.normal_exer);
         rgwl4 = (RadioButton) findViewById(R.id.many_exer);
         rgwl5 = (RadioButton) findViewById(R.id.heavy_exer);
-        sback = (ImageView)findViewById(R.id.sback);
-
-        sback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent it = new Intent(Survey.this, SignUpActivity.class);
-                startActivity(it);
-            }
-        });
 
         createbutton = (TextView) findViewById(R.id.create);
         createbutton.setOnClickListener(new View.OnClickListener() {
