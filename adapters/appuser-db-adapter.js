@@ -14,7 +14,7 @@ var adapter = {};
 
 var userSearchQuery = 'SELECT * FROM daily WHERE id=?'; // id/pw를 이용하여 유저 정보 search
 
-adapter.dailySearch = function(id, cb) {
+adapter.appuserSearch = function(id, cb) {
     var resultCode = dbResult.Fail;
 
     pool.getConnection(function(err, connection) {
