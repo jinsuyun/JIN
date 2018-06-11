@@ -45,14 +45,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/test1"
+                        android:layout_toStartOf="@+id/exer_url1"
                         android:layout_weight="1"
                         android:text="10회"
                         android:textColor="@android:color/background_dark"
                         android:textSize="18sp" />
 
                     <ImageView
-                        android:id="@+id/test1"
+                        android:id="@+id/exer_url1"
                         android:layout_width="93dp"
                         android:layout_height="115dp"
                         android:layout_alignParentEnd="true"
@@ -80,14 +80,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/imageView2"
+                        android:layout_toStartOf="@+id/exer_url2"
                         android:layout_weight="1"
                         android:text="10분"
                         android:textColor="@android:color/background_dark"
                         android:textSize="18sp" />
 
                     <ImageView
-                        android:id="@+id/imageView2"
+                        android:id="@+id/exer_url2"
                         android:layout_width="93dp"
                         android:layout_height="115dp"
                         android:layout_alignParentEnd="true"
@@ -114,13 +114,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/imageView6"
+                        android:layout_toStartOf="@+id/exer_url3"
                         android:text="10분"
                         android:textColor="@android:color/background_dark"
                         android:textSize="18sp" />
 
                     <ImageView
-                        android:id="@+id/imageView6"
+                        android:id="@+id/exer_url3"
                         android:layout_width="93dp"
                         android:layout_height="115dp"
                         android:layout_alignParentEnd="true"
@@ -155,7 +155,7 @@
                         android:textSize="18sp" />
 
                     <ImageView
-                        android:id="@+id/imageView7"
+                        android:id="@+id/exer_url4"
                         android:layout_width="93dp"
                         android:layout_height="115dp"
                         android:layout_alignParentEnd="true"
@@ -182,13 +182,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/imageView5"
+                        android:layout_toStartOf="@+id/exer_url5"
                         android:text="30초"
                         android:textColor="@android:color/background_dark"
                         android:textSize="18sp" />
 
                     <ImageView
-                        android:id="@+id/imageView5"
+                        android:id="@+id/exer_url5"
                         android:layout_width="93dp"
                         android:layout_height="115dp"
                         android:layout_alignParentEnd="true"
@@ -224,5 +224,15 @@
         </ScrollView>
 
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/exercise_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/pullup_info"
+        android:visibility="invisible" />
 
 </RelativeLayout>
