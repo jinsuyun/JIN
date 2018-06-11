@@ -19,7 +19,7 @@ router.post('/', function(req, res) {
 
     }
 
-    loginAdapter.loginSearch(userId, userPassword, obj.workoutday, function(resultCode,rows){
+    loginAdapter.loginSearch(userId, userPassword, function(resultCode,rows){
         if(resultCode == dbConnection.OK){
             if(rows.length > 0){
                 if(rows[0].password == obj.password){
