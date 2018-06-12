@@ -58,8 +58,6 @@ public class Survey extends AppCompatActivity {
         etweight = (EditText) findViewById(R.id.weight);
         ettw = (EditText) findViewById(R.id.weighttarget);
         ettp = (EditText) findViewById(R.id.timetarget);
-        etsm = (EditText) findViewById(R.id.musclemass);
-        etbf = (EditText) findViewById(R.id.fat);
         rgsex =(RadioGroup) findViewById(R.id.sex);
         rgm=(RadioButton)findViewById(R.id.sex_man);
         rgw=(RadioButton)findViewById(R.id.sex_woman);

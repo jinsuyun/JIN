@@ -1577,8 +1577,10 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
         RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
         url1=v.findViewById(R.id.exer_url1);url2=v.findViewById(R.id.exer_url2);url3=v.findViewById(R.id.exer_url3);url4=v.findViewById(R.id.exer_url4);url5=v.findViewById(R.id.exer_url5);
         exer1 = v.findViewById(R.id.exer_opt1);exer2 = v.findViewById(R.id.exer_opt2);exer3 = v.findViewById(R.id.exer_opt3);exer4 = v.findViewById(R.id.exer_opt4);exer5 = v.findViewById(R.id.exer_opt5);
+        TextView tv1 = v.findViewById(R.id.textView5); TextView tv2 = v.findViewById(R.id.textView10); TextView tv3 = v.findViewById(R.id.textView12);  TextView tv4 = v.findViewById(R.id.textView13); TextView tv5 = v.findViewById(R.id.textView14);
 
         if(level==1){
+            tv1.setText("10회");
             exer1.setImageResource(R.drawable.knee_pushup);
             exer1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1598,7 +1600,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
-
+            tv2.setText("12회");
             exer2.setImageResource(R.drawable.fly_3kg);
             exer2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1618,7 +1620,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
-
+            tv3.setText("8회");
             exer3.setImageResource(R.drawable.jump_pullup);
             exer3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1638,7 +1640,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
-
+            tv4.setText("8회");
             exer4.setImageResource(R.drawable.pike_pushup);
             exer4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1658,7 +1660,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
-
+            tv5.setText("200스텝");
             exer5.setImageResource(R.drawable.step);
             exer5.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1680,6 +1682,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
             });
 
         } else {
+            tv1.setText("15회");
             exer1.setImageResource(R.drawable.wall_pushup);
             exer1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1699,7 +1702,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
-
+            tv2.setText("8회");
             exer2.setImageResource(R.drawable.bentover_3);
             exer2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1719,7 +1722,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
-
+            tv3.setText("15회");
             exer3.setImageResource(R.drawable.dumcurl_1);
             exer3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1739,7 +1742,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
-
+            tv4.setText("10회");
             exer4.setImageResource(R.drawable.squat);
             exer4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1759,7 +1762,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
-
+            tv5.setText("30초");
             exer5.setImageResource(R.drawable.plank);
             exer5.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2388,11 +2391,12 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
 
     public RelativeLayout sbRestore(int level){
         RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
-
+        TextView tv1 = v.findViewById(R.id.textView5); TextView tv2 = v.findViewById(R.id.textView10); TextView tv3 = v.findViewById(R.id.textView12);  TextView tv4 = v.findViewById(R.id.textView13); TextView tv5 = v.findViewById(R.id.textView14);
         url1=v.findViewById(R.id.exer_url1);url2=v.findViewById(R.id.exer_url2);url3=v.findViewById(R.id.exer_url3);url4=v.findViewById(R.id.exer_url4);url5=v.findViewById(R.id.exer_url5);
         exer1 = v.findViewById(R.id.exer_opt1);exer2 = v.findViewById(R.id.exer_opt2);exer3 = v.findViewById(R.id.exer_opt3);exer4 = v.findViewById(R.id.exer_opt4);exer5 = v.findViewById(R.id.exer_opt5);
 
         if(level==1){
+            tv1.setText("15회");
             exer1.setImageResource(R.drawable.handstand_pushup);
             exer1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2412,6 +2416,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv2.setText("15회");
             exer2.setImageResource(R.drawable.incline_pushup);
             exer2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2431,6 +2436,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv3.setText("25회");
             exer3.setImageResource(R.drawable.one_squat);
             exer3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2450,6 +2456,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv4.setText("15회");
             exer4.setImageResource(R.drawable.buffet);
             exer4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2469,6 +2476,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv5.setText("20분");
             exer5.setImageResource(R.drawable.cycle);
             exer5.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2492,7 +2500,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
 
 
             /*------------------------------------------------------------------exer1 시나리오----------------------------------------------------------*/
-
+            tv1.setText("15회");
             exer1.setImageResource(R.drawable.pullup);
             exer1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2531,6 +2539,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
 //            });
 
             /*-------------------------------------------------------------exer2 시나리오------------------------------------------------------*/
+            tv2.setText("12회");
             exer2.setImageResource(R.drawable.jump_squat);
             exer2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2569,6 +2578,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
 //            });
 
             /*-----------------------------------------------exer3 시나리오--------------------------------------------*/
+            tv3.setText("15회");
             exer3.setImageResource(R.drawable.narrow_pushup);
             exer3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2607,6 +2617,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
 //            });
 
             /*--------------------------------------------------exer4 시나리오------------------------------------------*/
+            tv4.setText("60초");
             exer4.setImageResource(R.drawable.plank);
             exer4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2644,6 +2655,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
 //                }
 //            });
             /*----------------------------------------------------------exer5 시나리오---------------------------------------------------*/
+            tv5.setText("20분");
             exer5.setImageResource(R.drawable.running5km);
             exer5.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2688,8 +2700,10 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
         RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
         url1=v.findViewById(R.id.exer_url1);url2=v.findViewById(R.id.exer_url2);url3=v.findViewById(R.id.exer_url3);url4=v.findViewById(R.id.exer_url4);url5=v.findViewById(R.id.exer_url5);
         exer1 = v.findViewById(R.id.exer_opt1);exer2 = v.findViewById(R.id.exer_opt2);exer3 = v.findViewById(R.id.exer_opt3);exer4 = v.findViewById(R.id.exer_opt4);exer5 = v.findViewById(R.id.exer_opt5);
+        TextView tv1 = v.findViewById(R.id.textView5); TextView tv2 = v.findViewById(R.id.textView10); TextView tv3 = v.findViewById(R.id.textView12);  TextView tv4 = v.findViewById(R.id.textView13); TextView tv5 = v.findViewById(R.id.textView14);
 
         if(level==1){
+            tv1.setText("12회");
             exer1.setImageResource(R.drawable.pushup);
             exer1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2709,6 +2723,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv2.setText("12회");
             exer2.setImageResource(R.drawable.fly_5kg);
             exer2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2727,7 +2742,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     intent.putExtra("force_fullscreen",true);
                     startActivity(intent);
                 }
-            });
+            }); tv3.setText("40회");
             exer3.setImageResource(R.drawable.jumprope);
             exer3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2746,7 +2761,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     intent.putExtra("force_fullscreen",true);
                     startActivity(intent);
                 }
-            });
+            }); tv4.setText("10회");
             exer4.setImageResource(R.drawable.buffet);
             exer4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2765,7 +2780,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     intent.putExtra("force_fullscreen",true);
                     startActivity(intent);
                 }
-            });
+            }); tv1.setText("15분");
             exer5.setImageResource(R.drawable.running5km);
             exer5.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2785,7 +2800,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
-        } else {
+        } else { tv1.setText("12회");
             exer1.setImageResource(R.drawable.pullup);
             exer1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2804,7 +2819,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     intent.putExtra("force_fullscreen",true);
                     startActivity(intent);
                 }
-            });
+            }); tv2.setText("15회");
             exer2.setImageResource(R.drawable.onearm_5);
             exer2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2823,7 +2838,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     intent.putExtra("force_fullscreen",true);
                     startActivity(intent);
                 }
-            });
+            }); tv3.setText("1분");
             exer3.setImageResource(R.drawable.plank);
             exer3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2842,7 +2857,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     intent.putExtra("force_fullscreen",true);
                     startActivity(intent);
                 }
-            });
+            }); tv4.setText("200스텝");
             exer4.setImageResource(R.drawable.step);
             exer4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2861,7 +2876,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     intent.putExtra("force_fullscreen",true);
                     startActivity(intent);
                 }
-            });
+            }); tv5.setText("20분");
             exer5.setImageResource(R.drawable.cycle);
             exer5.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2889,8 +2904,10 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
         RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
         url1=v.findViewById(R.id.exer_url1);url2=v.findViewById(R.id.exer_url2);url3=v.findViewById(R.id.exer_url3);url4=v.findViewById(R.id.exer_url4);url5=v.findViewById(R.id.exer_url5);
         exer1 = v.findViewById(R.id.exer_opt1);exer2 = v.findViewById(R.id.exer_opt2);exer3 = v.findViewById(R.id.exer_opt3);exer4 = v.findViewById(R.id.exer_opt4);exer5 = v.findViewById(R.id.exer_opt5);
+        TextView tv1 = v.findViewById(R.id.textView5); TextView tv2 = v.findViewById(R.id.textView10); TextView tv3 = v.findViewById(R.id.textView12);  TextView tv4 = v.findViewById(R.id.textView13); TextView tv5 = v.findViewById(R.id.textView14);
 
         if(level==1){
+            tv1.setText("25분");
             exer1.setImageResource(R.drawable.running5km);
             exer1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2910,6 +2927,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv2.setText("15분");
             exer2.setImageResource(R.drawable.cycle);
             exer2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2929,6 +2947,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv3.setText("30회");
             exer3.setImageResource(R.drawable.jumprope);
             exer3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2948,6 +2967,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv4.setText("15회");
             exer4.setImageResource(R.drawable.backex);
             exer4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2967,6 +2987,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv1.setText("20회");
             exer5.setImageResource(R.drawable.bicycle);
             exer5.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2987,6 +3008,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                 }
             });
         } else {
+            tv1.setText("250스텝");
             exer1.setImageResource(R.drawable.step);
             exer1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3006,6 +3028,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv2.setText("20회");
             exer2.setImageResource(R.drawable.buffet);
             exer2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3025,6 +3048,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv3.setText("25분");
             exer3.setImageResource(R.drawable.cycle);
             exer3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3044,6 +3068,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv1.setText("15회");
             exer4.setImageResource(R.drawable.cross_crunch);
             exer4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3063,6 +3088,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv1.setText("60초");
             exer5.setImageResource(R.drawable.plank);
             exer5.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3090,8 +3116,10 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
         RelativeLayout imagestack = (RelativeLayout)v.findViewById(R.id.imagestack);
         url1=v.findViewById(R.id.exer_url1);url2=v.findViewById(R.id.exer_url2);url3=v.findViewById(R.id.exer_url3);url4=v.findViewById(R.id.exer_url4);url5=v.findViewById(R.id.exer_url5);
         exer1 = v.findViewById(R.id.exer_opt1);exer2 = v.findViewById(R.id.exer_opt2);exer3 = v.findViewById(R.id.exer_opt3);exer4 = v.findViewById(R.id.exer_opt4);exer5 = v.findViewById(R.id.exer_opt5);
+        TextView tv1 = v.findViewById(R.id.textView5); TextView tv2 = v.findViewById(R.id.textView10); TextView tv3 = v.findViewById(R.id.textView12);  TextView tv4 = v.findViewById(R.id.textView13); TextView tv5 = v.findViewById(R.id.textView14);
 
         if(level==1){
+            tv1.setText("20회");
             exer1.setImageResource(R.drawable.jumprope);
             exer1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3111,6 +3139,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv2.setText("20회");
             exer2.setImageResource(R.drawable.step);
             exer2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3130,6 +3159,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv3.setText("10회");
             exer3.setImageResource(R.drawable.buffet);
             exer3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3149,6 +3179,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv4.setText("15회");
             exer4.setImageResource(R.drawable.crunch);
             exer4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3168,6 +3199,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     startActivity(intent);
                 }
             });
+            tv5.setText("10회");
             exer5.setImageResource(R.drawable.leg_raise);
             exer5.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3189,6 +3221,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
             });
 
         } else {
+            tv1.setText("15분");
             exer1.setImageResource(R.drawable.running3km);
             exer1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3207,7 +3240,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     intent.putExtra("force_fullscreen",true);
                     startActivity(intent);
                 }
-            });
+            });tv2.setText("30초");
             exer2.setImageResource(R.drawable.plank);
             exer2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3226,7 +3259,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     intent.putExtra("force_fullscreen",true);
                     startActivity(intent);
                 }
-            });
+            });tv3.setText("10회");
             exer3.setImageResource(R.drawable.cycle);
             exer3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3245,7 +3278,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     intent.putExtra("force_fullscreen",true);
                     startActivity(intent);
                 }
-            });
+            });tv4.setText("15분");
             exer4.setImageResource(R.drawable.bicycle);
             exer4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3264,7 +3297,7 @@ public class exercise extends Fragment implements Main2Activity.OnBackPressedLis
                     intent.putExtra("force_fullscreen",true);
                     startActivity(intent);
                 }
-            });
+            });tv5.setText("10회");
             exer5.setImageResource(R.drawable.russian_twist);
             exer5.setOnClickListener(new View.OnClickListener() {
                 @Override
