@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var myapi = "http://localhost:3001/appuserjson"
+    var myapi = "http://13.209.40.50:3000/appuserjson"
     var appuser_name = [];
     var appuser_id = [];
     var bmi = [];
@@ -25,8 +25,8 @@ $(document).ready(function () {
         var start_date = new Date(select_date[0]);
         var end_date = new Date(select_date[1]);
 
-        var appuserapi = "http://localhost:3001/appuserjson"
-        var dailyapi = "http://localhost:3001/dailyjson"
+        var appuserapi = "http://13.209.40.50:3000/appuserjson"
+        var dailyapi = "http://13.209.40.50:3000/dailyjson"
 
         var real_date = new Date();
 
@@ -40,7 +40,7 @@ $(document).ready(function () {
             });
         });
 
-        $.getJSON("http://localhost:3001/dailyjson", function (info) {
+        $.getJSON("http://13.209.40.50:3000/dailyjson", function (info) {
             $.each(info, function (key, item) {
 
 
