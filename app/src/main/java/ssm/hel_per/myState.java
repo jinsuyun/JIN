@@ -460,8 +460,8 @@ public class myState extends Fragment implements Main2Activity.OnBackPressedList
 
         PieChart eat_calories_chart = (PieChart) v.findViewById(R.id.eat_calories_chart);
         ArrayList<PieEntry> eat_calories_entries = new ArrayList<>();
-        float tmp2 = all_eat_calories - sum_eat_calories;
-        eat_calories_entries.add(new PieEntry(Float.valueOf(sum_eat_calories), "섭취량"));
+        float tmp2 = all_eat_calories - eat_calories;
+        eat_calories_entries.add(new PieEntry(Float.valueOf(eat_calories), "섭취량"));
         eat_calories_entries.add(new PieEntry(Float.valueOf(tmp2), "섭취할 량"));
 
         PieDataSet eat_pieDataSet = new PieDataSet(eat_calories_entries, "칼로리");
