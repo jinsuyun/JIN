@@ -177,7 +177,7 @@ public class exercise_plank extends AppCompatActivity {
     String sixpack = "1";
     String eat_calories = "0";
     String all_eat_calories = "0";
-    String spent_calories = "191";
+    String spent_calories = "105";
     String all_spent_calories = "0";
     String weight;
     String objective="0";

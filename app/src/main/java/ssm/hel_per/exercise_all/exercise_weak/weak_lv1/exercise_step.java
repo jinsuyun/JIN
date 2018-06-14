@@ -175,7 +175,7 @@ public class exercise_step extends AppCompatActivity {
         String sixpack = "0";
         String eat_calories = "0";
         String all_eat_calories = "0";
-        String spent_calories = "176";
+        String spent_calories = "103";
         String all_spent_calories = "0";
         String weight;
         String objective="0";
