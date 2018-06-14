@@ -170,8 +170,8 @@ public class exercise_plank extends AppCompatActivity {
     String running_time = "0";
     String weight_time = "25";
     String arm = "1";
-    String back = "0";
-    String shoulder = "1";
+    String back = "1";
+    String shoulder = "0";
     String chest = "1";
     String leg = "1";
     String sixpack = "1";

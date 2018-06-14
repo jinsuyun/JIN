@@ -171,7 +171,7 @@ public class exercise_step extends AppCompatActivity {
         String back = "1";
         String shoulder = "0";
         String chest = "3";
-        String leg = "0";
+        String leg = "1";
         String sixpack = "0";
         String eat_calories = "0";
         String all_eat_calories = "0";
