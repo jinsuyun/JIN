@@ -8,7 +8,7 @@ $(document).ready(function () {
         $.each(info, function (key, item) {
             appuser_name[key] = item["name"];
             appuser_id[key] = item["id"];
-            $("#userselect").append("<option value=" + appuser_id[key] + ">" + appuser_name[key] + "</option>");
+            $("#userselect").append("<option value=" + appuser_id[key] + ">" + appuser_id[key] + "</option>");
             makeWeekSelectOptions();
         });
     });
@@ -28,22 +28,24 @@ $(document).ready(function () {
         var appuserapi = "http://localhost:3001/appuserjson"
         var dailyapi = "http://localhost:3001/dailyjson"
 
-        var real_date; 
-        var match_date = 0;
-        
-         var appuser_bodytype;
+        var real_date = new Date();
+
+        var appuser_bodytype;
         $.getJSON(appuserapi, function (info) {
             $.each(info, function (key, item) {
                 if (sel_userid == info[key]['id']) {
-                    appuser_bodytype=info[key]["bodytype"];
-                $("#bodytype_desc").html("<img src = '../uploads/"+appuser_bodytype+".PNG' height='100%' width='100%'>");
+                    appuser_bodytype = info[key]["bodytype"];
+                    $("#bodytype_desc").html("<img src = '../uploads/" + appuser_bodytype + ".PNG' height='100%' width='100%'>");
                 }
             });
         });
-        
+
         $.getJSON("http://localhost:3001/dailyjson", function (info) {
             $.each(info, function (key, item) {
+
+
                 real_date = new Date(info[key]["workoutday"]);
+
                 if (start_date.getTime() <= real_date.getTime() && real_date.getTime() <= end_date.getTime()) {
                     match_date = 1;
                 }
@@ -162,6 +164,8 @@ $(document).ready(function () {
                 set_shoulder = 0;
             $.each(info, function (key, item) {
                 if (sel_userid == info[key]['id']) {
+                    var start_date = new Date(select_date[0]);
+                    var end_date = new Date(select_date[1]);
                     real_date = new Date(info[key]["workoutday"]);
                     if (start_date.getTime() <= real_date.getTime() && real_date.getTime() <= end_date.getTime()) {
                         set_arm += info[key]["arm"];
@@ -254,11 +258,15 @@ $(document).ready(function () {
 
             $.each(info, function (key, item) {
                 if (sel_userid == info[key]['id']) {
+                    var start_date = new Date(select_date[0]);
+                    var end_date = new Date(select_date[1]);
                     day[key] = (info[key]['workoutday']);
                     date[key] = new Date(day[key]).getDay();
                     real_date = new Date(info[key]["workoutday"]);
+                    /*  console.log("ADAD", start_date.getTime(),start_date);
+                      console.log("ADAD", real_date.getTime(),real_date);
+                      console.log("ADAD", end_date.getTime(),end_date);*/
                     if (start_date.getTime() <= real_date.getTime() && real_date.getTime() <= end_date.getTime()) {
-
                         if (date[key] == 0) {
                             run_sun = info[key]["running_time"];
                             weight_sun = info[key]["weight_time"];
@@ -282,6 +290,7 @@ $(document).ready(function () {
                             weight_sat = info[key]["weight_time"];
                         }
                     }
+                    //console.log("SSS", run_sun);
                 }
             });
 
@@ -294,6 +303,7 @@ $(document).ready(function () {
                     if (start_date.getTime() <= real_date.getTime() && real_date.getTime() <= end_date.getTime()) {
                         sum_run[0] += (info[key]["running_time"]);
                         sum_weight[0] += (info[key]["weight_time"]);
+
                     } else {
                         if (start_date.getMonth() <= real_date.getMonth() && real_date.getMonth() <= end_date.getMonth()) {
                             sum_run[1] += (info[key]["running_time"]);
@@ -303,64 +313,6 @@ $(document).ready(function () {
 
                 }
             });
-            for (var i = 0; i < 5; i++) {
-                sum_week_run[i] = (sum_run[i]);
-                sum_week_weight[i] = (sum_weight[i]);
-            }
-            var month_chart = AmCharts.makeChart("month", {
-                "type": "serial",
-                "theme": "light",
-                "titles": [{
-                    "text": "월간 운동량"
-                        }],
-                "dataProvider": [{
-                    "country": "1주차",
-                    "running": sum_week_run[0],
-                    "weight": sum_week_weight[0]
-                            }, {
-                    "country": "2주차",
-                    "running": sum_week_run[1],
-                    "weight": sum_week_weight[1]
-                            }, {
-                    "country": "3주차",
-                    "running": sum_week_run[2],
-                    "weight": sum_week_weight[2]
-                            }, {
-                    "country": "4주차",
-                    "running": sum_week_run[3],
-                    "weight": sum_week_weight[3]
-                            }, {
-                    "country": "5주차",
-                    "running": sum_week_run[4],
-                    "weight": sum_week_weight[4]
-                            }],
-                "graphs": [{
-                    "fillAlphas": 0.9,
-                    "lineAlpha": 0.2,
-                    "type": "column",
-                    "valueField": "running",
-                    "balloonText": "유산소:[[value]]시간",
-                            }, {
-                    "fillAlphas": 0.9,
-                    "lineAlpha": 0.2,
-                    "type": "column",
-                    "valueField": "weight",
-                    "balloonText": "웨이트:[[value]]시간",
-                        }],
-                "categoryField": "country",
-                "chartCursor": {
-                    "fullWidth": true,
-                    "cursorAlpha": 0.1,
-                    "listeners": [{
-                        "event": "changed",
-                        "method": function (ev) {
-                            // Log last cursor position
-                            ev.chart.lastCursorPosition = ev.index;
-                        }
-                            }]
-                }
-            });
-
             $.each(info, function (key, item) {
                 var week_chart = AmCharts.makeChart("week", {
                     "type": "serial",
@@ -431,210 +383,239 @@ $(document).ready(function () {
                         }]
                     }
                 });
-
+            });
+            $.getJSON(dailyapi, function (info) {
                 $.each(info, function (key, item) {
-                    var workout_calories_chart = AmCharts.makeChart("workout_calories", {
-                        "type": "pie",
-                        "theme": "none",
-                        "innerRadius": "40%",
-                        "gradientRatio": [-0.4, -0.4, -0.4, -0.4, -0.4, -0.4, 0, 0.1, 0.2, 0.1, 0, -0.2, -0.5],
-                        "titles": [{
-                            "text": "소모 칼로리량"
+                    if (sel_userid == info[key]['id']) {
+                        var workout_calories_chart = AmCharts.makeChart("workout_calories", {
+                            "type": "pie",
+                            "theme": "none",
+                            "innerRadius": "40%",
+                            "gradientRatio": [-0.4, -0.4, -0.4, -0.4, -0.4, -0.4, 0, 0.1, 0.2, 0.1, 0, -0.2, -0.5],
+                            "titles": [{
+                                "text": "소모 칼로리량"
                     }],
-                        "dataProvider": [{
-                            "country": "소모한 칼로리",
-                            "litres": info[key]["spent_calories"]
+                            "dataProvider": [{
+                                "country": "소모한 칼로리",
+                                "litres": info[key]["spent_calories"]
                     }, {
-                            "country": "소모해야할 칼로리",
-                            "litres": info[key]["all_spent_calories"] - info[key]["spent_calories"]
+                                "country": "소모해야할 칼로리",
+                                "litres": info[key]["all_spent_calories"] - info[key]["spent_calories"]
                     }],
-                        "balloonText": "[[value]]",
-                        "valueField": "litres",
-                        "titleField": "country",
-                        "balloon": {
-                            "drop": true,
-                            "adjustBorderColor": false,
-                            "color": "#FFFFFF",
-                            "fontSize": 16
-                        },
-                        "export": {
-                            "enabled": true
-                        }
-                    });
+                            "balloonText": "[[value]]",
+                            "valueField": "litres",
+                            "titleField": "country",
+                            "balloon": {
+                                "drop": true,
+                                "adjustBorderColor": false,
+                                "color": "#FFFFFF",
+                                "fontSize": 16
+                            },
+                            "export": {
+                                "enabled": true
+                            }
+                        });
+                    }
                 });
 
                 $.each(info, function (key, item) {
-                    var eat_calories_chart = AmCharts.makeChart("eat_calories", {
-                        "type": "pie",
-                        "theme": "none",
-                        "innerRadius": "40%",
-                        "gradientRatio": [-0.4, -0.4, -0.4, -0.4, -0.4, -0.4, 0, 0.1, 0.2, 0.1, 0, -0.2, -0.5],
-                        "titles": [{
-                            "text": "섭취 칼로리량"
+                    if (sel_userid == info[key]['id']) {
+                        var eat_calories_chart = AmCharts.makeChart("eat_calories", {
+                            "type": "pie",
+                            "theme": "none",
+                            "innerRadius": "40%",
+                            "gradientRatio": [-0.4, -0.4, -0.4, -0.4, -0.4, -0.4, 0, 0.1, 0.2, 0.1, 0, -0.2, -0.5],
+                            "titles": [{
+                                "text": "섭취 칼로리량"
                     }],
-                        "dataProvider": [{
-                            "country": "섭취한 칼로리",
-                            "litres": info[key]["eat_calories"]
+                            "dataProvider": [{
+                                "country": "섭취한 칼로리",
+                                "litres": info[key]["eat_calories"]
                         }, {
-                            "country": "섭취해야할 칼로리",
-                            "litres": info[key]["all_eat_calories"] - info[key]["eat_calories"]
+                                "country": "섭취해야할 칼로리",
+                                "litres": info[key]["all_eat_calories"] - info[key]["eat_calories"]
                         }],
-                        "balloonText": "[[value]]",
-                        "valueField": "litres",
-                        "titleField": "country",
-                        "balloon": {
-                            "drop": true,
-                            "adjustBorderColor": false,
-                            "color": "#FFFFFF",
-                            "fontSize": 16
-                        },
-                        "export": {
-                            "enabled": true
+                            "balloonText": "[[value]]",
+                            "valueField": "litres",
+                            "titleField": "country",
+                            "balloon": {
+                                "drop": true,
+                                "adjustBorderColor": false,
+                                "color": "#FFFFFF",
+                                "fontSize": 16
+                            },
+                            "export": {
+                                "enabled": true
+                            }
+                        });
+                    }
+                });
+            });
+
+            $.getJSON(dailyapi, function (info) {
+                var weight_date = [];
+                var weight_change = [];
+
+                $.each(info, function (key, item) {
+                    if (sel_userid == info[key]['id']) {
+                        weight_date.push(info[key]["workoutday"].toString());
+                        //console.log(weight_date);
+                        weight_change.push(info[key]["weight"]);
+                        console.log(weight_change);
+                        var weight_chart = AmCharts.makeChart("weight", {
+                            "type": "serial",
+                            "theme": "light",
+                            "marginRight": 40,
+                            "marginLeft": 40,
+                            "autoMarginOffset": 20,
+                            "mouseWheelZoomEnabled": true,
+                            "valueAxes": [{
+                                "id": "v1",
+                                "axisAlpha": 0,
+                                "position": "left",
+                                "ignoreAxisWidth": true
+                    }],
+                            "balloon": {
+                                "borderThickness": 1,
+                                "shadowAlpha": 0
+                            },
+                            "graphs": [{
+                                "id": "g1",
+                                "balloon": {
+                                    "drop": true,
+                                    "adjustBorderColor": false,
+                                    "color": "#ffffff"
+                                },
+                                "bullet": "round",
+                                "bulletBorderAlpha": 1,
+                                "bulletColor": "#FFFFFF",
+                                "bulletSize": 5,
+                                "hideBulletsCount": 50,
+                                "lineThickness": 2,
+                                "title": "red line",
+                                "useLineColorForBulletBorder": true,
+                                "valueField": "value",
+                                "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
+                    }],
+                            "categoryField": "date",
+                            "categoryAxis": {
+                                "parseDates": true,
+                                "dashLength": 1,
+                                "minorGridEnabled": true
+                            },
+                            "export": {
+                                "enabled": true
+                            },
+                            "titles": [{
+                                "text": "체중 변화"
+                    }],
+                            "dataProvider": [{
+                                    "date": weight_date[0],
+                                    "value": weight_change[0]
+                        }, {
+                                    "date": weight_date[1],
+                                    "value": weight_change[1]
                         }
-                    });
-                });
-            });
+                        , {
+                                    "date": weight_date[2],
+                                    "value": weight_change[2]
+                                                }, {
+                                    "date": weight_date[3],
+                                    "value": weight_change[3]
+                                                }, {
+                                    "date": weight_date[4],
+                                    "value": weight_change[4]
+                                                }, {
+                                    "date": weight_date[5],
+                                    "value": weight_change[5]
+                                                }, {
+                                    "date": weight_date[6],
+                                    "value": weight_change[6]
+                                                }, {
+                                    "date": weight_date[7],
+                                    "value": weight_change[7]
+                                                }, {
+                                    "date": weight_date[8],
+                                    "value": weight_change[8]
+                                                }, {
+                                    "date": weight_date[9],
+                                    "value": weight_change[9]
+                                                }, {
+                                    "date": weight_date[10],
+                                    "value": weight_change[10]
+                                                }, {
+                                    "date": weight_date[11],
+                                    "value": weight_change[11]
+                                                }, {
+                                    "date": weight_date[12],
+                                    "value": weight_change[12]
+                                                }, {
+                                    "date": weight_date[13],
+                                    "value": weight_change[13]
+                                                }
+                        ]
+                        });
 
-            $.each(info, function (key, item) {
-                var weight_chart = AmCharts.makeChart("weight", {
-                    "type": "serial",
-                    "theme": "light",
-                    "marginRight": 40,
-                    "marginLeft": 40,
-                    "autoMarginOffset": 20,
-                    "mouseWheelZoomEnabled": true,
-                    "dataDateFormat": "YYYY-MM-DD",
-                    "valueAxes": [{
-                        "id": "v1",
-                        "axisAlpha": 0,
-                        "position": "left",
-                        "ignoreAxisWidth": true
-                    }],
-                    "balloon": {
-                        "borderThickness": 1,
-                        "shadowAlpha": 0
-                    },
-                    "graphs": [{
-                        "id": "g1",
-                        "balloon": {
-                            "drop": true,
-                            "adjustBorderColor": false,
-                            "color": "#ffffff"
-                        },
-                        "bullet": "round",
-                        "bulletBorderAlpha": 1,
-                        "bulletColor": "#FFFFFF",
-                        "bulletSize": 5,
-                        "hideBulletsCount": 50,
-                        "lineThickness": 2,
-                        "title": "red line",
-                        "useLineColorForBulletBorder": true,
-                        "valueField": "value",
-                        "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
-                    }],
-                    "categoryField": "date",
-                    "categoryAxis": {
-                        "parseDates": true,
-                        "dashLength": 1,
-                        "minorGridEnabled": true
-                    },
-                    "export": {
-                        "enabled": true
-                    },
-                    "titles": [{
-                        "text": "주간 체중 변화"
-                    }],
-                    "dataProvider": [{
-                        "date": "2012-07-27",
-                        "value": 13
-                        }, {
-                        "date": "2012-07-28",
-                        "value": 11
-                        }, {
-                        "date": "2012-07-29",
-                        "value": 15
-                        }, {
-                        "date": "2012-07-30",
-                        "value": 16
-                        }, {
-                        "date": "2012-07-31",
-                        "value": 18
-                        }, {
-                        "date": "2012-08-01",
-                        "value": 13
-                        }, {
-                        "date": "2012-08-02",
-                        "value": 22
-                        }, {
-                        "date": "2012-08-03",
-                        "value": 23
-                        }, {
-                        "date": "2012-08-04",
-                        "value": 20
-                        }, {
-                        "date": "2012-08-05",
-                        "value": 17
-                        }, {
-                        "date": "2012-08-06",
-                        "value": 16
-                        }, {
-                        "date": "2012-08-07",
-                        "value": 18
-                        }]
+                        weight_chart.addListener("rendered", zoomChart);
+
+                        zoomChart();
+
+                        function zoomChart() {
+                            weight_chart.zoomToIndexes(weight_chart.dataProvider.length - 40, weight_chart.dataProvider.length - 1);
+                        }
+                    }
                 });
 
-                weight_chart.addListener("rendered", zoomChart);
 
-                zoomChart();
-
-                function zoomChart() {
-                    weight_chart.zoomToIndexes(weight_chart.dataProvider.length - 40, weight_chart.dataProvider.length - 1);
-                }
-            });
-
-            $.each(info, function (key, item) {
-                var objective_chart = AmCharts.makeChart("objective", {
-                    "theme": "light",
-                    "type": "gauge",
-                    "axes": [{
-                        "topTextFontSize": 20,
-                        "topTextYOffset": 70,
-                        "axisColor": "#31d6ea",
-                        "axisThickness": 1,
-                        "endValue": 100,
-                        "gridInside": true,
-                        "inside": true,
-                        "radius": "50%",
-                        "valueInterval": 10,
-                        "tickColor": "#67b7dc",
-                        "startAngle": -90,
-                        "endAngle": 90,
-                        "unit": "%",
-                        "bandOutlineAlpha": 0,
-                        "bands": [{
-                            "color": "#0080ff",
-                            "endValue": 100,
-                            "innerRadius": "105%",
-                            "radius": "170%",
-                            "gradientRatio": [0.5, 0, -0.5],
-                            "startValue": 0
+                $.each(info, function (key, item) {
+                    if (sel_userid == info[key]['id']) {
+                        var objective_chart = AmCharts.makeChart("objective", {
+                            "theme": "light",
+                            "type": "gauge",
+                            "axes": [{
+                                "topTextFontSize": 20,
+                                "topTextYOffset": 70,
+                                "axisColor": "#31d6ea",
+                                "axisThickness": 1,
+                                "endValue": 100,
+                                "gridInside": true,
+                                "inside": true,
+                                "radius": "50%",
+                                "valueInterval": 10,
+                                "tickColor": "#67b7dc",
+                                "startAngle": -90,
+                                "endAngle": 90,
+                                "unit": "%",
+                                "bandOutlineAlpha": 0,
+                                "bands": [{
+                                    "color": "#0080ff",
+                                    "endValue": 100,
+                                    "innerRadius": "105%",
+                                    "radius": "170%",
+                                    "gradientRatio": [0.5, 0, -0.5],
+                                    "startValue": 0
                             }, {
-                            "color": "#3cd3a3",
-                            "endValue": 0,
-                            "innerRadius": "105%",
-                            "radius": "170%",
-                            "gradientRatio": [0.5, 0, -0.5],
-                            "startValue": 0
+                                    "color": "#3cd3a3",
+                                    "endValue": 0,
+                                    "innerRadius": "105%",
+                                    "radius": "170%",
+                                    "gradientRatio": [0.5, 0, -0.5],
+                                    "startValue": 0
                         }]
                     }],
-                    "arrows": [{
-                        "alpha": 1,
-                        "innerRadius": "35%",
-                        "nailRadius": 0,
-                        "radius": "170%"
+                            "titles": [{
+                                "text": "목표 달성률"
+                             }],
+                            "arrows": [{
+                                "alpha": 1,
+                                "innerRadius": "35%",
+                                "nailRadius": 0,
+                                "radius": "170%",
+                                "value": info[key]["objective"]
                     }]
+                        });
+                    }
                 });
-
             });
         });
     });

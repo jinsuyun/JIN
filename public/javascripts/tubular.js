@@ -9,7 +9,14 @@
 |* 
 |* Thanks,
 |* Sean */
+ $(document).ready(function() {
+            var options = {
+                videoId: '00Cq2BreDb8',
+                start: 8
+            };
 
+            $('#wrapper').tubular(options);
+        });
 ;(function ($, window) {
 
     // test for feature support and return if failure

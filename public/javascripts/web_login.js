@@ -1,4 +1,4 @@
-$('#login_form').validate({
+/*$('#login_form').validate({
   onkeyup: false,
   submitHandler: function () {
       console.log($('#id').val())
@@ -33,4 +33,4 @@ $('#login_form').validate({
       }
     }
   }
-});
+});*/
