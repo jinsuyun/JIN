@@ -85,39 +85,39 @@ public class foodManage  extends Fragment implements Main2Activity.OnBackPressed
             }
         });
 
-        if (reqCalorie < 1150) {
+        if (reqCalorie < 1200) {
             regCalorie = 1100;
             food.setBackgroundResource(R.drawable.menu_1100);
             graph.setImageResource(R.drawable.nut_1100);
-        } else if (reqCalorie < 1250 && reqCalorie >= 1150) {
+        } else if (reqCalorie < 1300 && reqCalorie >= 1200) {
             regCalorie = 1200;
             food.setBackgroundResource(R.drawable.menu_1200);
             graph.setImageResource(R.drawable.nut_1200);
-        } else if (reqCalorie < 1350 && reqCalorie >= 1250) {
+        } else if (reqCalorie < 1400 && reqCalorie >= 1300) {
             regCalorie = 1300;
             food.setBackgroundResource(R.drawable.menu_1300);
             graph.setImageResource(R.drawable.nut_1300);
-        } else if (reqCalorie < 1450 && reqCalorie >= 1350) {
+        } else if (reqCalorie < 1500 && reqCalorie >= 1400) {
             regCalorie = 1400;
             food.setBackgroundResource(R.drawable.menu_1400);
             graph.setImageResource(R.drawable.nut_1400);
-        } else if (reqCalorie < 1550 && reqCalorie >= 1450) {
+        } else if (reqCalorie < 1600 && reqCalorie >= 1500) {
             regCalorie = 1500;
             food.setBackgroundResource(R.drawable.menu_1500);
             graph.setImageResource(R.drawable.nut_1500);
-        } else if (reqCalorie < 1650 && reqCalorie >= 1550) {
+        } else if (reqCalorie < 1700 && reqCalorie >= 1600) {
             regCalorie = 1600;
             food.setBackgroundResource(R.drawable.menu_1600);
             graph.setImageResource(R.drawable.nut_1600);
-        } else if (reqCalorie < 1750 && reqCalorie >= 1650) {
+        } else if (reqCalorie < 1800 && reqCalorie >= 1700) {
             regCalorie = 1700;
             food.setBackgroundResource(R.drawable.menu_1700);
             graph.setImageResource(R.drawable.nut_1700);
-        } else if (reqCalorie < 1850 && reqCalorie >= 1750) {
+        } else if (reqCalorie < 1900 && reqCalorie >= 1800) {
             regCalorie = 1800;
             food.setBackgroundResource(R.drawable.menu_1800);
             graph.setImageResource(R.drawable.nut_1800);
-        } else if (reqCalorie < 1950 && reqCalorie >= 1850) {
+        } else if (reqCalorie < 2000 && reqCalorie >= 1900) {
             regCalorie = 1900;
             food.setBackgroundResource(R.drawable.menu_1900);
             graph.setImageResource(R.drawable.nut_1900);

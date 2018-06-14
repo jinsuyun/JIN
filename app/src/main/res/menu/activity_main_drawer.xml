@@ -9,10 +9,6 @@
             android:icon="@drawable/home"
             android:title="홈" />
         <item
-            android:id="@+id/nav_my_state"
-            android:icon="@drawable/graph"
-            android:title="내 정보 확인" />
-        <item
             android:id="@+id/nav_body_check"
             android:icon="@drawable/body"
             android:title="체형 분석" />
@@ -24,6 +20,10 @@
             android:id="@+id/nav_food_manage"
             android:icon="@drawable/food"
             android:title="식단 관리" />
+        <item
+            android:id="@+id/nav_my_state"
+            android:icon="@drawable/graph"
+            android:title="내 정보 확인" />
         <item
             android:id="@+id/nav_re_survey"
             android:icon="@drawable/create"

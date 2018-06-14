@@ -192,21 +192,6 @@
                     android:layout_marginRight="40dp"
                     android:background="#ADCCE2" />
 
-                <customfonts.MyEditText
-                    android:id="@+id/musclemass"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginRight="35dp"
-                    android:background="#0000"
-                    android:hint="골격근량"
-                    android:inputType="number|numberSigned|numberDecimal"
-                    android:maxLength="12"
-                    android:padding="16dp"
-                    android:textColor="#ADCCE2"
-                    android:textColorHint="#ADCCE2"
-                    android:textSize="14dp" />
-
                 <View
                     android:id="@+id/view6"
                     android:layout_width="match_parent"
@@ -214,21 +199,6 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:background="#ADCCE2" />
-
-                <customfonts.MyEditText
-                    android:id="@+id/fat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginRight="35dp"
-                    android:background="#0000"
-                    android:hint="체지방량"
-                    android:inputType="number|numberSigned|numberDecimal"
-                    android:maxLength="12"
-                    android:padding="16dp"
-                    android:textColor="#ADCCE2"
-                    android:textColorHint="#ADCCE2"
-                    android:textSize="14dp" />
 
                 <View
                     android:id="@+id/view10"

@@ -47,7 +47,7 @@
                         android:layout_centerVertical="true"
                         android:layout_toStartOf="@+id/exer_url1"
                         android:layout_weight="1"
-                        android:text="10회"
+                        android:text="10"
                         android:textColor="@android:color/background_dark"
                         android:textSize="18sp" />
 
@@ -82,7 +82,7 @@
                         android:layout_centerVertical="true"
                         android:layout_toStartOf="@+id/exer_url2"
                         android:layout_weight="1"
-                        android:text="10분"
+                        android:text="10"
                         android:textColor="@android:color/background_dark"
                         android:textSize="18sp" />
 
@@ -115,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toStartOf="@+id/exer_url3"
-                        android:text="10분"
+                        android:text="10"
                         android:textColor="@android:color/background_dark"
                         android:textSize="18sp" />
 
@@ -183,7 +183,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toStartOf="@+id/exer_url5"
-                        android:text="30초"
+                        android:text="120"
                         android:textColor="@android:color/background_dark"
                         android:textSize="18sp" />
 
