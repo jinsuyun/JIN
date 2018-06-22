@@ -26,8 +26,9 @@ router.post('/', function(req, res) {
                     if (resultCode == dbConnection.OK) {
                         var response;
                         console.log("login success");
-                        if(rows[0].sex == undefined || rows[0].age == undefined || rows[0].weight == undefined  || rows[0].height == undefined
-                            || rows[0].targetweight == undefined || rows[0].targetperiod == undefined || rows[0].workperiod == undefined || rows[0].worklevel == undefined) {
+                        if(rows[0].sex == undefined || rows[0].age == undefined || rows[0].weight == undefined
+                            || rows[0].height == undefined || rows[0].targetweight == undefined || rows[0].targetperiod == undefined
+                            || rows[0].workperiod == undefined || rows[0].worklevel == undefined) {
                             response = Object.assign(rows[0], {"success":true, "survey":false});
                         } else {
                             response = Object.assign(rows[0], {"success":true, "survey":true});

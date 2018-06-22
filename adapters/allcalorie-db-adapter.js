@@ -12,8 +12,8 @@ var pool = mysql.createPool(dbConfig);
 var adapter = {};
 
 var userDataSearchQuery = 'SELECT * FROM daily WHERE id=? AND workoutday=?';
-var calorieNewWriteQuery = 'INSERT INTO daily(all_eat_calories, id, workoutday) VALUE (?,?,?)'; // id 없는경우 새로등록
-var calorieWriteQuery = 'UPDATE daily SET all_eat_calories=? WHERE id=? AND workoutday=?'; // id 있는경우 update
+var calorieNewWriteQuery = 'INSERT INTO daily VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'; // id 없는경우 새로등록
+var calorieWriteQuery = 'UPDATE daily SET all_eat_calories=?, all_spent_calories=? WHERE id=? AND workoutday=?'; // id 있는경우 update
 
 adapter.allCalorieWrite = function(user, cb) {
     var resultCode = dbResult.Fail;
@@ -30,7 +30,8 @@ adapter.allCalorieWrite = function(user, cb) {
                     console.log(rows);
                     if(!rows[0]) { // 중복 id x
                         console.log('duplicated id');
-                        connection.query(calorieNewWriteQuery, [user.all_eat_calories, user.id, user.workoutday], function(err) {
+                        connection.query(calorieNewWriteQuery, [user.id, user.workoutday, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, user.all_eat_calories, 0, user.all_spent_calories, 0, 0], function(err) {
                             if (err) {
                                 console.log(err)
                                 resultCode = dbResult.Fail;
@@ -44,7 +45,8 @@ adapter.allCalorieWrite = function(user, cb) {
                             }
                         });
                     } else {
-                        connection.query(calorieWriteQuery, [user.all_eat_calories, user.id, user.workoutday], function(err) {
+                        connection.query(calorieWriteQuery, [user.all_eat_calories, user.all_spent_calories,
+                            user.id, user.workoutday], function(err) {
                             if (err) {
                                 console.log(err)
                                 resultCode = dbResult.Fail;

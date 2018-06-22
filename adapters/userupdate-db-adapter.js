@@ -13,7 +13,8 @@ var pool = mysql.createPool(dbConfig);
 var adapter = {};
 
 var userIdSearchQuery = 'SELECT * FROM appuser WHERE id=?'; // id를 이용하여 유저 정보 search
-var userInfoWriteQuery = 'UPDATE appuser SET weight=?, height=?, targetweight=?, targetperiod=?, workperiod=?, worklevel=?, bodytype=? WHERE id=?'; // 유저 정보입력 query, 이 외의 추가적인 정보 더 입력
+var userInfoWriteQuery = 'UPDATE appuser SET weight=?, height=?, targetweight=?, targetperiod=?,' +
+    ' workperiod=?, worklevel=?, bodytype=? WHERE id=?'; // 유저 정보입력 query, 이 외의 추가적인 정보 더 입력
 
 adapter.write = function(user, cb) {
     var resultCode = dbResult.Fail;
@@ -33,7 +34,9 @@ adapter.write = function(user, cb) {
                         connection.release();
                         cb(resultCode, []);
                     } else { // 중복 id 존재o
-                        connection.query(userInfoWriteQuery, [user.weight, user.height, user.targetweight, user.targetperiod, user.workperiod, user.worklevel, user.bodytype, user.id], function(err) {
+                        connection.query(userInfoWriteQuery, [user.weight, user.height,
+                            user.targetweight, user.targetperiod, user.workperiod, user.worklevel,
+                            user.bodytype, user.id], function(err) {
                             if (err) {
                                 console.log(err)
                                 resultCode = dbResult.Fail;
