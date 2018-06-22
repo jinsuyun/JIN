@@ -1,13 +1,11 @@
-var bcrypt = require('bcrypt-nodejs');
 var mysql = require('mysql');
-var db_config = require('../db-config');
 var dbConfig = {
-    host: db_config.host,
-    port: db_config.port,
-    user: db_config.user,
-    password: db_config.password,
-    database: db_config.database,
-    connectionLimit: db_config.connectionLimit
+    host: '18.221.204.247',
+    port: '3306',
+    user: 'root', // mysql user
+    password: '5907', // mysql password
+    database: 'capstone',
+    connectionLimit: 10
 }
 var dbResult = require('../routes/result');
 var pool = mysql.createPool(dbConfig);
@@ -18,8 +16,7 @@ var userWriteQuery = 'INSERT INTO appuser(id, password, name, email) VALUE (?,?,
 
 adapter.signupWrite = function(user, cb) {
     var resultCode = dbResult.Fail;
-    var password = user.password;
-    console.log(user);
+
     pool.getConnection(function(err, connection) {
         if (err) {
             console.log(err)
@@ -36,23 +33,19 @@ adapter.signupWrite = function(user, cb) {
                         connection.release();
                         cb(resultCode);
                     } else {
-                        console.log(password)
-                        bcrypt.hash(password, null, null, function(err, hash) {
-                            password = hash;
-                            console.log(password)
-                            connection.query(userWriteQuery, [user.id, password, user.name, user.email], function(err) {
-                                if (err) {
-                                    console.log(err)
-                                    resultCode = dbResult.Fail;
-                                    connection.release();
-                                    cb(resultCode);
-                                } else {
-                                    console.log("signup success");
-                                    resultCode = dbResult.OK;
-                                    connection.release();
-                                    cb(resultCode);
-                                }
-                            });
+                        connection.query(userWriteQuery, [user.id, user.password, user.name, user.email],
+                            function(err) {
+                            if (err) {
+                                console.log(err)
+                                resultCode = dbResult.Fail;
+                                connection.release();
+                                cb(resultCode);
+                            } else {
+                                console.log("signup success");
+                                resultCode = dbResult.OK;
+                                connection.release();
+                                cb(resultCode);
+                            }
                         });
                     }
                 } else { // query가 오지 않는 경우
