@@ -1,0 +1,8 @@
+{
+  "host": "18.221.204.247",
+  "port": "3306",
+  "user": "root",
+  "password": "5907",
+  "database": "capstone",
+  "connectionLimit": 10
+}
