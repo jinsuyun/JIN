@@ -15,7 +15,9 @@ var adapter = {};
 var dailySearchQuery = 'SELECT * FROM daily WHERE id=? ORDER BY workoutday DESC limit 7'; // id/pw를 이용하여 유저 정보 search
 var dailyDupSearchQuery = 'SELECT workoutday FROM daily WHERE id=? AND workoutday=?'; // 유저 daily query
 var dailyNewWriteQuery = 'INSERT INTO daily VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'; // id 없는경우 새로등록
-var dailyWriteQuery = 'UPDATE daily SET running_time=running_time+?, weight_time=weight_time+?, arm=arm+?, back=back+?, shoulder=shoulder+?, chest=chest+?, leg=leg+?, sixpack=sixpack+?, spent_calories=spent_calories+?, all_spent_calories=?, weight=?, objective=? WHERE id=? AND workoutday=?'; // id 있는경우 update로 누적
+var dailyWriteQuery = 'UPDATE daily SET running_time=running_time+?, weight_time=weight_time+?, arm=arm+?, back=back+?,' +
+    'shoulder=shoulder+?, chest=chest+?, leg=leg+?, sixpack=sixpack+?, spent_calories=spent_calories+?,' +
+    'all_spent_calories=?, weight=?, objective=? WHERE id=? AND workoutday=?'; // id 있는경우 update로 누적
 var countWriteQuery = 'UPDATE appuser SET exercount=exercount+1 WHERE id=?';
 var userSearchQuery = 'SELECT exercount, targetperiod FROM appuser WHERE id=?';
 var levelWriteQuery = 'UPDATE appuser SET exercount=?, exerlevel=exerlevel+1 WHERE id=?';
@@ -62,7 +64,8 @@ adapter.dailyWrite = function(daily, cb) {
                         console.log('not duplicated id');
                         connection.query(dailyNewWriteQuery, [daily.id, daily.workoutday, daily.running_time,
                             daily.weight_time, daily.arm, daily.back, daily.shoulder, daily.chest, daily.leg,
-                            daily.sixpack, daily.eat_calories, daily.all_eat_calories, daily.spent_calories, daily.all_spent_calories, daily.weight, daily.objective], function(err) {
+                            daily.sixpack, daily.eat_calories, daily.all_eat_calories, daily.spent_calories,
+                            daily.all_spent_calories, daily.weight, daily.objective], function(err) {
                             if (err) {
                                 console.log(err)
                                 resultCode = dbResult.Fail;
@@ -72,8 +75,10 @@ adapter.dailyWrite = function(daily, cb) {
                             }
                         });
                     } else {
-                        connection.query(dailyWriteQuery, [daily.running_time, daily.weight_time, daily.arm, daily.back, daily.shoulder, daily.chest,
-                            daily.leg, daily.sixpack, daily.spent_calories, daily.all_spent_calories, daily.weight, daily.objective, daily.id, daily.workoutday], function(err) {
+                        connection.query(dailyWriteQuery, [daily.running_time, daily.weight_time,
+                            daily.arm, daily.back, daily.shoulder, daily.chest, daily.leg, daily.sixpack,
+                            daily.spent_calories, daily.all_spent_calories, daily.weight, daily.objective,
+                            daily.id, daily.workoutday], function(err) {
                             if (err) {
                                 console.log(err)
                                 resultCode = dbResult.Fail;

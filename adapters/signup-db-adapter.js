@@ -33,7 +33,8 @@ adapter.signupWrite = function(user, cb) {
                         connection.release();
                         cb(resultCode);
                     } else {
-                        connection.query(userWriteQuery, [user.id, user.password, user.name, user.email], function(err) {
+                        connection.query(userWriteQuery, [user.id, user.password, user.name, user.email],
+                            function(err) {
                             if (err) {
                                 console.log(err)
                                 resultCode = dbResult.Fail;
