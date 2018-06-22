@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/timg">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/unconditional"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="35dp"
+                    android:layout_marginTop="50dp"
+                    android:background="#0000"
+                    android:text="* 필수항목"
+                    android:textColor="@color/colorAccent" />
+
+                <customfonts.MyEditText
+                    android:id="@+id/age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="35dp"
+                    android:background="#0000"
+                    android:freezesText="false"
+                    android:hint="나이 * "
+                    android:inputType="number|numberSigned"
+                    android:padding="16dp"
+                    android:textColor="#ADCCE2"
+                    android:textColorHint="#ADCCE2"
+                    android:textSize="14dp" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="#ADCCE2" />
+
+                <customfonts.MyEditText
+                    android:id="@+id/height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="35dp"
+                    android:background="#0000"
+                    android:freezesText="false"
+                    android:hint="키 * "
+                    android:inputType="number|numberSigned|numberDecimal"
+                    android:padding="16dp"
+                    android:textColor="#ADCCE2"
+                    android:textColorHint="#ADCCE2"
+                    android:textSize="14dp" />
+
+                <View
+                    android:id="@+id/view9"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="#ADCCE2" />
+
+                <customfonts.MyEditText
+                    android:id="@+id/weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="35dp"
+                    android:background="#0000"
+                    android:hint="몸무게 *"
+                    android:inputType="number|numberSigned|numberDecimal"
+                    android:padding="16dp"
+                    android:textColor="#ADCCE2"
+                    android:textColorHint="#ADCCE2"
+                    android:textSize="14dp" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="#ADCCE2" />
+
+                <customfonts.MyTextView
+                    android:id="@+id/sex_font"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="35dp"
+                    android:background="#0000"
+                    android:hint="성별 *"
+                    android:maxLength="12"
+                    android:padding="16dp"
+                    android:textColor="#ADCCE2"
+                    android:textColorHint="#ADCCE2"
+                    android:textSize="14dp"></customfonts.MyTextView>
+                <RadioGroup
+                    android:id="@+id/sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RadioButton
+                        android:id="@+id/sex_man"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="남자" />
+
+                    <RadioButton
+                        android:id="@+id/sex_woman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_weight="1"
+                        android:text="여자" /> />
+
+
+                </RadioGroup>
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="#ADCCE2" />
+
+                <customfonts.MyEditText
+                    android:id="@+id/weighttarget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="35dp"
+                    android:background="#0000"
+                    android:hint="목표체중 *"
+                    android:inputType="number|numberSigned|numberDecimal"
+                    android:maxLength="12"
+                    android:padding="16dp"
+                    android:textColor="#ADCCE2"
+                    android:textColorHint="#ADCCE2"
+                    android:textSize="14dp" />
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="#ADCCE2" />
+
+                <customfonts.MyEditText
+                    android:id="@+id/timetarget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="35dp"
+                    android:background="#0000"
+                    android:hint="목표기간 *"
+                    android:inputType="number|numberSigned|numberDecimal"
+                    android:maxLength="12"
+                    android:padding="16dp"
+                    android:textColor="#ADCCE2"
+                    android:textColorHint="#ADCCE2"
+                    android:textSize="14dp" />
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="#ADCCE2" />
+
+                <View
+                    android:id="@+id/view6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="#ADCCE2" />
+
+                <View
+                    android:id="@+id/view10"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="#ADCCE2" />
+
+                <customfonts.MyTextView
+                    android:id="@+id/whether"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="35dp"
+                    android:background="#0000"
+                    android:hint="술,담배 여부"
+                    android:maxLength="12"
+                    android:padding="16dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textColor="#ADCCE2"
+                    android:textColorHint="#ADCCE2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="35dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/drunk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="22dp"
+                        android:layout_marginRight="35dp"
+                        android:layout_weight="1"
+                        android:text="술" />
+
+                    <CheckBox
+                        android:id="@+id/smoking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="담배" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:id="@+id/view11"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_weight="1"
+                        android:background="#ADCCE2" />
+
+                    <customfonts.MyTextView
+                        android:id="@+id/exercise_set"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="22dp"
+                        android:layout_marginRight="35dp"
+                        android:background="#0000"
+                        android:hint="운동경력 *"
+                        android:inputType="textPassword"
+                        android:maxLength="12"
+                        android:padding="16dp"
+                        android:textColor="#ADCCE2"
+                        android:textColorHint="#ADCCE2"
+                        android:textSize="14dp"></customfonts.MyTextView>
+
+                    <RadioGroup
+                        android:id="@+id/exer_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <RadioButton
+                            android:id="@+id/ca_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:text="1년 미만" />
+
+                        <RadioButton
+                            android:id="@+id/ca_one_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_weight="1"
+                            android:text="1년 이상 3년 미만" />
+
+                        <RadioButton
+                            android:id="@+id/ca_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_weight="1"
+                            android:text="3년 이상" />
+
+                    </RadioGroup>
+
+                    <View
+                        android:id="@+id/view8"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_weight="1"
+                        android:background="#ADCCE2" />
+
+                    <customfonts.MyTextView
+                        android:id="@+id/exercise_career"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="22dp"
+                        android:layout_marginRight="35dp"
+                        android:layout_weight="1"
+                        android:background="#0000"
+                        android:hint="운동량 *"
+                        android:inputType="textPassword"
+                        android:maxLength="12"
+                        android:padding="16dp"
+                        android:textColor="#ADCCE2"
+                        android:textColorHint="#ADCCE2"
+                        android:textSize="14dp" />
+
+                    <RadioGroup
+                        android:id="@+id/exer_level"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <RadioButton
+                            android:id="@+id/no_exer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:text="활동안함 : 전혀 운동을 하지 않음" />
+
+                        <RadioButton
+                            android:id="@+id/usual_exer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_weight="1"
+                            android:text="가벼운 활동 : 일주일에 1~3일 정도 운동" />
+
+                        <RadioButton
+                            android:id="@+id/normal_exer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_weight="1"
+                            android:text="보통 활동 : 일주일에 3~5일 정도 운동" />
+
+                        <RadioButton
+                            android:id="@+id/many_exer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_weight="1"
+                            android:text="많은 활동 : 일주일에 6~7일 정도 운동" />
+
+                        <RadioButton
+                            android:id="@+id/heavy_exer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_weight="1"
+                            android:text="심한 활동 : 심한 운동 , 물리적 작업을 함" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view7"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="#ADCCE2" />
+
+                <customfonts.MyTextView
+                    android:id="@+id/create"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="28dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/angle"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="Create"
+                    android:textColor="#fff"
+                    android:textSize="16dp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

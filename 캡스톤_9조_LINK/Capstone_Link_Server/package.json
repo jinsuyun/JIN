@@ -1,0 +1,27 @@
+{
+  "name": "capstone_link",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://git.ajou.ac.kr/JINSUYUN/Capstone_Link.git"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "fs": "0.0.1-security",
+    "html": "^1.0.0",
+    "http-errors": "^1.6.3",
+    "jquery-validation": "^1.17.0",
+    "morgan": "^1.9.0",
+    "mysql": "^2.15.0",
+    "session": "^0.1.0"
+  }
+}

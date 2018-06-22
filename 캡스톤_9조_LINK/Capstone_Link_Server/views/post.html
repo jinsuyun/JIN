@@ -1,0 +1,89 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="stylesheets/graph.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>퍼스널 트레이닝</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+</head>
+
+
+<body>
+    <!--상단바 네비게이션-->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- 브라우저가 좁아졋을때 나오는 버튼(클릭시 메뉴출력) -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Hel-Per</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li id="user" value="user"><a href="/graph">User</a></li>
+                    <li id="qa" value="qa"><a href="/post">Q & A</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<div id="container">
+
+    <div id="list">
+        <b>게시판 (전체 글: 10)</b>
+    </div>
+
+    <div id="write">
+        <a href="/bbs/writeForm.bbs?pageNum=${pageNum}">글쓰기</a>
+    </div>
+
+    <div>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th width="10%">번호</th>
+                    <th width="50%">제목</th>
+                    <th width="10%">작성자</th>
+                    <th width="20%">작성일</th>
+                    <th width="10%">조회</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="article" items="${articles}" varStatus="status">
+                    <tr>
+                        <td>1</td>
+                        <td id="title">
+                            <c:if test="${article.depth > 0}">
+                                &nbsp;&nbsp;
+                            </c:if>
+                            <a href="/bbs/content.bbs?articleNumber=${article.articleNumber}&pageNum=${pageNum}">게시판1</a>
+                        </td>
+                        <td>윤진수</td>
+                        <td>2018.05.08</td>
+                        <td>20</td>
+                        <tr>
+                </c:forEach>
+            </tbody>
+        </table>
+
+        <!-- Paging 처리 -->
+        <div id="paging">
+            1
+        </div>
+    </div>
+</div>
+
+</html>

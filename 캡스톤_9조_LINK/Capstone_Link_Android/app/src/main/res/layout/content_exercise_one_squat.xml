@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".exercise_all.exercise_standard.standard_lv1.exercise_one_squat"
+    tools:showIn="@layout/activity_exercise_one_squat">
+
+    <ImageView
+        android:id="@+id/skyImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        >
+
+        <ImageView
+            android:id="@+id/swingImage"
+            android:layout_width="180dp"
+            android:layout_height="320dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/android_swing" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/nextbtn_one_squat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_one_squat"
+        android:layout_toEndOf="@+id/one_squat"
+        android:text="다음" />
+
+    <TextView
+        android:id="@+id/text_one_squat"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/one_squat"
+        android:layout_toEndOf="@+id/one_squat"
+        android:text="Timer"
+        android:textSize="20dp" />
+
+    <ImageView
+        android:id="@+id/one_squat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/one_squat" />
+
+</RelativeLayout>

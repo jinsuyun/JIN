@@ -1,0 +1,125 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="stylesheets/graph.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+  
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>퍼스널 트레이닝</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/stylesheets/graph.css">
+
+  
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+</head>
+
+
+<body id="page_graph">
+    
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- 브라우저가 좁아졋을때 나오는 버튼(클릭시 메뉴출력) -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Hel-Per</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li id="user" value="user"><a href="/graph">User</a></li>
+                    <!--<li id="qa" value="qa"><a href="/post">Q & A</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="selectbtn" class="btn-group">
+        <form id='searchform'>
+
+            <div style="float: left; width: 110px; margin-right: 5px">
+                <select id="userselect" class="form-control">
+                    <option>유저 선택</option>
+                </select>
+            </div>
+            
+            <div style="float: left; width: 100px; margin-right: 5px">
+                <select class="form-control" name="sh_year" id="sh_year" onchange="makeWeekSelectOptions();">
+                    <option value='2018'>2018년</option>
+                </select>
+            </div>
+            
+            <div style="float: left; width: 80px; margin-right: 5px">
+                <select class="form-control" name="sh_month" id="sh_month" onchange="makeWeekSelectOptions();">
+                    <option value='1'>01월</option>
+                    <option value='2'>02월</option>
+                    <option value='3'>03월</option>
+                    <option value='4'>04월</option>
+                    <option value='5'>05월</option>
+                    <option value='6'>06월</option>
+                    <option value='7'>07월</option>
+                    <option value='8'>08월</option>
+                    <option value='9'>09월</option>
+                    <option value='10'>10월</option>
+                    <option value='11'>11월</option>
+                    <option value='12'>12월</option>
+            </select>
+            </div>
+            
+            <div id="weekselect"style="float: left; width: 220px; margin-right: 5px">
+                <select class="form-control" name="sh_week" id="sh_week">
+            </select>
+            </div>
+            
+            <div style="float: left; ">
+                <button id="searchbtn" type="submit" class="btn btn-primary">검색</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="bmi" class="chart-block" style="border: 1px solid green;"></div>
+    
+    <div id="graph2">
+        <div id="bodytype_desc" style="border: 1px solid pink;"></div>
+        <div id="weight" style="border: 1px solid red;"></div>
+        <!--<div id="objective" style="border: 1px solid gold;"></div>-->
+    </div>
+    
+    <div id=graph>
+        <div id="part" style="border: 1px solid gold;"></div><!--
+        <div id="month" style="border: 1px solid blue;"></div>-->
+        <div id="week" style="border: 1px solid red;"></div>
+        <div id="workout_calories" style="border: 1px solid green;"></div>
+        <div id="eat_calories" style="border: 1px solid pink;"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="/javascripts/graph.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/radar.js"></script>
+    <script src="https://www.amcharts.com/lib/3/gauge.js"></script>
+    <script src="https://www.amcharts.com/lib/3/pie.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/animate/animate.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#top_menu").load("top_menu.html")
+    });
+
+</script>
+</body>
+
+</html>
