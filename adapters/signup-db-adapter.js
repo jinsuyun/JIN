@@ -36,10 +36,8 @@ adapter.signupWrite = function(user, cb) {
                         connection.release();
                         cb(resultCode);
                     } else {
-                        console.log(password)
                         bcrypt.hash(password, null, null, function(err, hash) {
                             password = hash;
-                            console.log(password)
                             connection.query(userWriteQuery, [user.id, password, user.name, user.email], function(err) {
                                 if (err) {
                                     console.log(err)

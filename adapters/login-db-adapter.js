@@ -34,8 +34,6 @@ adapter.loginSearch = function(id, password, cb) {
                     cb(resultCode, []);
                 } else { // 로그인 성공
                     bcrypt.compare(password, rows[0].password, function(err, res) {
-                        console.log(password);
-                        console.log(rows[0].password);
                         if (res) {
                             console.log(res);
                             resultCode = dbResult.OK;
