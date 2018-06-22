@@ -1,11 +1,12 @@
 var mysql = require('mysql');
+var db_config = require('../db-config');
 var dbConfig = {
-    host: '18.221.204.247',
-    port: '3306',
-    user: 'root', // mysql user
-    password: '5907', // mysql password
-    database: 'capstone',
-    connectionLimit: 10
+    host: db_config.host,
+    port: db_config.port,
+    user: db_config.user,
+    password: db_config.password,
+    database: db_config.database,
+    connectionLimit: db_config.connectionLimit
 }
 var dbResult = require('../routes/result');
 var pool = mysql.createPool(dbConfig);
